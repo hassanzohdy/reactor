@@ -1,59 +1,62 @@
-import './login.scss';
-import React from 'react';
-import { ReactorPageComponent } from '../../../core/component';
-import Input from '../../../core/component/Input';
+import "./login.scss";
+import React from "react";
+import { ReactorPageComponent } from "../../../core/component";
+import Input from "../../../core/component/Input";
 
 export default class Login extends ReactorPageComponent {
+  constructor() {
+    super();
 
-    constructor() {
-        super();
+    this.setMeta("title", "Login Page").setMeta(
+      "description",
+      "Welcome to our login page."
+    );
+  }
 
-        this.setMeta('title', 'Login Page')
-            .setMeta('description', 'Welcome to our login page.');
-    }
+  login = e => {
+    e.preventDefault(); // disable default form submission
 
-    login = e => {
-        e.preventDefault(); // disable default form submission  
+    console.log("Send to some api!");
+  };
 
-        console.log('Send to some api!');
-    };
+  render() {
+    return (
+      <div id="login-page">
+        <h1>Login Page</h1>
 
-    render() {
-        return (
-            <div id="login-page">
-                <h1>Login Page</h1>
+        <form onSubmit={this.login}>
+          {/* it will be validated by default and has the form-control class and wrapped by form-group */}
+          <div className="form-group">
+            <Input
+              type="email"
+              required={true}
+              placeholder="Email Address"
+              minLength={5}
+              maxLength={30}
+              length={23}
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched"
+              }}
+              errorPosition="bottom"
+            />
+          </div>
 
-                <form onSubmit={this.login}>
-                    {/* it will be validated by default and has the form-control class and wrapped by form-group */}
-                    <div className="form-group">
-                        <Input
-                            type="email"
-                            required={true}
-                            placeholder="Email Address"
-                            minLength={5}
-                            maxLength={30}
-                            length={23}
-                            validationMessages={{empty: "Empty !", email: "Not Email !", lengthMessage: "length is not matched"}}
-                            errorPosition="bottom"
-                            onSubmit="sdfad"
-                        />
-                    </div>
+          <div className="form-group">
+            <Input
+              type="password"
+              required={true}
+              placeholder="Password"
+              length={4}
+            />
+          </div>
 
-                    <div className="form-group">
-                        <Input
-                            type="password"
-                            required
-                            placeholder="Password"
-                            length={4}
-                        />
-                    </div>
-
-
-                    <div id="button-wrapper">
-                        <button>Login</button>
-                    </div>
-                </form>
-            </div>
-        );
-    }
+          <div id="button-wrapper">
+            <button>Login</button>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }

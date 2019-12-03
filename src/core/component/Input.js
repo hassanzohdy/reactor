@@ -1,91 +1,131 @@
-import React from 'react';
-import Is from '@flk/supportive-is';
-import { ReactorComponent } from '../component';
+import React from "react";
+import Is from "@flk/supportive-is";
+import { ReactorComponent } from "../component";
 
-import "./style.scss"
+import "./style.scss";
 
 export default class Input extends ReactorComponent {
-
     state = {
         validation: {
-            [this.props.type]: null
+            [this.props.type]: null,
+            fieldValidation: null
         }
-    }
+    };
 
-    // numeric input types so we can pass max & min attribute
-    numericInputTypes = ["number", "date"];
+    // get all the input types to add attributes dynamically to the input
+    inputTypes = {
+        numericTypes: ["number", "date"],
+        textfulTypes: ["text", "email", "password", "tel"]
+    };
 
-    // textful input types so we can pass max & min attribute
-    textfulInputTypes = ["text", "email", "password", "tel"];
+    /**
+     * Check if the type provided is a numeric number
+     * it makes the input component accept min & max attributes
+     *
+     * @param {string} typeProvided
+     */
+    isNumericType = typeProvided => {
+        return this.inputTypes.numericTypes.includes(typeProvided);
+    };
 
-    isNumericType = (typeProvided) => {
-        return this.numericInputTypes.includes(typeProvided);
-    }
+    /**
+     * Check if the type provided is a textful number
+     * it makes the input component accept minLength & maxLength attributes
+     *
+     * @param {string} typeProvided
+     */
+    isTextFulType = typeProvided => {
+        return this.inputTypes.textfulTypes.includes(typeProvided);
+    };
 
-    isTextFulType = (typeProvided) => {
-        return this.textfulInputTypes.includes(typeProvided);
-    }
-
+    // check if the field is required
     isRequired = () => {
         return this.props.required;
-    }
+    };
 
+    // make the error message's position according to the errorPosition prop provided
     topPosition = () => {
-        return this.props.errorPosition === "top" ? "order-top" : "order-bottom"
-    }
+        return this.props.errorPosition === "top" ? "order-top" : "order-bottom";
+    };
 
+    /**
+     * View the custom message provided by the user or view a custom message
+     *
+     * @param {string} role
+     * @param {string} defaultMessage
+     */
     customMessage = (role, defaultMessage) => {
-        let { validationMessages } = this.props
-        return validationMessages && (validationMessages[role] || defaultMessage)
-    }
+        let { validationMessages } = this.props;
+        return (validationMessages && validationMessages[role]) || defaultMessage;
+    };
 
+    // validate the field according to its type
     validateField = e => {
         let input = e.target,
             value = input.value,
-            { length, type, validationMessages } = this.props;
+            { length, type } = this.props;
 
         // reset validation email input error
-        let fieldValidation = null;
+        this.set("validation.fieldValidation", null);
 
         // validate required input
         // check if the input is not empty
         if (this.isRequired() && Is.empty(value)) {
             // he didn't access this body
-            fieldValidation = this.customMessage("empty", 'Email Address Is Required!')
+            this.set(
+                "validation.fieldValidation",
+                this.customMessage("empty", "This field Is Required!")
+            );
         }
 
         // check if the input value a valid email address
         // validate the email when?
-        // when the validation.email is null 
-        if (type === "email" && fieldValidation === null && !Is.empty(value) && !Is.email(value)) {
-            fieldValidation = this.customMessage("email", 'Invalid Email Address');
+        // when the validation.email is null
+        if (
+            type === "email" &&
+            this.get("validation.fieldValidation") === null &&
+            !Is.empty(value) &&
+            !Is.email(value)
+        ) {
+            this.set(
+                "validation.fieldValidation",
+                this.customMessage("email", "Invalid Email Address")
+            );
         }
 
         // check if the value equals the length specified
         if (!Is.empty(value) && length && value.length !== length) {
-            fieldValidation = this.customMessage("lengthMessage", `This field should be ${length} in length`);
+            this.set(
+                "validation.fieldValidation",
+                this.customMessage(
+                    "lengthMessage",
+                    `This field should be ${length} in length`
+                )
+            );
         }
 
-        this.set(`validation.${type}`, fieldValidation);
+        this.set(`validation.${type}`, this.get("validation.fieldValidation"));
     };
 
     render() {
-
-        // console.log(this.props.validationMessages)
-
         // get all the props supplied
-        let { type, required, min, max, minLength, maxLength, placeholder, errorPosition } = this.props;
+        let {
+            type,
+            required,
+            min,
+            max,
+            minLength,
+            maxLength,
+            placeholder
+        } = this.props;
 
         return (
             <section className="input-wrapper">
-
-                {this.get(`validation.${type}`) !== null &&
-                    <label
-                        className={`error ${this.topPosition()}`}
-                    >
+                {this.get(`validation.${type}`) !== null && (
+                    <label className={`error ${this.topPosition()}`}>
                         {this.get(`validation.${type}`)}
                     </label>
-                }
+                )}
 
                 <input
                     type={type}
@@ -98,8 +138,7 @@ export default class Input extends ReactorComponent {
                     maxLength={this.isTextFulType(type) ? maxLength : null}
                     minLength={this.isTextFulType(type) ? minLength : null}
                 />
-
             </section>
-        )
+        );
     }
 }
