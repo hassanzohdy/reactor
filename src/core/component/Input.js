@@ -31,7 +31,7 @@ export default class Input extends ReactorComponent {
     }
 
     topPosition = () => {
-        return this.props.errorPosition === "top"
+        return this.props.errorPosition === "top" ? "order-top" : "order-bottom"
     }
 
     customMessage = (role, defaultMessage) => {
@@ -81,7 +81,7 @@ export default class Input extends ReactorComponent {
 
                 {this.get(`validation.${type}`) !== null &&
                     <label
-                        className={`error ${this.topPosition() ? "order-top" : "order-bottom"}`}
+                        className={`error ${this.topPosition()}`}
                     >
                         {this.get(`validation.${type}`)}
                     </label>
