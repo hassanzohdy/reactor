@@ -24,7 +24,7 @@ export default class Input extends ReactorComponent {
         return this.textfulInputTypes.includes(typeProvided);
     }
 
-    validateEmailInput = e => {
+    validateField = e => {
         let input = e.target,
             value = input.value,
             length = this.props.length,
@@ -67,7 +67,7 @@ export default class Input extends ReactorComponent {
                         type={type}
                         className="form-control"
                         required={required}
-                        onInput={this.validateEmailInput}
+                        onInput={this.validateField}
                         placeholder={placeholder}
                         min={this.isNumericType(type) ? min : null}
                         max={this.isNumericType(type) ? max : null}
