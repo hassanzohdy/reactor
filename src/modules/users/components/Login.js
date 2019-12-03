@@ -25,23 +25,26 @@ export default class Login extends ReactorPageComponent {
 
                 <form onSubmit={this.login}>
                     {/* it will be validated by default and has the form-control class and wrapped by form-group */}
-                    <Input
-                        type="email"
-                        required={true}
-                        placeholder="Email Address"
-                        minLength={5}
-                        maxLength={30}
-                        length={23}
-                        max={2}
-                        min={1}
-                    />
+                    <div className="form-group">
+                        <Input
+                            type="email"
+                            required={true}
+                            placeholder="Email Address"
+                            minLength={5}
+                            maxLength={30}
+                            length={23}
+                            validationMessages={{empty: "Empty !", email: "Not Email !", lengthMessage: "length is not matched"}}
+                        />
+                    </div>
 
-                    <Input 
-                        type="password"
-                        required
-                        placeholder="Password"
-                        length={4}
-                    />
+                    <div className="form-group">
+                        <Input
+                            type="password"
+                            required
+                            placeholder="Password"
+                            length={4}
+                        />
+                    </div>
 
 
                     <div id="button-wrapper">

@@ -24,11 +24,14 @@ export default class Input extends ReactorComponent {
         return this.textfulInputTypes.includes(typeProvided);
     }
 
+    customMessage = () => {
+        return ``
+    }
+
     validateField = e => {
         let input = e.target,
             value = input.value,
-            length = this.props.length,
-            type = this.props.type;
+            { length, type, validationMessages } = this.props;
 
         // reset validation email input error
         let fieldValidation = null;
@@ -37,19 +40,19 @@ export default class Input extends ReactorComponent {
         // check if the input is not empty
         if (this.props.required === true && Is.empty(value)) {
             // he didn't access this body
-            fieldValidation = 'Email Address Is Required!';
+            fieldValidation = validationMessages && (validationMessages.empty || 'Email Address Is Required!');
         }
 
         // check if the input value a valid email address
         // validate the email when?
         // when the validation.email is null 
         if (type === "email" && fieldValidation === null && !Is.empty(value) && !Is.email(value)) {
-            fieldValidation = 'Invalid Email Address';
+            fieldValidation = validationMessages && (validationMessages.email || 'Invalid Email Address');
         }
 
         // check if the value equals the length specified
         if (length && value.length !== length) {
-            fieldValidation = `This field should be ${length} in length`
+            fieldValidation = validationMessages && (validationMessages.lengthMessage || `This field should be ${length} in length`);
         }
 
         this.set(`validation.${type}`, fieldValidation);
@@ -57,28 +60,29 @@ export default class Input extends ReactorComponent {
 
     render() {
 
+        // console.log(this.props.validationMessages)
+
         // get all the props supplied
         let { type, required, min, max, minLength, maxLength, placeholder } = this.props;
 
         return (
             <>
-                <div className="form-group">
-                    <input
-                        type={type}
-                        className="form-control"
-                        required={required}
-                        onInput={this.validateField}
-                        placeholder={placeholder}
-                        min={this.isNumericType(type) ? min : null}
-                        max={this.isNumericType(type) ? max : null}
-                        maxLength={this.isTextFulType(type) ? maxLength : null}
-                        minLength={this.isTextFulType(type) ? minLength : null}
-                    />
-                    {this.get(`validation.${this.props.type}`) !== null &&
-                        <label className="error">{this.get(`validation.${this.props.type}`)}</label>
-                    }
 
-                </div>
+                <input
+                    type={type}
+                    className="form-control"
+                    required={required}
+                    onInput={this.validateField}
+                    placeholder={placeholder}
+                    min={this.isNumericType(type) ? min : null}
+                    max={this.isNumericType(type) ? max : null}
+                    maxLength={this.isTextFulType(type) ? maxLength : null}
+                    minLength={this.isTextFulType(type) ? minLength : null}
+                />
+                {this.get(`validation.${this.props.type}`) !== null &&
+                    <label className="error">{this.get(`validation.${this.props.type}`)}</label>
+                }
+
             </>
         )
     }
