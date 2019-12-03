@@ -1,15 +1,15 @@
 import Reactor from './core/reactor';
 
 // grab all service providers from all modules
-import usersServiceProvider from './modules/users/service-provider'; 
-import categoriesServiceProvider from './modules/categories/service-provider'; 
+import UsersServiceProvider from './modules/users/service-provider'; 
+import CategoriesServiceProvider from './modules/categories/service-provider'; 
 
 const reactor = new Reactor();
 
 reactor.registerServiceProviders([
     // service providers list
-    usersServiceProvider,
-    categoriesServiceProvider,
+    UsersServiceProvider,
+    CategoriesServiceProvider,
 ]);
 
 // start the application

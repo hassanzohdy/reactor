@@ -1,0 +1,45 @@
+#login-page {
+    padding-top: 5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        width: 40%;
+        margin: 2rem auto;
+
+        .form-group {
+            margin-bottom: 1rem;
+            .form-control {
+                width: 100%;
+                padding: 1rem;
+                border: 1px solid #eee;
+            }
+
+            label {
+                &.error {
+                    display: block;
+                    font-weight: bold;
+                    margin-top: 0.5rem;
+                    color: red;
+                }
+            }
+        }
+
+        #button-wrapper {
+            text-align: center;
+
+            button {
+                background: rgb(70, 196, 246);
+                color: #FFF;
+                padding: 1rem 3rem;
+                border-radius: 5px;
+                border: 1px solid skyblue;
+                cursor: pointer;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+        }
+    }
+}

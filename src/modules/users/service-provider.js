@@ -1,3 +1,5 @@
-export default function () {
-    console.log('users service provider.');
+import routes from './routes';
+
+export default function (reactor) {
+    routes(reactor.route, reactor);
 }
