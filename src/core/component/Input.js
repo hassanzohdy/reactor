@@ -24,8 +24,8 @@ export default class Input extends ReactorComponent {
         return this.textfulInputTypes.includes(typeProvided);
     }
 
-    customMessage = () => {
-        return ``
+    isRequired = () => {
+        return this.props.required;
     }
 
     validateField = e => {
@@ -38,7 +38,7 @@ export default class Input extends ReactorComponent {
 
         // validate required input
         // check if the input is not empty
-        if (this.props.required === true && Is.empty(value)) {
+        if (this.isRequired() && Is.empty(value)) {
             // he didn't access this body
             fieldValidation = validationMessages && (validationMessages.empty || 'Email Address Is Required!');
         }
