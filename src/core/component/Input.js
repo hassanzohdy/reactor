@@ -30,6 +30,10 @@ export default class Input extends ReactorComponent {
         return this.props.required;
     }
 
+    topPosition = () => {
+        return this.props.errorPosition === "top"
+    }
+
     validateField = e => {
         let input = e.target,
             value = input.value,
@@ -72,7 +76,7 @@ export default class Input extends ReactorComponent {
 
                 {this.get(`validation.${type}`) !== null &&
                     <label
-                        className={`error ${errorPosition === "top" ? "order-top" : "order-bottom"}`}
+                        className={`error ${this.topPosition() ? "order-top" : "order-bottom"}`}
                     >
                         {this.get(`validation.${type}`)}
                     </label>
