@@ -2,6 +2,8 @@ import React from 'react';
 import Is from '@flk/supportive-is';
 import { ReactorComponent } from '../component';
 
+import "./style.scss"
+
 export default class Input extends ReactorComponent {
 
     state = {
@@ -63,10 +65,18 @@ export default class Input extends ReactorComponent {
         // console.log(this.props.validationMessages)
 
         // get all the props supplied
-        let { type, required, min, max, minLength, maxLength, placeholder } = this.props;
+        let { type, required, min, max, minLength, maxLength, placeholder, errorPosition } = this.props;
 
         return (
-            <>
+            <section className="input-wrapper">
+
+                {this.get(`validation.${type}`) !== null &&
+                    <label
+                        className={`error ${errorPosition === "top" ? "order-top" : "order-bottom"}`}
+                    >
+                        {this.get(`validation.${type}`)}
+                    </label>
+                }
 
                 <input
                     type={type}
@@ -79,11 +89,8 @@ export default class Input extends ReactorComponent {
                     maxLength={this.isTextFulType(type) ? maxLength : null}
                     minLength={this.isTextFulType(type) ? minLength : null}
                 />
-                {this.get(`validation.${this.props.type}`) !== null &&
-                    <label className="error">{this.get(`validation.${this.props.type}`)}</label>
-                }
 
-            </>
+            </section>
         )
     }
 }

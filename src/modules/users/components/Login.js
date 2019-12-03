@@ -34,6 +34,7 @@ export default class Login extends ReactorPageComponent {
                             maxLength={30}
                             length={23}
                             validationMessages={{empty: "Empty !", email: "Not Email !", lengthMessage: "length is not matched"}}
+                            errorPosition="bottom"
                         />
                     </div>
 
