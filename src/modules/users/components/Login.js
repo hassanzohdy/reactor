@@ -13,6 +13,10 @@ export default class Login extends ReactorPageComponent {
     );
   }
 
+  focus = () => {
+    console.log("focused");
+  };
+
   login = e => {
     e.preventDefault(); // disable default form submission
 
@@ -32,14 +36,20 @@ export default class Login extends ReactorPageComponent {
               required={true}
               placeholder="Email Address"
               minLength={5}
-              maxLength={30}
-              length={23}
+              maxLength={10}
+            //   length={23}
+              min={3}
               validationMessages={{
                 empty: "Empty !",
                 email: "Not Email !",
-                lengthMessage: "length is not matched"
+                lengthMessage: "length is not matched",
+                "minValueMessage": "You should pass 3 as the minimum",
+                "maxValueMessage": "You should pass 10 as the maximum",
+                "minLengthMessage": "minimum length required is 5",
+                "maxLengthMessage": "maximum length required is 10"
               }}
               errorPosition="bottom"
+              onInput={this.focus}
             />
           </div>
 
