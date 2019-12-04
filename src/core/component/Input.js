@@ -7,8 +7,8 @@ import "./style.scss";
 export default class Input extends ReactorComponent {
     state = {
         validation: {
-            [this.props.type]: null,
-            fieldValidation: null
+            field: null,
+            errorMessage: null
         }
     };
 
@@ -44,7 +44,7 @@ export default class Input extends ReactorComponent {
     };
 
     // make the error message's position according to the errorPosition prop provided
-    topPosition = () => {
+    errorPosition = () => {
         return this.props.errorPosition === "top" ? "order-top" : "order-bottom";
     };
 
@@ -66,14 +66,14 @@ export default class Input extends ReactorComponent {
             { length, type } = this.props;
 
         // reset validation email input error
-        this.set("validation.fieldValidation", null);
+        this.set("validation.errorMessage", null);
 
         // validate required input
         // check if the input is not empty
         if (this.isRequired() && Is.empty(value)) {
             // he didn't access this body
             this.set(
-                "validation.fieldValidation",
+                "validation.errorMessage",
                 this.customMessage("empty", "This field Is Required!")
             );
         }
@@ -83,12 +83,12 @@ export default class Input extends ReactorComponent {
         // when the validation.email is null
         if (
             type === "email" &&
-            this.get("validation.fieldValidation") === null &&
+            this.get("validation.errorMessage") === null &&
             !Is.empty(value) &&
             !Is.email(value)
         ) {
             this.set(
-                "validation.fieldValidation",
+                "validation.errorMessage",
                 this.customMessage("email", "Invalid Email Address")
             );
         }
@@ -96,7 +96,7 @@ export default class Input extends ReactorComponent {
         // check if the value equals the length specified
         if (!Is.empty(value) && length && value.length !== length) {
             this.set(
-                "validation.fieldValidation",
+                "validation.errorMessage",
                 this.customMessage(
                     "lengthMessage",
                     `This field should be ${length} in length`
@@ -104,7 +104,7 @@ export default class Input extends ReactorComponent {
             );
         }
 
-        this.set(`validation.${type}`, this.get("validation.fieldValidation"));
+        this.set(`validation.field`, this.get("validation.errorMessage"));
     };
 
     render() {
@@ -121,9 +121,9 @@ export default class Input extends ReactorComponent {
 
         return (
             <section className="input-wrapper">
-                {this.get(`validation.${type}`) !== null && (
-                    <label className={`error ${this.topPosition()}`}>
-                        {this.get(`validation.${type}`)}
+                {this.get(`validation.field`) !== null && (
+                    <label className={`error ${this.errorPosition()}`}>
+                        {this.get(`validation.field`)}
                     </label>
                 )}
 
