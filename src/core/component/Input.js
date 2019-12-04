@@ -128,7 +128,6 @@ export default class Input extends ReactorComponent {
 
   matchMaxLength = field => {
     let { maxLength } = this.props;
-    console.log(field.value.length, maxLength, this.isTextFulType());
     if (this.isTextFulType() && !!maxLength && field.value.length > maxLength) {
       this.errorMessageClone = this.customMessage(
         "maxLengthMessage",
@@ -137,10 +136,82 @@ export default class Input extends ReactorComponent {
     }
   };
 
+  hasExceededMaxDate = (dateProvided, maxDate) => {
+    return new Date(dateProvided).getTime() > new Date(maxDate).getTime();
+  };
+
+  matchMaxDate = field => {
+    let { maxDate } = this.props;
+
+    if (
+      this.isNumericType() &&
+      !!maxDate &&
+      this.hasExceededMaxDate(field.value, maxDate)
+    ) {
+      this.errorMessageClone = this.customMessage(
+        "maxDateMessage",
+        `The Date should be maximum ${maxDate}`
+      );
+    }
+  };
+
+  hasExceededMinDate = (dateProvided, minDate) => {
+    return new Date(dateProvided).getTime() < new Date(minDate).getTime();
+  };
+
+  matchMinDate = field => {
+    let { minDate } = this.props;
+
+    if (
+      this.isNumericType() &&
+      !!minDate &&
+      this.hasExceededMinDate(field.value, minDate)
+    ) {
+      this.errorMessageClone = this.customMessage(
+        "maxDateMessage",
+        `The Date should be minimum ${minDate}`
+      );
+    }
+  };
+
   // make the error message's position according to the errorPosition prop provided
   errorPosition = () => {
     return this.props.errorPosition === "top" ? "order-top" : "order-bottom";
   };
+
+  checkIntType = field => {
+    if (this.props.type === "int" && !Number.isInteger(+field.value)) {
+      this.errorMessageClone = this.customMessage(
+        "intType",
+        `You should pass an integer number`
+      );
+    }
+  };
+
+  isFloat = num => {
+    return +num === num && num % 1 !== 0;
+  };
+
+  checkFloatType = field => {
+    if (this.props.type === "float" && !this.isFloat(+field.value)) {
+      this.errorMessageClone = this.customMessage(
+        "floatType",
+        `You should pass a float number`
+      );
+    }
+  };
+
+  matchTextPattern = field => {
+      let {type, regPattern} = this.props,
+        pattern = new RegExp(`^${regPattern}$`, "g")
+        console.log(pattern.test(field.value))
+      if (type === "text" && !pattern.test(field.value)) {
+        this.errorMessageClone = this.customMessage(
+            "matchPattern",
+            `The string should match pattern provided`
+          );
+      }
+  }
 
   // validate the field according to its type
   validateField = e => {
@@ -152,7 +223,12 @@ export default class Input extends ReactorComponent {
         this.matchMinValue,
         this.matchMinValue,
         this.matchMaxLength,
-        this.matchMinLength
+        this.matchMinLength,
+        this.matchMaxDate,
+        this.matchMinDate,
+        this.checkIntType,
+        this.checkFloatType,
+        this.matchTextPattern
       ];
 
     this.errorMessageClone = null;
@@ -195,16 +271,27 @@ export default class Input extends ReactorComponent {
           </label>
         )}
 
-        <input
-          type={type}
-          ref="inputField"
-          className="form-control"
-          {...this.propsPassed()}
-          required={required}
-          onInput={this.validateField}
-          placeholder={placeholder}
-          autoComplete="new-password"
-        />
+        {type === "int" || type === "float" ? (
+          <input
+            type="number"
+            className="form-control"
+            {...this.propsPassed()}
+            required={required}
+            onInput={this.validateField}
+            placeholder={placeholder}
+            autoComplete="new-password"
+          />
+        ) : (
+          <input
+            type={type}
+            className="form-control"
+            {...this.propsPassed()}
+            required={required}
+            onInput={this.validateField}
+            placeholder={placeholder}
+            autoComplete="new-password"
+          />
+        )}
       </section>
     );
   }
