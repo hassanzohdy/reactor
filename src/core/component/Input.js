@@ -239,11 +239,30 @@ export default class Input extends ReactorComponent {
     }
   };
 
-  getPropsMethods = () => {
+  isAcceptableProp = prop => {
+    let acceptableProps = [
+      "type",
+      "autoCompleteKeyword",
+      "required",
+      "placeholder",
+      "minLength",
+      "maxLength",
+      "length",
+      "min",
+      "validationMessages",
+      "errorPosition",
+      "minDate",
+      "maxDate",
+      "regPattern"
+    ];
+    return typeof prop !== "object" && !acceptableProps.includes(prop);
+  };
+
+  getAcceptedProps = () => {
     let obj = {};
 
     for (let prop in this.props) {
-      if (typeof this.props[prop] === "function") {
+      if (typeof this.props[prop] === "function" || this.isAcceptableProp(prop)) {
         obj[prop] = this.props[prop];
       }
     }
@@ -264,7 +283,7 @@ export default class Input extends ReactorComponent {
         )}
 
         <input
-          {...this.getPropsMethods()}
+          {...this.getAcceptedProps()}
           type={type === "int" || type === "float" ? "number" : type}
           className="form-control"
           onInput={this.validateField}

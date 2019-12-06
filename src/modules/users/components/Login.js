@@ -33,6 +33,7 @@ export default class Login extends ReactorPageComponent {
           <div className="form-group">
             <Input
               type="email"
+              data-new="sd"
               autoCompleteKeyword="age"
               required={true}
               placeholder="Email Address"
