@@ -242,9 +242,7 @@ export default class Input extends ReactorComponent {
   isAcceptableProp = prop => {
     let acceptableProps = [
       "type",
-      "autoCompleteKeyword",
       "required",
-      "placeholder",
       "minLength",
       "maxLength",
       "length",
@@ -287,8 +285,6 @@ export default class Input extends ReactorComponent {
           type={type === "int" || type === "float" ? "number" : type}
           className="form-control"
           onInput={this.validateField}
-          placeholder={placeholder}
-          autoComplete={autoCompleteKeyword}
         />
       </section>
     );
