@@ -7,13 +7,13 @@ import "./style.scss";
 export default class Input extends ReactorComponent {
   state = {
     validation: {
-      errorMessage: null
+      message: null
     }
   };
 
   // get all the input types to add attributes dynamically to the input
   inputTypes = {
-    numericTypes: ["number", "date"],
+    numericTypes: ["number"],
     textfulTypes: ["text", "email", "password", "tel"]
   };
 
@@ -54,14 +54,14 @@ export default class Input extends ReactorComponent {
     return (validationMessages && validationMessages[role]) || defaultMessage;
   };
 
-  errorMessageClone = null;
+  errorMessage = null;
 
   validateEmpty = field => {
     // validate required input
     // check if the input is not empty
     if (this.isRequired() && Is.empty(field.value)) {
       // he didn't access this body
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "empty",
         "This field is Required!"
       );
@@ -73,14 +73,11 @@ export default class Input extends ReactorComponent {
     // validate the email when the validation.errorMessage is null
     if (
       this.props.type === "email" &&
-      this.get("validation.errorMessage") === null &&
+      this.get("validation.message") === null &&
       !Is.empty(field.value) &&
       !Is.email(field.value)
     ) {
-      this.errorMessageClone = this.customMessage(
-        "email",
-        "Invalid Email Address"
-      );
+      this.errorMessage = this.customMessage("email", "Invalid Email Address");
     }
   };
 
@@ -89,7 +86,7 @@ export default class Input extends ReactorComponent {
 
     // check if the value equals the length specified
     if (!Is.empty(field.value) && length && field.value.length !== length) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "lengthMessage",
         `This field should be ${length} in length`
       );
@@ -99,7 +96,7 @@ export default class Input extends ReactorComponent {
   matchMinValue = field => {
     let { min } = this.props;
     if (this.isNumericType() && min && field.value < min) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "minValueMessage",
         `The minimum value accepted is ${min}`
       );
@@ -109,7 +106,7 @@ export default class Input extends ReactorComponent {
   matchMaxValue = field => {
     let { max } = this.props;
     if (this.isNumericType() && max && field.value > max) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "maxValueMessage",
         `The maximum value accepted is ${max}`
       );
@@ -119,7 +116,7 @@ export default class Input extends ReactorComponent {
   matchMinLength = field => {
     let { minLength } = this.props;
     if (this.isTextFulType() && minLength && field.value.length < minLength) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "minLengthMessage",
         `The field should be at minimum ${minLength} characters `
       );
@@ -129,7 +126,7 @@ export default class Input extends ReactorComponent {
   matchMaxLength = field => {
     let { maxLength } = this.props;
     if (this.isTextFulType() && !!maxLength && field.value.length > maxLength) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "maxLengthMessage",
         `The field should be maximum ${maxLength} characters `
       );
@@ -148,7 +145,7 @@ export default class Input extends ReactorComponent {
       !!maxDate &&
       this.hasExceededMaxDate(field.value, maxDate)
     ) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "maxDateMessage",
         `The Date should be maximum ${maxDate}`
       );
@@ -167,7 +164,7 @@ export default class Input extends ReactorComponent {
       !!minDate &&
       this.hasExceededMinDate(field.value, minDate)
     ) {
-      this.errorMessageClone = this.customMessage(
+      this.errorMessage = this.customMessage(
         "maxDateMessage",
         `The Date should be minimum ${minDate}`
       );
@@ -180,21 +177,17 @@ export default class Input extends ReactorComponent {
   };
 
   checkIntType = field => {
-    if (this.props.type === "int" && !Number.isInteger(+field.value)) {
-      this.errorMessageClone = this.customMessage(
+    if (this.props.type === "int" && !Is.int(+field.value)) {
+      this.errorMessage = this.customMessage(
         "intType",
         `You should pass an integer number`
       );
     }
   };
 
-  isFloat = num => {
-    return +num === num && num % 1 !== 0;
-  };
-
   checkFloatType = field => {
-    if (this.props.type === "float" && !this.isFloat(+field.value)) {
-      this.errorMessageClone = this.customMessage(
+    if (this.props.type === "float" && !Is.float(+field.value)) {
+      this.errorMessage = this.customMessage(
         "floatType",
         `You should pass a float number`
       );
@@ -202,16 +195,16 @@ export default class Input extends ReactorComponent {
   };
 
   matchTextPattern = field => {
-      let {type, regPattern} = this.props,
-        pattern = new RegExp(`^${regPattern}$`, "g")
-        console.log(pattern.test(field.value))
-      if (type === "text" && !pattern.test(field.value)) {
-        this.errorMessageClone = this.customMessage(
-            "matchPattern",
-            `The string should match pattern provided`
-          );
-      }
-  }
+    let { type, regPattern } = this.props,
+      pattern = new RegExp(`${regPattern}`, "g");
+
+    if (type === "text" && !pattern.test(field.value)) {
+      this.errorMessage = this.customMessage(
+        "matchPattern",
+        `The string should match pattern provided`
+      );
+    }
+  };
 
   // validate the field according to its type
   validateField = e => {
@@ -231,23 +224,22 @@ export default class Input extends ReactorComponent {
         this.matchTextPattern
       ];
 
-    this.errorMessageClone = null;
+    this.errorMessage = null;
 
     // validate according to the rules provided
     for (let rule of validationCollectedRules) {
       rule(input);
-      if (this.errorMessageClone) break;
-      else continue;
+      if (this.errorMessage) break;
     }
 
-    this.set(`validation.errorMessage`, this.errorMessageClone);
+    this.set(`validation.message`, this.errorMessage);
 
     if (this.props.onInput) {
       this.props.onInput(e);
     }
   };
 
-  propsPassed = () => {
+  getPropsMethods = () => {
     let obj = {};
 
     for (let prop in this.props) {
@@ -261,37 +253,25 @@ export default class Input extends ReactorComponent {
 
   render() {
     // get all the props supplied
-    let { type, required, placeholder } = this.props;
+    let { type, required, placeholder, autoCompleteKeyword } = this.props;
 
     return (
       <section className="input-wrapper">
-        {this.get(`validation.errorMessage`) !== null && (
+        {this.get(`validation.message`) !== null && (
           <label className={`error ${this.errorPosition()}`}>
-            {this.get(`validation.errorMessage`)}
+            {this.get(`validation.message`)}
           </label>
         )}
 
-        {type === "int" || type === "float" ? (
-          <input
-            type="number"
-            className="form-control"
-            {...this.propsPassed()}
-            required={required}
-            onInput={this.validateField}
-            placeholder={placeholder}
-            autoComplete="new-password"
-          />
-        ) : (
-          <input
-            type={type}
-            className="form-control"
-            {...this.propsPassed()}
-            required={required}
-            onInput={this.validateField}
-            placeholder={placeholder}
-            autoComplete="new-password"
-          />
-        )}
+        <input
+          {...this.getPropsMethods()}
+          type={type === "int" || type === "float" ? "number" : type}
+          className="form-control"
+          required={required}
+          onInput={this.validateField}
+          placeholder={placeholder}
+          autoComplete={autoCompleteKeyword}
+        />
       </section>
     );
   }

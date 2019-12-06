@@ -33,6 +33,7 @@ export default class Login extends ReactorPageComponent {
           <div className="form-group">
             <Input
               type="email"
+              autoCompleteKeyword="age"
               required={true}
               placeholder="Email Address"
               minLength={5}
@@ -57,7 +58,7 @@ export default class Login extends ReactorPageComponent {
             <Input
               type="date"
               required={true}
-              placeholder="Email Address"
+              placeholder="Date"
               minLength={5}
               maxLength={10}
             //   length={23}
@@ -140,9 +141,10 @@ export default class Login extends ReactorPageComponent {
 
           <div className="form-group">
             <Input
+              autoCompleteKeyword="age"
               type="text"
               required={true}
-              regPattern="[0-9]|[a-z]"
+              regPattern="[0-9][a-z]"
               placeholder="text pattern"
             //   minLength={5}
             //   maxLength={10}
