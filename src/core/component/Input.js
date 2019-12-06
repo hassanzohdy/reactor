@@ -270,7 +270,7 @@ export default class Input extends ReactorComponent {
 
   render() {
     // get all the props supplied
-    let { type, placeholder, autoCompleteKeyword } = this.props;
+    let { type } = this.props;
 
     return (
       <section className="input-wrapper">
