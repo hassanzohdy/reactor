@@ -253,7 +253,7 @@ export default class Input extends ReactorComponent {
 
   render() {
     // get all the props supplied
-    let { type, required, placeholder, autoCompleteKeyword } = this.props;
+    let { type, placeholder, autoCompleteKeyword } = this.props;
 
     return (
       <section className="input-wrapper">
@@ -267,7 +267,6 @@ export default class Input extends ReactorComponent {
           {...this.getPropsMethods()}
           type={type === "int" || type === "float" ? "number" : type}
           className="form-control"
-          required={required}
           onInput={this.validateField}
           placeholder={placeholder}
           autoComplete={autoCompleteKeyword}
