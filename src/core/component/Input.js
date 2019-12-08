@@ -260,7 +260,10 @@ export default class Input extends ReactorComponent {
     let obj = {};
 
     for (let prop in this.props) {
-      if (typeof this.props[prop] === "function" || this.isAcceptableProp(prop)) {
+      if (
+        typeof this.props[prop] === "function" ||
+        this.isAcceptableProp(prop)
+      ) {
         obj[prop] = this.props[prop];
       }
     }
@@ -269,8 +272,7 @@ export default class Input extends ReactorComponent {
   };
 
   render() {
-    // get all the props supplied
-    let { type } = this.props;
+    let { type, options } = this.props;
 
     return (
       <section className="input-wrapper">
@@ -280,12 +282,19 @@ export default class Input extends ReactorComponent {
           </label>
         )}
 
-        <input
-          {...this.getAcceptedProps()}
-          type={type === "int" || type === "float" ? "number" : type}
-          className="form-control"
-          onInput={this.validateField}
-        />
+        {type === "dropdown" ? (
+          <select {...this.getAcceptedProps()}>
+            {options &&
+              options.map((option, idx) => <option value={option} key={idx} > {option} </option>)}
+          </select>
+        ) : (
+          <input
+            {...this.getAcceptedProps()}
+            type={type === "int" || type === "float" ? "number" : type}
+            className="form-control"
+            onInput={this.validateField}
+          />
+        )}
       </section>
     );
   }
