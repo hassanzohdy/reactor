@@ -1,0 +1,20 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .error.order-top {
+    order: 1;
+  }
+
+  .error.order-top + .form-control {
+    order: 2;
+  }
+
+  .error.order-bottom {
+    order: 2;
+  }
+
+  .error.order-bottom + .form-control {
+    order: 1;
+  }
+}

@@ -1,75 +1,193 @@
-import './login.scss';
-import Is from '@flk/supportive-is';
-import React from 'react';
-import { ReactorPageComponent } from '../../../core/component';
+import "./login.scss";
+import React from "react";
+import { ReactorPageComponent } from "../../../core/component";
+import Input from "../../../core/component/Input";
 
 export default class Login extends ReactorPageComponent {
-    state = {
-        validation: {
-            email: null, // email input
-            password: null, // password input
-        }
-    };
+  constructor() {
+    super();
 
-    constructor() {
-        super();    
+    this.setMeta("title", "Login Page").setMeta(
+      "description",
+      "Welcome to our login page."
+    );
+  }
 
-        this.setMeta('title', 'Login Page')
-            .setMeta('description', 'Welcome to our login page.');
-    }
-    
-    login = e => {
-        e.preventDefault(); // disable default form submission  
+  focus = () => {
+    console.log("focused");
+  };
 
-        console.log('Send to some api!');
-    };
+  login = e => {
+    e.preventDefault(); // disable default form submission
 
-    validateEmailInput = e => {
-        let input = e.target,
-            value = input.value;
+    console.log("Send to some api!");
+  };
 
-        // reset validation email input error
-        let emailValidation = null;
+  render() {
+    return (
+      <div id="login-page">
+        <h1>Login Page</h1>
 
-        // validate required input
-        // check if the input is not empty
-        if (input.required === true && Is.empty(value)) {
-            // he didn't access this body
-            emailValidation = 'Email Address Is Required!';
-        } 
+        <form onSubmit={this.login}>
+          {/* it will be validated by default and has the form-control class and wrapped by form-group */}
+          <div className="form-group">
+            <Input
+              type="email"
+              data-new="sd"
+              required={true}
+              placeholder="Email Address"
+              minLength={5}
+              maxLength={10}
+              //   length={23}
+              min={3}
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched",
+                minValueMessage: "You should pass 3 as the minimum",
+                maxValueMessage: "You should pass 10 as the maximum",
+                minLengthMessage: "minimum length required is 5",
+                maxLengthMessage: "maximum length required is 10"
+              }}
+              errorPosition="bottom"
+              onInput={this.focus}
+            />
+          </div>
 
-        // check if the input value a valid email address
-        // validate the email when?
-        // when the validation.email is null 
-        if (emailValidation === null && ! Is.empty(value) && !Is.email(value)) {
-            emailValidation = 'Invalid Email Address';            
-        }
+          <div className="form-group">
+            <Input
+              type="date"
+              required={true}
+              placeholder="Date"
+              minLength={5}
+              maxLength={10}
+              //   length={23}
+              min={3}
+              minDate="3/2/1999"
+              maxDate="3/2/2030"
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched",
+                minValueMessage: "You should pass 3 as the minimum",
+                maxValueMessage: "You should pass 10 as the maximum",
+                minLengthMessage: "minimum length required is 5",
+                maxLengthMessage: "maximum length required is 10",
+                maxDateMessage: "maximum date accepted is 3/2/2030",
+                minDateMessage: "minimum date accepted is 3/2/1999"
+              }}
+              errorPosition="bottom"
+              onInput={this.focus}
+            />
+          </div>
 
-        this.set('validation.email', emailValidation);
-    };
+          <div className="form-group">
+            <Input
+              type="int"
+              required={true}
+              placeholder="Integer"
+              minLength={5}
+              maxLength={10}
+              //   length={23}
+              min={3}
+              minDate="3/2/1999"
+              maxDate="3/2/2030"
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched",
+                minValueMessage: "You should pass 3 as the minimum",
+                maxValueMessage: "You should pass 10 as the maximum",
+                minLengthMessage: "minimum length required is 5",
+                maxLengthMessage: "maximum length required is 10",
+                maxDateMessage: "maximum date accepted is 3/2/2030",
+                minDateMessage: "minimum date accepted is 3/2/1999",
+                intType: "Not integer!"
+              }}
+              errorPosition="bottom"
+              onInput={this.focus}
+            />
+          </div>
 
-    render() {
-        return (
-            <div id="login-page">
-                <h1>Login Page</h1>
+          <div className="form-group">
+            <Input
+              type="float"
+              required={true}
+              placeholder="Float"
+              minLength={5}
+              maxLength={10}
+              //   length={23}
+              min={3}
+              minDate="3/2/1999"
+              maxDate="3/2/2030"
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched",
+                minValueMessage: "You should pass 3 as the minimum",
+                maxValueMessage: "You should pass 10 as the maximum",
+                minLengthMessage: "minimum length required is 5",
+                maxLengthMessage: "maximum length required is 10",
+                maxDateMessage: "maximum date accepted is 3/2/2030",
+                minDateMessage: "minimum date accepted is 3/2/1999",
+                floatType: "Not float !"
+              }}
+              errorPosition="bottom"
+              onInput={this.focus}
+            />
+          </div>
 
-                <form onSubmit={this.login}>
-                    <div className="form-group">
-                        <input type="email" className="form-control" required={true} onInput={this.validateEmailInput} placeholder="Email Address" />
-                        {this.get('validation.email') !== null &&
-                            <label className="error">{this.get('validation.email')}</label>
-                        }
+          <div className="form-group">
+            <Input
+              type="text"
+              required={true}
+              regPattern="[0-9][a-z]"
+              placeholder="text pattern"
+              //   minLength={5}
+              //   maxLength={10}
+              //   length={23}
+              min={3}
+              minDate="3/2/1999"
+              maxDate="3/2/2030"
+              validationMessages={{
+                empty: "Empty !",
+                email: "Not Email !",
+                lengthMessage: "length is not matched",
+                minValueMessage: "You should pass 3 as the minimum",
+                maxValueMessage: "You should pass 10 as the maximum",
+                minLengthMessage: "minimum length required is 5",
+                maxLengthMessage: "maximum length required is 10",
+                maxDateMessage: "maximum date accepted is 3/2/2030",
+                minDateMessage: "minimum date accepted is 3/2/1999",
+                floatType: "Not float !"
+              }}
+              errorPosition="bottom"
+              onInput={this.focus}
+            />
+          </div>
 
-                    </div>
-                    <div className="form-group">
-                        <input type="password" className="form-control" placeholder="Enter Your Password" />
-                    </div>
+          <div className="form-group">
+            <Input
+              type="password"
+              required={true}
+              placeholder="Password"
+              length={4}
+            />
+          </div>
 
-                    <div id="button-wrapper">
-                        <button>Login</button>
-                    </div>
-                </form>
-            </div>
-        );
-    }
+          <div className="form-group">
+            <Input
+              type="dropdown"
+              required={true}
+              options={["option 1", "option 2", "option 3"]}
+            />
+          </div>
+
+          <div id="button-wrapper">
+            <button>Login</button>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
