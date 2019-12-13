@@ -11,6 +11,12 @@ export default class Input extends ReactorComponent {
     }
   };
 
+  constructor() {
+    super()
+
+    this.addClass()
+  }
+
   // get all the input types to add attributes dynamically to the input
   inputTypes = {
     numericTypes: ["number"],
@@ -271,8 +277,14 @@ export default class Input extends ReactorComponent {
     return obj;
   };
 
+  addClass = (e) => {
+    if (this.props.className) {
+      e.target.classList.add(this.props.className)
+    }
+  }
+
   render() {
-    let { type, options } = this.props;
+    let { type, options, className } = this.props;
 
     return (
       <section className="input-wrapper">
@@ -291,7 +303,7 @@ export default class Input extends ReactorComponent {
           <input
             {...this.getAcceptedProps()}
             type={type === "int" || type === "float" ? "number" : type}
-            className="form-control"
+            className={`form-control ${className}`}
             onInput={this.validateField}
           />
         )}
