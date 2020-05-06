@@ -1,18 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
+import config from 'core/config';
+import { Link } from 'react-router-dom';
+import ReactorComponent from 'core/component/reactor.component';
 
+export default class Users extends ReactorComponent {
+    state = {
+        number: 1,
+    };
 
-export default class Users extends Component {
-    constructor() {
-        super();
+    init() {
     }
+
     render() {
         return (
-            <div>
-                {this.isOK &&
-                    <h1>Thanks</h1>
-                }
-                {this.users}
-                <h1>Hello, Users</h1>
+            <div id="container">
+                <Link to="/">Back to Home</Link>
+                <h1 onClick={() => this.setState({ number: this.state.number + 1 })}>Hello, Users {config.get('name.first')}</h1>
+
+                <h1>Current Number: {this.state.number}</h1>
             </div>
         );
     }

@@ -1,9 +1,12 @@
 import './login.scss';
-import Is from '@flk/supportive-is';
 import React from 'react';
-import { ReactorPageComponent } from '../../../core/component';
+import Form from 'core/component/form/form';
+import { title, description } from 'core/metadata';
+import ReactorComponent from 'core/component/reactor.component';
+import FormInput from 'core/component/form/form-input';
+import endpoint from 'core/endpoint';
 
-export default class Login extends ReactorPageComponent {
+export default class Login extends ReactorComponent {
     state = {
         validation: {
             email: null, // email input
@@ -11,41 +14,15 @@ export default class Login extends ReactorPageComponent {
         }
     };
 
-    constructor() {
-        super();    
-
-        this.setMeta('title', 'Login Page')
-            .setMeta('description', 'Welcome to our login page.');
+    init() {
+        title('My Login Page');
+        description('Some login description');
     }
-    
+
     login = e => {
-        e.preventDefault(); // disable default form submission  
+        console.log('Send to some api!')
 
-        console.log('Send to some api!');
-    };
-
-    validateEmailInput = e => {
-        let input = e.target,
-            value = input.value;
-
-        // reset validation email input error
-        let emailValidation = null;
-
-        // validate required input
-        // check if the input is not empty
-        if (input.required === true && Is.empty(value)) {
-            // he didn't access this body
-            emailValidation = 'Email Address Is Required!';
-        } 
-
-        // check if the input value a valid email address
-        // validate the email when?
-        // when the validation.email is null 
-        if (emailValidation === null && ! Is.empty(value) && !Is.email(value)) {
-            emailValidation = 'Invalid Email Address';            
-        }
-
-        this.set('validation.email', emailValidation);
+        endpoint.get('/test');
     };
 
     render() {
@@ -53,22 +30,26 @@ export default class Login extends ReactorPageComponent {
             <div id="login-page">
                 <h1>Login Page</h1>
 
-                <form onSubmit={this.login}>
-                    <div className="form-group">
-                        <input type="email" className="form-control" required={true} onInput={this.validateEmailInput} placeholder="Email Address" />
-                        {this.get('validation.email') !== null &&
-                            <label className="error">{this.get('validation.email')}</label>
-                        }
+                <Form onSubmit={this.login}>
+                    <FormInput
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        required={true}
+                        placeholder="Email Address"
+                    />
 
-                    </div>
-                    <div className="form-group">
-                        <input type="password" className="form-control" placeholder="Enter Your Password" />
-                    </div>
-
+                    <FormInput
+                        type="password"
+                        required={true}
+                        name="password"
+                        className="form-control"
+                        placeholder="Enter Your Password"
+                    />
                     <div id="button-wrapper">
                         <button>Login</button>
                     </div>
-                </form>
+                </Form>
             </div>
         );
     }
