@@ -2,6 +2,6 @@ import config from 'core/config';
 
 config.set({
     endpoint: {
-        baseUrl: 'https://some-domain.com/api/'
+        baseUrl: 'https://apps.mentoor.io/shera2/api/admin/'
     },
 });

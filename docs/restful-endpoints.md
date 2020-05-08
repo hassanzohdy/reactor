@@ -19,6 +19,8 @@ Here is the documentation of the Restful Endpoint methods
 
 `list(params: object)`
 
+Return list of records
+
 ### get
 
 `get(id: number, params: object)`

@@ -1,29 +1,47 @@
 import './login.scss';
 import React from 'react';
 import Form from 'core/component/form/form';
+import { login } from 'modules/users/services/auth';
 import { title, description } from 'core/metadata';
-import ReactorComponent from 'core/component/reactor.component';
 import FormInput from 'core/component/form/form-input';
-import endpoint from 'core/endpoint';
+import ReactorComponent from 'core/component/reactor.component';
 
 export default class Login extends ReactorComponent {
     state = {
-        validation: {
-            email: null, // email input
-            password: null, // password input
-        }
     };
 
+    /**
+     * {@inheritdoc} 
+     */
     init() {
         title('My Login Page');
         description('Some login description');
     }
 
-    login = e => {
-        console.log('Send to some api!')
+    /**
+     * Submit login form
+     */
+    login = async (e) => {
+        this.set('errors', null); // make sure to clear previous errors
+        try {
+            let { data } = await login(e.target);
+            console.log(data);
 
-        endpoint.get('/test');
+        } catch (error) {
+            let errors = error.response.data.errors;
+
+            this.set('errors', errors);
+        }
     };
+
+    displayErrors() {
+        this.errors = this.get('errors');
+        return Object.keys(this.errors).map(key => {
+            return (
+                <div key={key}>{this.errors[key]}</div>
+            );
+        });
+    }
 
     render() {
         return (
@@ -31,6 +49,12 @@ export default class Login extends ReactorComponent {
                 <h1>Login Page</h1>
 
                 <Form onSubmit={this.login}>
+                    {this.get('errors') &&
+                        <div className="error">
+                            {this.displayErrors()}
+                        </div>
+                    }
+
                     <FormInput
                         type="email"
                         className="form-control"
