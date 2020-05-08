@@ -23,7 +23,8 @@
     "preinstall": "command -v link-module-alias && link-module-alias clean || true"
   },
   "_moduleAliases": {
-    "core": "src/core",
+    "user": "src/reactor/user.js",
+    "reactor": "src/reactor",
     "modules": "src/modules",
     "shared": "src/shared"
   },

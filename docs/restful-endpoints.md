@@ -1,6 +1,6 @@
  # Restful Endpoints
 
-Path: `core/restful-endpoint.js`
+Path: `reactor/restful-endpoint.js`
  
 This class is used to create a full `Restful APIs` requests for:
 

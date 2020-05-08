@@ -36,14 +36,11 @@ function Routes() {
     );
 }
 
-function scan() {
+export function scan() {
     ReactDOM.render(<Routes />, document.getElementById('root'));
 }
 
+
 export default {
-    scan,
-    provider: {
-        name: 'route', // the name that will be used from the reactor object in any module service provider,
-        call: addRouter,
-    }
+    add: addRouter
 };

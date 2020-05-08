@@ -1,7 +1,7 @@
 import React from 'react';
-import config from 'core/config';
+import config from 'reactor/config';
 import { Link } from 'react-router-dom';
-import ReactorComponent from 'core/component/reactor.component';
+import ReactorComponent from 'reactor/component/reactor.component';
 
 export default class Users extends ReactorComponent {
     state = {

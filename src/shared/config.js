@@ -1,4 +1,4 @@
-import config from 'core/config';
+import config from 'reactor/config';
 
 config.set({
     endpoint: {

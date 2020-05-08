@@ -1,6 +1,6 @@
 import React  from 'react';
 import events from '@flk/events';
-import ReactorComponent from 'core/component/reactor.component';
+import ReactorComponent from 'reactor/component/reactor.component';
 
 export default class Form extends ReactorComponent {
     isValidForm = true;

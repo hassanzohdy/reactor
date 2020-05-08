@@ -1,6 +1,6 @@
 # Endpoint
 
-Path `core/endpoint.js`
+Path `reactor/endpoint.js`
 
 
 # What is Endpoint

@@ -1,4 +1,4 @@
-import RestfulEndpoint from "core/restful-endpoint";
+import RestfulEndpoint from "reactor/restful-endpoint";
 
 class UsersService extends RestfulEndpoint {
     route = '/users';
