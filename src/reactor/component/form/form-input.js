@@ -1,6 +1,7 @@
 import React from 'react';
 import events from '@flk/events';
 import Is from '@flk/supportive-is';
+import PropTypes from 'prop-types';
 import ReactorComponent from 'reactor/component/reactor.component';
 
 export default class FormInput extends ReactorComponent {
@@ -86,3 +87,15 @@ export default class FormInput extends ReactorComponent {
         );
     }
 }
+
+FormInput.propTypes = {
+    type: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    className: PropTypes.string,
+    required: PropTypes.bool,
+};
+
+FormInput.defaultProps = {
+    type: 'text',
+};

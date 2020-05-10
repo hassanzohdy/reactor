@@ -7,6 +7,7 @@
     "@flk/supportive-is": "^0.2.3",
     "axios": "^0.19.0",
     "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
