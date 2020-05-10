@@ -7,11 +7,15 @@ This is the full documentation about Reactor.
 The application core contains the following:
 
 - [Reactor](./reactor.md): The Application Manager.
-- [Config](./config.md): Application Configurations Manager,
+- [Config](./config.md): Application Configurations Manager.
 - [Router](./router.md): Application Router Manager. 
-- [Endpoint](./endpoint.md): Endpoint Service Controller
-- [Restful Endpoints](./restful-endpoints.md): Endpoint Service Controller
-
+- [Endpoint](./endpoint.md): Endpoint Service Controller.
+- [Restful Endpoints](./restful-endpoints.md): Endpoint Service Controller.
+- [User](./user.md): User Data Manipulator.
+- [Cache Engine](./cache.md): Cache Engine for storing data locally.
+- [Helpers](./helpers.md): List of utilities.   
+- [Meta Data](./metadata.md): Web page meta data handler.
+- [Module Aliasing](./module-aliasing.md): Module Aliasing.
 
 # Forms
 
