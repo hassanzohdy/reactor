@@ -23,6 +23,7 @@ class User {
      * @returns {void}
      */
     login(userData) {
+        this.userData = userData;
         cache.set('user', userData);
     }
 }

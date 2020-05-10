@@ -1,4 +1,5 @@
 import './login.scss';
+import user from 'user';
 import React from 'react';
 import { mapObject } from 'reactor/helpers';
 import Form from 'reactor/component/form/form';
@@ -6,11 +7,13 @@ import { login } from 'modules/users/services/auth';
 import { title, description } from 'reactor/metadata';
 import FormInput from 'reactor/component/form/form-input';
 import ReactorComponent from 'reactor/component/reactor.component';
-import user from 'reactor/user';
+import { navigateTo } from 'reactor/router';
 
 export default class Login extends ReactorComponent {
-    state = {
-    };
+    /**
+     * {@inheritdoc}
+     */
+    state = {};
 
     /**
      * {@inheritdoc} 
@@ -18,10 +21,6 @@ export default class Login extends ReactorComponent {
     init() {
         title('My Login Page');
         description('Some login description');
-
-        if (user.isLoggedIn()) {
-            // redirect to home page
-        }
     }
 
     /**
@@ -34,6 +33,8 @@ export default class Login extends ReactorComponent {
             let { data } = await login(e.target);
 
             user.login(data.user);
+
+            navigateTo('/users');
 
         } catch (error) {
             let errors = error.response.data.errors;
@@ -54,6 +55,9 @@ export default class Login extends ReactorComponent {
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     render() {
         return (
             <div id="login-page">
