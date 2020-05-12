@@ -95,6 +95,16 @@ class ReactorComponent extends Component {
             Obj.set(this.state, key, value),
         );
     }
+
+    /**
+     * Get component children
+     * 
+     * @param   {any} args 
+     * @returns {array|null}
+     */
+    children() {
+        return this.props.children;
+    }
     
     /**
      * Get the value of the given `dot.notation` key from state

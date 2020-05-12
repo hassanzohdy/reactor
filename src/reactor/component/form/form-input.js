@@ -13,12 +13,13 @@ export default class FormInput extends ReactorComponent {
         required: 'This field is required',
         email: 'Invalid Email Address',
     };
+    
+    inputReference = React.createRef(); // createRef
 
-    constructor(props) {
-        super(props);
-
-        this.inputReference = React.createRef(); // createRef
-
+    /**
+     * {@inheritdoc}
+     */
+    init() {
         events.on('form.validation', form => {
             // validate the input
             this.validate({
@@ -89,12 +90,12 @@ export default class FormInput extends ReactorComponent {
 }
 
 FormInput.propTypes = {
+    required: PropTypes.bool,
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
     type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    className: PropTypes.string,
-    required: PropTypes.bool,
-};
+};  
 
 FormInput.defaultProps = {
     type: 'text',
