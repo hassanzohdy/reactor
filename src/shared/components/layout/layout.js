@@ -1,9 +1,9 @@
 import React from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Sidebar from '../sidebar/sidebar';
 import ReactorComponent from 'reactor/component/reactor.component';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
