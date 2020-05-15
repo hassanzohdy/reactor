@@ -26,6 +26,15 @@ class User {
         this.userData = userData;
         cache.set('user', userData);
     }
+
+    /**
+     * Get user access token
+     * 
+     * @returns {string}
+     */
+    getAccessToken() {
+        return this.userData.accessToken;
+    }
 }
 
 export default new User();

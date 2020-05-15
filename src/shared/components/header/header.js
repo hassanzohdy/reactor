@@ -11,7 +11,7 @@ import layoutSettings from '../layout-settings';
 export default function Header(props) {
     let classes = layoutSettings(),
         sidebarIsOpened = props.sidebarIsOpened;
-        
+
     return (
         <AppBar
             position="fixed"
@@ -31,7 +31,7 @@ export default function Header(props) {
                 </IconButton>
                 <Typography variant="h6" noWrap>
                     Persistent drawer
-        </Typography>
+                </Typography>
             </Toolbar>
         </AppBar>
     )

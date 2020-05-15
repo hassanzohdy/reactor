@@ -5,7 +5,9 @@ class ReactorComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.init();
+        setTimeout(() => {
+            this.init();
+        }, 0);
     }
 
     /**
@@ -14,7 +16,7 @@ class ReactorComponent extends Component {
      * 
      * @memberof ReactorComponent
      */
-    init() {}
+    init() { }
 
     /**
      * Triggered after the component is rendered
@@ -22,8 +24,8 @@ class ReactorComponent extends Component {
      * @alias componentDidMount
      * @memberof ReactorComponent
      */
-    ready() {}
-    
+    ready() { }
+
     /**
      * {@inheritdoc}
      */
@@ -37,14 +39,14 @@ class ReactorComponent extends Component {
      * @alias getSnapshotBeforeUpdate
      * @memberof ReactorComponent
      */
-    beforeUpdating(props, state) {}
+    beforeUpdating(props, state) { }
 
     /**
      * {@inheritdoc}
      */
     getSnapshotBeforeUpdate(props, state) {
         let data = this.beforeUpdating(props, state);
-        
+
         // if this method returns the following object
         return data || null;
     }
@@ -58,7 +60,7 @@ class ReactorComponent extends Component {
      * @alias componentDidUpdate
      * @memberof ReactorComponent
      */
-    onUpdate(props, state, snapshot) {}
+    onUpdate(props, state, snapshot) { }
 
     /**
      * {@inheritdoc}
@@ -73,14 +75,14 @@ class ReactorComponent extends Component {
      * @alias componentWillUnmount
      * @memberof ReactorComponent
      */
-    destroy() {}
-    
+    destroy() { }
+
     /**
      * {@inheritdoc}
      */
     componentWillUnmount() {
         this.destroy();
-     }
+    }
 
     /**
      * Set the given value to its corresponding key
@@ -105,14 +107,14 @@ class ReactorComponent extends Component {
     children() {
         return this.props.children;
     }
-    
+
     /**
      * Get the value of the given `dot.notation` key from state
      * 
      * @param   {string} key
      * @param   {*} $default
      * @returns {*}  
-     */    
+     */
     get(key, $default = null) {
         return Obj.get(this.state, key, $default);
     }
