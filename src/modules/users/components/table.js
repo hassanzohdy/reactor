@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Obj } from 'reinforcements';
 
 const useStyles = makeStyles({
     table: {
@@ -29,22 +30,33 @@ const rows = [
 export default function SimpleTable(props) {
     const classes = useStyles();
 
-    let { columns, rows } = props;
+    let { options, records } = props;
 
-    let tableColumns = columns.map(column => {
-        return <TableCell key={column}>{column}</TableCell>;
-    })
+    let tableHeading = options.columns.map(column => {
+        return <TableCell key={column.heading}>{column.heading}</TableCell>;
+    });
+
+    let tableRows = records.map(record => {
+        return <TableRow key={record.id}>
+            {options.columns.map(column => {
+              return <TableCell key={column.heading}>
+                  {Obj.get(record, column.key)}
+              </TableCell>  
+            })}
+        </TableRow>;
+    });
+    
 
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        {tableColumns}
+                        {tableHeading}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows}
+                    {tableRows}
                 </TableBody>
             </Table>
         </TableContainer>

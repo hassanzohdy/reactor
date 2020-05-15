@@ -4,7 +4,6 @@ import usersService from 'modules/users/services/users-service';
 import ReactorComponent from 'reactor/component/reactor.component';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Table from './table';
-import { TableCell, TableRow } from '@material-ui/core';
 
 export default class Users extends ReactorComponent {
     state = {
@@ -13,10 +12,26 @@ export default class Users extends ReactorComponent {
 
     table = {
         columns: [
-            '#',
-            'Name',
-            'Email',
-            'Actions',
+            {
+                heading: '#',
+                key: 'id',
+            },
+            {
+                heading: 'name',
+                key: 'name',
+            },
+            {
+                heading: 'group',
+                key: 'group.name',
+            },
+            {
+                heading: 'email',
+                key: 'email',
+            },
+            {
+                heading: 'actions',
+                actions: []
+            }
         ],
     };
 
@@ -31,23 +46,12 @@ export default class Users extends ReactorComponent {
         this.paginationInfo = paginationInfo;
 
         this.records = records;
-
-        this.renderedRecords = this.records.map(record => {
-            return <TableRow key={record.id}>
-                <TableCell>{record.id}</TableCell>
-                <TableCell>{record.name}</TableCell>
-                <TableCell>{record.email}</TableCell>
-                <TableCell>
-                    Actions List    
-                </TableCell>
-            </TableRow>
-        });
-
+        
         this.set('isLoading', false);
     }
 
     renderTable() {
-        return <Table columns={this.table.columns} pagination={this.paginationInfo} rows={this.renderedRecords} />
+        return <Table options={this.table} records={this.records} pagination={this.paginationInfo} />
     }
 
     /**
