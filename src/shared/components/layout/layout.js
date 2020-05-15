@@ -1,5 +1,5 @@
-import React from 'react';
 import clsx from 'clsx';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
 import Sidebar from '../sidebar/sidebar';
