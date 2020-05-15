@@ -3,7 +3,8 @@ import Layout from 'layout';
 import usersService from 'modules/users/services/users-service';
 import ReactorComponent from 'reactor/component/reactor.component';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Table from './table';
+import Table from 'shared/components/table/table';
+import { TableEditButton, TableDeleteButton } from 'shared/components/table/table-actions';
 
 export default class Users extends ReactorComponent {
     state = {
@@ -30,7 +31,7 @@ export default class Users extends ReactorComponent {
             },
             {
                 heading: 'actions',
-                actions: []
+                buttons: [TableEditButton, TableDeleteButton]
             }
         ],
     };

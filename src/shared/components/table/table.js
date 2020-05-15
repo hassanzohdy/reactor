@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Obj } from 'reinforcements';
+import { TableAddButton, TableEditButton, TableDeleteButton } from './table-actions';
 
 const useStyles = makeStyles({
     table: {
@@ -39,13 +40,24 @@ export default function SimpleTable(props) {
     let tableRows = records.map(record => {
         return <TableRow key={record.id}>
             {options.columns.map(column => {
-              return <TableCell key={column.heading}>
-                  {Obj.get(record, column.key)}
-              </TableCell>  
+                if (column.buttons) {
+                    return <TableCell key={column.heading}>
+                        {column.buttons.map((ActionButton, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    <ActionButton />
+                                </React.Fragment>
+                            )
+                        })}
+                    </TableCell>
+                }
+                return <TableCell key={column.heading}>
+                    {Obj.get(record, column.key)}
+                </TableCell>
             })}
+
         </TableRow>;
     });
-    
 
     return (
         <TableContainer component={Paper}>

@@ -47,7 +47,6 @@ export default function Sidebar(props) {
             }}
         >
             <div className={classes.drawerHeader}>
-                <h1 className="text-left">Welcome</h1>
                 <IconButton onClick={onClose}>
                     {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                 </IconButton>
