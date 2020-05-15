@@ -9,7 +9,6 @@ import layoutSettings from '../layout-settings';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 
-
 const theme = createMuiTheme({
     palette: {
         primary: {
