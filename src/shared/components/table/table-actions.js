@@ -1,22 +1,35 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/AddBox';
+import AddIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/DeleteSweep';
+import { makeStyles } from '@material-ui/core/styles';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+
+const useStyles = makeStyles({
+    addButton: {
+        fill: lightBlue[800],
+    },
+    tooltip: {
+        backgroundColor: '#000',
+    }
+});
 
 export function TableAddButton(props) {
-    return (
-        <Tooltip placement="top" title="Add">
+    const classes = useStyles(); 
+    return (    
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Add">
         <IconButton>
-            <AddIcon />
+            <AddIcon fontSize="large" color="primary" />
         </IconButton>
         </Tooltip>
     )
 }
 export function TableEditButton(props) {
+    const classes = useStyles(); 
     return (
-        <Tooltip placement="top" title="Edit">
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Edit">
         <IconButton>
             <EditIcon />
         </IconButton>
@@ -25,8 +38,9 @@ export function TableEditButton(props) {
 }
 
 export function TableDeleteButton(props) {
+    const classes = useStyles(); 
     return (
-        <Tooltip placement="top" title="Remove">
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Remove">
         <IconButton>
             <DeleteIcon />
         </IconButton>

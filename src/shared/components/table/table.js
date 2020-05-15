@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Obj } from 'reinforcements';
 import { TableAddButton, TableEditButton, TableDeleteButton } from './table-actions';
+import TableToolBar from './table-toolbar';
 
 const useStyles = makeStyles({
     table: {
@@ -37,7 +38,7 @@ export default function SimpleTable(props) {
         return <TableCell key={column.heading}>{column.heading}</TableCell>;
     });
 
-    let tableRows = records.map(record => {
+    let tableRows = records.map((record, recordIndex) => {
         return <TableRow key={record.id}>
             {options.columns.map(column => {
                 if (column.buttons) {
@@ -60,17 +61,20 @@ export default function SimpleTable(props) {
     });
 
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        {tableHeading}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {tableRows}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <>
+            <TableToolBar text={options.heading} />
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            {tableHeading}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {tableRows}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     );
 }

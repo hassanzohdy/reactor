@@ -4,6 +4,7 @@ import usersService from 'modules/users/services/users-service';
 import ReactorComponent from 'reactor/component/reactor.component';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Table from 'shared/components/table/table';
+import {title} from 'reactor/metadata';
 import { TableEditButton, TableDeleteButton } from 'shared/components/table/table-actions';
 
 export default class Users extends ReactorComponent {
@@ -12,6 +13,7 @@ export default class Users extends ReactorComponent {
     };
 
     table = {
+        heading: 'users',
         columns: [
             {
                 heading: '#',
@@ -40,6 +42,8 @@ export default class Users extends ReactorComponent {
      * {@inheritdoc}
      */
     async init() {
+        title(this.table.heading);
+
         let { data } = await usersService.list(); // /users
 
         let { records, paginationInfo } = data;
@@ -52,7 +56,10 @@ export default class Users extends ReactorComponent {
     }
 
     renderTable() {
-        return <Table options={this.table} records={this.records} pagination={this.paginationInfo} />
+        return <Table 
+                options={this.table} 
+                records={this.records} 
+                pagination={this.paginationInfo} />
     }
 
     /**
@@ -62,10 +69,7 @@ export default class Users extends ReactorComponent {
         let displayedContent = this.get('isLoading') ? <LinearProgress /> : this.renderTable();
         return (
             <Layout>
-                {this.get('isLoading') && <LinearProgress />}
-
                 {displayedContent}
-
             </Layout>
         );
     }

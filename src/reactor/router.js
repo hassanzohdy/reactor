@@ -35,7 +35,6 @@ function addRouter(path, component, middleware = null) {
  * @returns {Array}
  */
 function Routes() {
-
     // each route contains:
     // path: path to page
     // middleware: middleware to be applied before accessing the component page 

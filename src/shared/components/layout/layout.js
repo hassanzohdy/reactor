@@ -6,6 +6,20 @@ import Sidebar from '../sidebar/sidebar';
 import ReactorComponent from 'reactor/component/reactor.component';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import layoutSettings from '../layout-settings';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import lightBlue from '@material-ui/core/colors/lightBlue';
+
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: lightBlue[800],
+        },
+    },
+    status: {
+        danger: 'orange',
+    },
+});
 
 function PersistentDrawerLeft(props) {
     const classes = layoutSettings();
@@ -20,25 +34,27 @@ function PersistentDrawerLeft(props) {
     };
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <Header
-                sidebarIsOpened={open}
-                onClick={handleDrawerOpen}
-            />
-            <Sidebar
-                open={open}
-                onClose={handleDrawerClose}
-            />
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                <div className={classes.drawerHeader} />
-                {props.children}
-            </main>
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+                <CssBaseline />
+                <Header
+                    sidebarIsOpened={open}
+                    onClick={handleDrawerOpen}
+                />
+                <Sidebar
+                    open={open}
+                    onClose={handleDrawerClose}
+                />
+                <main
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: open,
+                    })}
+                >
+                    <div className={classes.drawerHeader} />
+                    {props.children}
+                </main>
+            </div>
+        </ThemeProvider>
     );
 }
 
