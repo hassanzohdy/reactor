@@ -9,8 +9,23 @@ import {
 // use custom history to manage router navigation from our side
 import { createBrowserHistory } from 'history';
 import Middleware from './middleware';
+import config from 'reactor/config';
 
 const history = createBrowserHistory();
+
+let localeCodes = config.get('locales');
+
+// /en/users
+// /users
+// first remove the first slash from the url
+// then split the pathname by the /
+// then get the first segment of the created array 
+let [firstSegmentOfLocation] = history.location.pathname.replace(/^\//, '').split('/');
+
+if (localeCodes[firstSegmentOfLocation]) {
+    document.documentElement.dir = localeCodes[firstSegmentOfLocation];
+    document.documentElement.lang = firstSegmentOfLocation;
+}
 
 /**
  * Set all routes that may be requested in our application
@@ -46,8 +61,14 @@ function Routes() {
     // component: component class that will render the page
     const routes = routesList.map((route, index) => {
         return (
-            <Route path={route.path} exact={true} key={index}>
-                <Middleware route={route} history={history} />
+            // added optional localization
+            // /users
+            // /en/users
+            // /ar/users
+            <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`} exact={true} key={index}>
+                {(routeData) => {                    
+                    return <Middleware match={routeData.match} location={routeData.location} route={route} history={history} />;
+                }}
             </Route>
         );
     });
@@ -69,10 +90,23 @@ export function navigateTo(path) {
     history.push(path);
 }
 
+/**
+ * Navigate to current location and switch language
+ * 
+ * @param  {string} localeCode
+ */
+export function switchLang(localeCode) {
+
+}
+
+/**
+ * Scan the entire routes list
+ * 
+ * @returns  {void}
+ */
 export function scan() {
     ReactDOM.render(<Routes />, document.getElementById('root'));
 }
-
 
 export default {
     add: addRouter

@@ -1,6 +1,6 @@
 import Globals from './globals';
 import { Obj } from 'reinforcements';
-import {sprintf, vsprintf} from 'sprintf-js';
+import {vsprintf} from 'sprintf-js';
 
 class Localization {
     /**

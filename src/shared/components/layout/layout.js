@@ -6,9 +6,15 @@ import Sidebar from '../sidebar/sidebar';
 import ReactorComponent from 'reactor/component/reactor.component';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import layoutSettings from '../layout-settings';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider, StylesProvider, jssPreset } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import Globals from 'reactor/globals';
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+
+
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+
 
 const theme = createMuiTheme({
     direction: Globals.direction,
@@ -35,6 +41,7 @@ function PersistentDrawerLeft(props) {
     };
 
     return (
+        <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <CssBaseline />
@@ -56,6 +63,7 @@ function PersistentDrawerLeft(props) {
                 </main>
             </div>
         </ThemeProvider>
+        </StylesProvider>
     );
 }
 

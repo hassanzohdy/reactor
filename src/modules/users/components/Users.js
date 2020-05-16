@@ -1,13 +1,11 @@
 import React from 'react';
 import Layout from 'layout';
+import { title } from 'reactor/metadata';
+import Table from 'shared/components/table/table';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import usersService from 'modules/users/services/users-service';
 import ReactorComponent from 'reactor/component/reactor.component';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Table from 'shared/components/table/table';
-import { title } from 'reactor/metadata';
 import { TableEditButton, TableDeleteButton } from 'shared/components/table/table-actions';
-import { trans } from 'reactor/localization';
-
 
 export default class Users extends ReactorComponent {
     state = {

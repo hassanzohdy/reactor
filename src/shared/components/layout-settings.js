@@ -8,6 +8,7 @@ const layoutSettings = makeStyles((theme) => ({
         display: 'flex',
     },
     appBar: {
+        backgroundColor: lightBlue[800],
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -15,16 +16,14 @@ const layoutSettings = makeStyles((theme) => ({
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
-        [`margin${Globals.left}`]: drawerWidth,
-        [Globals.left]: 'auto',
-        [Globals.right]: 0,
+        marginLeft: drawerWidth,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
     menuButton: {
-        [`margin${Globals.right}`]: theme.spacing(2),
+        marginRight: theme.spacing(2),
     },
     hide: {
         display: 'none',
