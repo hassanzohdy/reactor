@@ -8,8 +8,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import layoutSettings from '../layout-settings';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import Globals from 'reactor/globals';
 
 const theme = createMuiTheme({
+    direction: Globals.direction,
     palette: {
         primary: {
             main: lightBlue[800],

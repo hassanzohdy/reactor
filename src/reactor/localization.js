@@ -1,5 +1,6 @@
 import Globals from './globals';
 import { Obj } from 'reinforcements';
+import {sprintf, vsprintf} from 'sprintf-js';
 
 class Localization {
     /**
@@ -23,15 +24,28 @@ class Localization {
     }
 
     /**
-     * Get translation value for the given key
+     * Translate the given keyword in current locale code
+     *  
+     * @param   {string} keyword
+     * @returns {any} 
+     */
+    translate(keyword, ...args) {        
+        return this.translateFrom(this.localeCode, keyword, ...args);
+    }
+
+    /**
+     * Translate the given keyword for the given locale code
+     * 
      * Please note this method accepts dot notation syntax
      *  
      * @param   {string} key
      * @returns {any} 
      */
-    translate(key, localeCode = this.localeCode) {        
-        return Obj.get(this.keywords, `${localeCode}.${key}`);
-    }
+    translateFrom(localeCode, keyword, ...args) {
+        let translation = Obj.get(this.keywords, `${localeCode}.${keyword}`);
+
+        return vsprintf(translation, args);
+    } 
 }
 
 const localizationObject = new Localization();

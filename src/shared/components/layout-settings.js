@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { lightBlue } from "@material-ui/core/colors";
+import Globals from "reactor/globals";
 
 const drawerWidth = 240;
 const layoutSettings = makeStyles((theme) => ({
@@ -14,14 +15,16 @@ const layoutSettings = makeStyles((theme) => ({
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
+        [`margin${Globals.left}`]: drawerWidth,
+        [Globals.left]: 'auto',
+        [Globals.right]: 0,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        [`margin${Globals.right}`]: theme.spacing(2),
     },
     hide: {
         display: 'none',
@@ -48,14 +51,14 @@ const layoutSettings = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: -drawerWidth,
+        [Globals.marginLeft]: -drawerWidth,
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
         }),
-        marginLeft: 0,
+        [Globals.marginLeft]: 0,
     },
     sidebar: {
         width: '100%',
