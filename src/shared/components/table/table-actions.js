@@ -6,6 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/DeleteSweep';
 import { makeStyles } from '@material-ui/core/styles';
 import lightBlue from '@material-ui/core/colors/lightBlue';
+import { trans } from 'reactor/localization';
 
 const useStyles = makeStyles({
     addButton: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 export function TableAddButton(props) {
     const classes = useStyles(); 
     return (    
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Add">
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('add')}>
         <IconButton>
             <AddIcon fontSize="large" color="primary" />
         </IconButton>
@@ -29,7 +30,7 @@ export function TableAddButton(props) {
 export function TableEditButton(props) {
     const classes = useStyles(); 
     return (
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Edit">
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('edit')}>
         <IconButton>
             <EditIcon />
         </IconButton>
@@ -40,7 +41,7 @@ export function TableEditButton(props) {
 export function TableDeleteButton(props) {
     const classes = useStyles(); 
     return (
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title="Remove">
+        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('remove')}>
         <IconButton>
             <DeleteIcon />
         </IconButton>

@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { Obj } from 'reinforcements';
 import { TableAddButton, TableEditButton, TableDeleteButton } from './table-actions';
 import TableToolBar from './table-toolbar';
+import { trans } from 'reactor/localization';
 
 const useStyles = makeStyles({
     table: {
@@ -62,7 +63,7 @@ export default function SimpleTable(props) {
 
     return (
         <>
-            <TableToolBar text={options.heading} />
+            <TableToolBar text={trans(options.heading)} />
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>

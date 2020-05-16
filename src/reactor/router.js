@@ -12,6 +12,11 @@ import Middleware from './middleware';
 
 const history = createBrowserHistory();
 
+/**
+ * Set all routes that may be requested in our application
+ * 
+ * @const  {Array}  
+ */
 const routesList = [];
 
 /**
