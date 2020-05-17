@@ -14,8 +14,7 @@ let http = axios.create({
     }],
 });
 
-
-http.interceptors.request.use(requestConfig => {
+http.interceptors.request.use(requestConfig => {    
     let auth = user.isLoggedIn() ? `Bearer ${user.getAccessToken()}` : `key ${config.get('endpoint.apiKey')}`;
 
     requestConfig.headers.Authorization = auth;

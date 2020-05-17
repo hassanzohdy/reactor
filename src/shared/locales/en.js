@@ -1,6 +1,7 @@
 import localization from 'reactor/localization';
 
 localization.extend('en', {
+    appName: 'Online Store',
     add: 'Add',
     edit: 'Edit',
     remove: 'Remove',    

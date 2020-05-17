@@ -1,10 +1,21 @@
+import {trans} from 'reactor/localization';
+
 /**
  * Set page title
  * 
- * @param {string} title 
+ * @param {string} pageTitle 
  */
-export function title(title) {
-    document.title = title;
+export function title(pageTitle) {
+    document.title = pageTitle;
+}
+
+/**
+ * Set page title using the trans function for translation
+ * 
+ * @param {string} pageTitle 
+ */
+export function translatedTitle(pageTitle) {
+    title(trans(pageTitle));
 }
 
 /**

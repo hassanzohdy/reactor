@@ -1,5 +1,5 @@
 import React from 'react';
-import { title } from 'reactor/metadata';
+import { translatedTitle } from 'reactor/metadata';
 import Table from 'shared/components/table/table';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import usersService from 'modules/users/services/users-service';
@@ -42,7 +42,7 @@ export default class Users extends ReactorComponent {
      * {@inheritdoc}
      */
     async init() {
-        title(this.table.heading);
+        translatedTitle(this.table.heading);
 
         let { data } = await usersService.list(); // /users
 

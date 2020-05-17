@@ -28,6 +28,14 @@ class User {
     }
 
     /**
+     * Log the user out
+     */
+    logout() {
+        this.userData = null;
+        cache.remove('user');
+    }
+
+    /**
      * Get user access token
      * 
      * @returns {string}
