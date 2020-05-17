@@ -1,13 +1,14 @@
 import './login.scss';
 import user from 'user';
 import React from 'react';
+import { navigateTo } from 'reactor/router';
 import { mapObject } from 'reactor/helpers';
 import Form from 'reactor/component/form/form';
 import { login } from 'modules/users/services/auth';
+import Layout from 'shared/components/layout/layout';
 import { title, description } from 'reactor/metadata';
 import FormInput from 'reactor/component/form/form-input';
 import ReactorComponent from 'reactor/component/reactor.component';
-import { navigateTo } from 'reactor/router';
 
 export default class Login extends ReactorComponent {
     /**
@@ -60,36 +61,39 @@ export default class Login extends ReactorComponent {
      */
     render() {
         return (
-            <div id="login-page">
-                <h1>Login Page</h1>
+            <Layout>
 
-                <Form onSubmit={this.login}>
-                    {this.get('errors') &&
-                        <div className="error">
-                            {this.displayErrors()}
+                <div id="login-page">
+                    <h1>Login Page</h1>
+
+                    <Form onSubmit={this.login}>
+                        {this.get('errors') &&
+                            <div className="error">
+                                {this.displayErrors()}
+                            </div>
+                        }
+
+                        <FormInput
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            required={true}
+                            placeholder="Email Address"
+                        />
+
+                        <FormInput
+                            type="password"
+                            required={true}
+                            name="password"
+                            className="form-control"
+                            placeholder="Enter Your Password"
+                        />
+                        <div id="button-wrapper">
+                            <button>Login</button>
                         </div>
-                    }
-
-                    <FormInput
-                        type="email"
-                        className="form-control"
-                        name="email"
-                        required={true}
-                        placeholder="Email Address"
-                    />
-
-                    <FormInput
-                        type="password"
-                        required={true}
-                        name="password"
-                        className="form-control"
-                        placeholder="Enter Your Password"
-                    />
-                    <div id="button-wrapper">
-                        <button>Login</button>
-                    </div>
-                </Form>
-            </div>
+                    </Form>
+                </div>  
+            </Layout>
         );
     }
 }

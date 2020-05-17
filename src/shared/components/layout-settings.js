@@ -7,6 +7,9 @@ const layoutSettings = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
+    grow: {
+      flexGrow: 1,
+    },
     appBar: {
         backgroundColor: lightBlue[800],
         transition: theme.transitions.create(['margin', 'width'], {

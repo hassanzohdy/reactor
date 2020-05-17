@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import layoutSettings from '../layout-settings';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import layoutSettings from '../layout-settings';
 
 export default function Header(props) {
     let classes = layoutSettings(),
