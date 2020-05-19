@@ -18,7 +18,7 @@ export default function Header(props) {
 
     return (
         <AppBar
-            position="fixed"
+            position="absolute"
             className={clsx(classes.appBar, {
                 [classes.appBarShift]: sidebarIsOpened,
             })}

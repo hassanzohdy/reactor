@@ -10,5 +10,5 @@ config.set({
     locales: {
         en: 'ltr',
         ar: 'rtl',
-    }
+    },
 });

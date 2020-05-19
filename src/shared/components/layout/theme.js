@@ -4,6 +4,8 @@ import Globals from 'reactor/globals';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import MultiDirection from './multi-direction';
+
 
 const theme = createMuiTheme({
     direction: Globals.direction,
@@ -19,10 +21,12 @@ const theme = createMuiTheme({
 
 export default function Theme(props) {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            {props.children}
-        </ThemeProvider>
+        <MultiDirection>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                {props.children}
+            </ThemeProvider>
+        </MultiDirection>
     )
 }
 

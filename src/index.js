@@ -1,8 +1,9 @@
 import 'shared/config';
+import 'modules/home/routes';
 import 'shared/locales/en';
+import 'shared/locales/ar';
 
 // home
-import 'modules/home/routes';
 import 'modules/home/locales/en';
 import 'modules/home/locales/ar';
 
