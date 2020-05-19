@@ -8,7 +8,7 @@ const layoutSettings = makeStyles((theme) => ({
         display: 'flex',
     },
     grow: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     appBar: {
         backgroundColor: lightBlue[800],
@@ -69,6 +69,16 @@ const layoutSettings = makeStyles((theme) => ({
     },
     sidebarNestedItem: {
         paddingLeft: theme.spacing(4),
+    },
+    modalTitle: {
+        margin: 0,
+        padding: theme.spacing(2),
+    },
+    modalTitleCloseBtn: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
     },
 }));
 
