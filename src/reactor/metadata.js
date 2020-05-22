@@ -12,10 +12,14 @@ export function title(pageTitle) {
 /**
  * Set page title using the trans function for translation
  * 
- * @param {string} pageTitle 
+ * @param   {string} pageTitle 
+ * @returns {string}
  */
 export function translatedTitle(pageTitle) {
-    title(trans(pageTitle));
+    let translatedTitle = trans(pageTitle);
+    title(translatedTitle);
+
+    return translatedTitle;
 }
 
 /**

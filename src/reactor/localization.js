@@ -44,7 +44,7 @@ class Localization {
     translateFrom(localeCode, keyword, ...args) {
         let translation = Obj.get(this.keywords, `${localeCode}.${keyword}`);
 
-        return vsprintf(translation, args);
+        return vsprintf(translation, args) || keyword;
     } 
 }
 

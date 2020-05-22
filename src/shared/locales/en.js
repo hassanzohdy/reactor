@@ -8,4 +8,5 @@ localization.extend('en', {
     addItem: 'Add new %s',
     editItem: 'Edit %s',
     removeItem: 'Remove %s',
+    actions: 'Actions',
 });
