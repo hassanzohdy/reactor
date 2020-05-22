@@ -1,11 +1,11 @@
 import React from 'react';
 import { translatedTitle } from 'reactor/metadata';
 import Table from 'shared/components/table/table';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import usersService from 'modules/users/services/users-service';
-import ReactorComponent from 'reactor/component/reactor.component';
+import ReactorComponent from 'reactor/components/reactor.component';
 import DashboardLayout from 'shared/components/layout/dashboard-layout';
 import { TableEditButton, TableDeleteButton } from 'shared/components/table/table-actions';
+import AdminTableLayout from 'shared/components/layout/admin-table-layout';
 
 export default class Users extends ReactorComponent {
     state = {
@@ -55,22 +55,10 @@ export default class Users extends ReactorComponent {
         this.set('isLoading', false);
     }
 
-    renderTable() {
-        return <Table
-            options={this.table}
-            records={this.records}
-            pagination={this.paginationInfo} />
-    }
-
     /**
      * {@inheritdoc}
      */
     render() {
-        let displayedContent = this.get('isLoading') ? <LinearProgress /> : this.renderTable();
-        return (
-            <DashboardLayout>
-                {displayedContent}
-            </DashboardLayout>
-        );
+        return <AdminTableLayout options={this.table} service={usersService}></AdminTableLayout>
     }
 }   

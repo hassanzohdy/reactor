@@ -2,23 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from './modal';
 import FormModalTitle from './form-modal-title';
+import Form from 'reactor/components/form/form';
 
 export default function FormModal(props) {
     const { title, onSubmit, ...otherDialogProps } = props;
 
+    let formHandler;
+
     const handleOnConfirm = () => {
-        console.log(100);
-        
+        formHandler.submit();
     };
+
+    const formTitle = <FormModalTitle title={title} onSubmit={handleOnConfirm} onClose={props.onClose} />;
 
     return (
         <Modal
             {...otherDialogProps}
-            title={
-                <FormModalTitle title={title} onSubmit={handleOnConfirm} onClose={props.onClose}/>
-            }
+            title={formTitle}
         >
-            {props.children}
+            <Form
+                onSubmit={onSubmit}
+                ref={form => formHandler = form}
+            >
+                {props.children}
+            </Form>
         </Modal>
     );
 }

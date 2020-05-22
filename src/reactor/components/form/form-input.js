@@ -2,7 +2,7 @@ import React from 'react';
 import events from '@flk/events';
 import Is from '@flk/supportive-is';
 import PropTypes from 'prop-types';
-import ReactorComponent from 'reactor/component/reactor.component';
+import ReactorComponent from 'reactor/components/reactor.component';
 
 export default class FormInput extends ReactorComponent {
     state = {

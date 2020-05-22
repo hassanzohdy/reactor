@@ -1,13 +1,14 @@
 import React  from 'react';
 import events from '@flk/events';
-import ReactorComponent from 'reactor/component/reactor.component';
+import ReactorComponent from 'reactor/components/reactor.component';
 
 export default class Form extends ReactorComponent {
     isValidForm = true;
+    formElement = null;
     /**
      * Submit form
      */
-    submit(e) {
+    triggerSubmit(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -27,12 +28,21 @@ export default class Form extends ReactorComponent {
     }
 
     /**
+     * Trigger form submission programmatically
+     * 
+     * @returns {void} 
+     */
+    submit() {
+        this.formElement.requestSubmit();
+    }
+
+    /**
      * {@inheritdoc}
      */
     render() {
         // noValidate disables the browser default validation
         return (
-            <form noValidate={true} onSubmit={this.submit.bind(this)}>
+            <form ref={form => this.formElement = form} noValidate={true} onSubmit={this.triggerSubmit.bind(this)}>
                 {this.props.children}
             </form>
         );
