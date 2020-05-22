@@ -1,58 +1,33 @@
-import React from 'react';
-import { Obj } from 'reinforcements';
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
-import Paper from '@material-ui/core/Paper';
 import TableToolBar from './table-toolbar';
+import Paper from '@material-ui/core/Paper';
 import { trans } from 'reactor/localization';
+import tableStructure from './table-structure';
+import FormModal from './../layout/form-modal';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
-import { TableEditButton, TableDeleteButton } from 'shared/components/table/table-actions';
-
-const defaultTableActions = {
-    heading: 'actions',
-    buttons: [TableEditButton, TableDeleteButton]
-};
 
 export default function SimpleTable(props) {
     let { options, records } = props;
+    
+    let [tableHeading, tableRows] = tableStructure(options, records);
 
-    if (options.actions === true) {
-        options.columns.push(defaultTableActions);
-    }
+    const [formIsDisplayed, displayForm] = useState(false);
 
-    let tableHeading = options.columns.map(column => {
-        return <TableCell key={column.heading}>{trans(column.heading)}</TableCell>;
-    });
-
-
-    let tableRows = records.map((record, recordIndex) => {
-        return <TableRow key={record.id}>
-            {options.columns.map(column => {
-                if (column.buttons) {
-                    return <TableCell key={column.heading}>
-                        {column.buttons.map((ActionButton, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <ActionButton />
-                                </React.Fragment>
-                            )
-                        })}
-                    </TableCell>
-                }
-                return <TableCell key={column.heading}>
-                    {Obj.get(record, column.key)}
-                </TableCell>
-            })}
-
-        </TableRow>;
-    });
+    const closeModal = () => displayForm(false);
 
     return (
         <>
-            <TableToolBar text={trans(options.heading)} />
+            <FormModal open={formIsDisplayed} 
+                        onSubmit={closeModal} 
+                        title={trans('addItem', trans(options.singleName))} 
+                        onClose={closeModal}>
+                <options.form />
+            </FormModal>
+            <TableToolBar displayForm={displayForm} text={trans(options.heading)} />
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>

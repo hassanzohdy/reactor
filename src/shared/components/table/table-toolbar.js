@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TableToolBar(props) {
     const classes = useStyles();
 
-    let { text } = props;
+    let { text, displayForm } = props;
 
     return (
         <div className={classes.root}>
@@ -36,7 +36,7 @@ export default function TableToolBar(props) {
                     <Typography variant="h6" className={classes.title}>
                         {text}
                     </Typography>
-                    <TableAddButton />
+                    <TableAddButton onClick={() => displayForm(true)} />
                 </Toolbar>
             </AppBar>
         </div>

@@ -21,7 +21,7 @@ export function TableAddButton(props) {
     const classes = useStyles(); 
     return (    
         <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('add')}>
-        <IconButton>
+        <IconButton onClick={props.onClick}>
             <AddIcon fontSize="large" color="primary" />
         </IconButton>
         </Tooltip>

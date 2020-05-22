@@ -2,9 +2,12 @@ import React from 'react';
 import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'shared/components/layout/admin-table-layout';
+import UserForm from './user-form';
 
-const table = {
+const options = {
     heading: 'users',
+    form: UserForm,
+    singleName: 'user',
     actions: true, // table button actions
     columns: [
         {
@@ -27,7 +30,7 @@ const table = {
 };
 
 export default function Users(props) {
-    translatedTitle(table.heading);
+    translatedTitle(options.heading);
 
-    return <AdminTableLayout options={table} service={usersService}></AdminTableLayout>;
+    return <AdminTableLayout options={options} service={usersService}></AdminTableLayout>;
 }   

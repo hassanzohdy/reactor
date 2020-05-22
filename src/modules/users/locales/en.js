@@ -5,4 +5,5 @@ localization.extend('en', {
     logout: 'Logout', 
     email: 'Email Address',
     group: 'Administrator Group',
+    user: 'User',
 });

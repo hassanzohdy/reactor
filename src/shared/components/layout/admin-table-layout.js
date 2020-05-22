@@ -1,22 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
 import DashboardLayout from './dashboard-layout';
-import Table from 'shared/components/table/table';
+import React, { useEffect, useState } from 'react';
 import ProgressBar from 'reactor/components/progress-bar';
-
-async function loadData(service, updateLoader, updateResponse) {
-    let { data } = await service.list();
-
-    updateResponse(data); // entire response body
-    updateLoader(false);
-}
-
-function renderTable(tableOptions, response, ) {
-    return <Table
-        options={tableOptions}
-        records={response.records}
-        pagination={response.paginationInfo} />
-}
+import { loadData, renderTable } from './admin-table-layout-helpers';
 
 export default function AdminTableLayout(props) {
     let { service, options } = props;
@@ -31,7 +17,7 @@ export default function AdminTableLayout(props) {
     // only once the component is rendered 
     useEffect(() => {
         loadData(service, updateLoader, updateResponse);
-    }, []);
+    }, [service]);
 
     // Display In Progress Spinner
     // load the users data from API
