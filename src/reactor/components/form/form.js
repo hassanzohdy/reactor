@@ -27,7 +27,7 @@ export default class Form extends ReactorComponent {
         for (let input of this.inputs) {
             input.validate();
 
-            if (input.get('validationError')) {
+            if (input.hasError) {
                 this.isValidForm = false;
             }
         }

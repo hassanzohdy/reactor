@@ -86,6 +86,7 @@ export default class Login extends ReactorComponent {
 
                         <FormInput
                             type="email"
+                            autoFocus
                             className="form-control"
                             name="email"
                             required

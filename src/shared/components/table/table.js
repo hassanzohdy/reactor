@@ -31,7 +31,9 @@ export default function SimpleTable(props) {
         return tableStructure(options, records, recordUpdate);
     }, [options, records]);
 
-    const closeModal = () => displayForm(false);
+    const closeModal = () => {
+        displayForm(false);
+    };
 
     const itemType = action === 'edit' ? 'editItem' : 'addItem';
 
