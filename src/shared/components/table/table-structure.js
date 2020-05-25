@@ -10,11 +10,13 @@ const defaultTableActions = {
     buttons: [TableEditButton, TableDeleteButton]
 };
 
-export default function tableStructure(options, records) {
+export default function tableStructure(options, records, setRecord) {
     if (options.actions === true && ! options.actionsIsAdded) {
         options.columns.push(defaultTableActions);
         options.actionsIsAdded = true;
     }
+
+    console.log('Table Structure Function Called');
 
     let tableHeading = options.columns.map((column, index) => {
         return <TableCell key={index}>{column.heading}</TableCell>;
@@ -28,7 +30,7 @@ export default function tableStructure(options, records) {
                         {column.buttons.map((ActionButton, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <ActionButton record={record} index={recordIndex} />
+                                    <ActionButton onClick={(e, currentAction) => setRecord(record, index, currentAction)} />
                                 </React.Fragment>
                             )
                         })}

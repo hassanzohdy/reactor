@@ -12,20 +12,36 @@ import TableContainer from '@material-ui/core/TableContainer';
 
 export default function SimpleTable(props) {
     let { options, records } = props;
-    
-    let [tableHeading, tableRows] = tableStructure(options, records);
-
     const [formIsDisplayed, displayForm] = useState(false);
+    const [record, setRecord] = useState({});
+    const [recordIndex, setIndex] = useState(null);
+    const [action, setAction] = useState(null);
+
+    const recordUpdate = (record, index, currentAction) => {
+        setRecord(record);
+        setIndex(index);
+        setAction(currentAction);
+        if (currentAction == 'edit') {
+            displayForm(true);
+        }
+    };
+
+    // store the value until one of the given deps is changed
+    let [tableHeading, tableRows] = React.useMemo(() => {
+        return tableStructure(options, records, recordUpdate);
+    }, [options, records]);
 
     const closeModal = () => displayForm(false);
 
+    const itemType = action == 'edit' ? 'editItem' : 'addItem';
+
     return (
         <>
-            <FormModal open={formIsDisplayed} 
-                        onSubmit={closeModal} 
-                        title={trans('addItem', trans(options.singleName))} 
-                        onClose={closeModal}>
-                <options.form />
+            <FormModal open={formIsDisplayed}
+                onSubmit={closeModal}
+                title={trans(itemType, trans(options.singleName))}
+                onClose={closeModal}>
+                <options.form record={record} />
             </FormModal>
             <TableToolBar displayForm={displayForm} text={trans(options.heading)} />
             <TableContainer component={Paper}>

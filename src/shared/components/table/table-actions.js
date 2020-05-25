@@ -18,33 +18,40 @@ const useStyles = makeStyles({
 });
 
 export function TableAddButton(props) {
-    const classes = useStyles(); 
-    return (    
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('add')}>
+    const classes = useStyles();
+    return (
         <IconButton onClick={props.onClick}>
-            <AddIcon fontSize="large" color="primary" />
+            <Tooltip classes={{ tooltip: classes.tooltip }} placement="top" title={trans('add')}>
+                <AddIcon fontSize="large" color="primary" />
+            </Tooltip>
         </IconButton>
-        </Tooltip>
     )
 }
+
 export function TableEditButton(props) {
-    const classes = useStyles(); 
+    const classes = useStyles();
+    const editClick = e => {
+        props.onClick(e, 'edit');
+    };
     return (
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('edit')}>
-        <IconButton>
-            <EditIcon />
+        <IconButton onClick={editClick}>
+            <Tooltip classes={{ tooltip: classes.tooltip }} placement="top" title={trans('edit')}>
+                <EditIcon />
+            </Tooltip>
         </IconButton>
-        </Tooltip>
     )
 }
 
 export function TableDeleteButton(props) {
-    const classes = useStyles(); 
+    const classes = useStyles();
+    const deleteClick = e => {
+        props.onClick(e, 'remove');
+    };
     return (
-        <Tooltip classes={{tooltip: classes.tooltip}} placement="top" title={trans('remove')}>
-        <IconButton>
-            <DeleteIcon />
+        <IconButton onClick={deleteClick}>
+            <Tooltip classes={{ tooltip: classes.tooltip }} placement="top" title={trans('remove')}>
+                <DeleteIcon />
+            </Tooltip>
         </IconButton>
-        </Tooltip>
     )
 }
