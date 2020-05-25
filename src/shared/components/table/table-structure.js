@@ -16,8 +16,6 @@ export default function tableStructure(options, records, setRecord) {
         options.actionsIsAdded = true;
     }
 
-    console.log('Table Structure Function Called');
-
     let tableHeading = options.columns.map((column, index) => {
         return <TableCell key={index}>{column.heading}</TableCell>;
     });

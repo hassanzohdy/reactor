@@ -1,8 +1,9 @@
 import React from 'react';
-import events from '@flk/events';
 import Is from '@flk/supportive-is';
 import PropTypes from 'prop-types';
 import ReactorComponent from 'reactor/components/reactor.component';
+import TextField from '@material-ui/core/TextField';
+import FormContext from './form-context';
 
 export default class FormInput extends ReactorComponent {
     state = {
@@ -10,39 +11,29 @@ export default class FormInput extends ReactorComponent {
     };
 
     messages = {
-        required: 'This field is required',
         email: 'Invalid Email Address',
+        required: 'This field is required',
     };
-    
+
     inputReference = React.createRef(); // createRef
 
     /**
      * {@inheritdoc}
      */
-    init() {
-        events.on('form.validation', form => {
-            // validate the input
-            this.validate({
-                target: this.input,
-            });
-
-            if (this.get('validationError')) {
-                form.isValidForm = false;
-            }
-        });
+    ready() {
+        this.input = this.inputReference.current;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    ready() {
-        this.input = this.inputReference.current;        
+    validate() {
+        this.validateInput({
+            target: this.input,
+        });
     }
 
     /**
      * Validate the input
      */
-    validate(e) {
+    validateInput(e) {
         let input = e.target,
             value = input.value;
 
@@ -63,6 +54,13 @@ export default class FormInput extends ReactorComponent {
             inputValidation = this.messages.email;
         }
 
+        // tell the form if the input is clean or not
+        if (inputValidation) {
+            this.form.dirtyInput(this);
+        } else {
+            this.form.cleanInput(this);
+        }
+
         this.set('validationError', inputValidation);
     }
 
@@ -70,21 +68,33 @@ export default class FormInput extends ReactorComponent {
      * {@inheritdoc}
      */
     render() {
+        const errorMessage = this.get('validationError');
+        let label = this.props.label || this.props.placeholder;
         return (
-            <div className="form-group">
-                <input
-                    ref={this.inputReference}
-                    type={this.props.type}
-                    name={this.props.name}
-                    className={this.props.className}
-                    placeholder={this.props.placeholder}
-                    onInput={this.validate.bind(this)}
-                />
-                {
-                    this.get('validationError') !== null &&
-                    <label className="error">{this.get('validationError')}</label>
-                }
-            </div>
+            <FormContext.Consumer>
+                {context => {
+                    if (!this.form) {
+                        const { form } = context;
+
+                        form.setInput(this);
+
+                        this.form = form;
+                    }
+
+                    return (
+                        <TextField
+                            error={Boolean(errorMessage)}
+                            label={label}
+                            margin  ="normal"
+                            inputRef={this.inputReference}
+                            onInput={this.validateInput.bind(this)}
+                            helperText={errorMessage}
+                            fullWidth
+                            {...this.props}
+                        />
+                    )
+                }}
+            </FormContext.Consumer>
         );
     }
 }
@@ -95,8 +105,10 @@ FormInput.propTypes = {
     placeholder: PropTypes.string,
     type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-};  
+};
 
 FormInput.defaultProps = {
     type: 'text',
+    color: 'primary',
+    variant: "outlined",
 };

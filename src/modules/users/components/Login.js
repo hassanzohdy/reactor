@@ -9,6 +9,9 @@ import Layout from 'shared/components/layout/layout';
 import { title, description } from 'reactor/metadata';
 import FormInput from 'reactor/components/form/form-input';
 import ReactorComponent from 'reactor/components/reactor.component';
+import FormButton from 'reactor/components/form/form-button';
+import Alert from '@material-ui/lab/Alert';
+import { trans } from 'reactor/localization';
 
 export default class Login extends ReactorComponent {
     /**
@@ -27,7 +30,8 @@ export default class Login extends ReactorComponent {
     /**
      * Submit login form
      */
-    login = async (e) => {
+    login = async (e, form) => {
+        this.set('error', null); // make sure to clear previous errors
         this.set('errors', null); // make sure to clear previous errors
 
         try {
@@ -36,9 +40,13 @@ export default class Login extends ReactorComponent {
             user.login(data.user);
 
             navigateTo('/users');
-
         } catch (error) {
-            let errors = error.response.data.errors;
+            form.isSubmitting = false;
+            let { errors, error: errorText } = error.response.data;
+
+            if (errorText) {
+                this.set('error', errorText);
+            }
 
             this.set('errors', errors);
         }
@@ -62,7 +70,6 @@ export default class Login extends ReactorComponent {
     render() {
         return (
             <Layout>
-
                 <div id="login-page">
                     <h1>Login Page</h1>
 
@@ -73,26 +80,30 @@ export default class Login extends ReactorComponent {
                             </div>
                         }
 
+                        {this.get('error') &&
+                            <Alert severity="error">{this.get('error')}</Alert>
+                        }
+
                         <FormInput
                             type="email"
                             className="form-control"
                             name="email"
-                            required={true}
-                            placeholder="Email Address"
+                            required
+                            placeholder={trans('email')}
                         />
 
                         <FormInput
                             type="password"
-                            required={true}
+                            required
+                            minLength={8}
                             name="password"
                             className="form-control"
                             placeholder="Enter Your Password"
                         />
-                        <div id="button-wrapper">
-                            <button>Login</button>
-                        </div>
+
+                        <FormButton fullWidth theme="dark">Login</FormButton>
                     </Form>
-                </div>  
+                </div>
             </Layout>
         );
     }

@@ -21,7 +21,7 @@ export default function SimpleTable(props) {
         setRecord(record);
         setIndex(index);
         setAction(currentAction);
-        if (currentAction == 'edit') {
+        if (currentAction === 'edit') {
             displayForm(true);
         }
     };
@@ -33,14 +33,17 @@ export default function SimpleTable(props) {
 
     const closeModal = () => displayForm(false);
 
-    const itemType = action == 'edit' ? 'editItem' : 'addItem';
+    const itemType = action === 'edit' ? 'editItem' : 'addItem';
 
     return (
         <>
-            <FormModal open={formIsDisplayed}
+            <FormModal
+                open={formIsDisplayed}
                 onSubmit={closeModal}
+                index={recordIndex}
                 title={trans(itemType, trans(options.singleName))}
-                onClose={closeModal}>
+                onClose={closeModal}
+            >
                 <options.form record={record} />
             </FormModal>
             <TableToolBar displayForm={displayForm} text={trans(options.heading)} />

@@ -80,6 +80,19 @@ const layoutSettings = makeStyles((theme) => ({
         top: theme.spacing(1),
         color: theme.palette.grey[500],
     },
+
+    // Themes
+    darkTheme: {
+        background: '#333',
+        color: '#FFF',
+        '&:hover': {
+            background: '#222',
+        },
+        '&:disabled': {
+            background: '#555',
+            color: '#eee',
+        },
+    },
 }));
 
 
