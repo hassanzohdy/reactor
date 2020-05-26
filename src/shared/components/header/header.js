@@ -11,6 +11,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import userLogout from 'modules/users/helpers/user-logout';
+import { refresh } from 'reactor/router';
+import Tooltip from 'reactor/components/tooltip';
+import RefreshIcon from '@material-ui/icons/Refresh';
+
+const refreshText = trans('refresh');
+const logoutText = trans('logout');
 
 export default function Header(props) {
     let classes = layoutSettings(),
@@ -41,16 +47,20 @@ export default function Header(props) {
                 {/* Divider */}
                 <div className={classes.grow} />
 
-                {/* Logout Button */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={userLogout}
-                    startIcon={<ExitToApp />}
-                >
-                    {trans('logout')}
-                </Button>
+                {/* Refresh Button */}
 
+                <IconButton color="inherit" onClick={refresh}>
+                    <Tooltip title={refreshText}>
+                        <RefreshIcon />
+                    </Tooltip>
+                </IconButton>
+
+                {/* Logout Button */}
+                <IconButton color="inherit" onClick={userLogout}>
+                    <Tooltip title={logoutText}>
+                        <ExitToApp />
+                    </Tooltip>
+                </IconButton>
             </Toolbar>
         </AppBar>
     )
