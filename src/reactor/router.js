@@ -13,7 +13,8 @@ import config from 'reactor/config';
 
 const history = createBrowserHistory();
 
-let localeCodes = config.get('locales');
+const localeCodes = config.get('locales');
+const forceRefresh = config.get('forceRefresh', true);
 
 // /en/users
 // /users
@@ -66,8 +67,14 @@ function Routes() {
             // /en/users
             // /ar/users
             <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`} exact={true} key={index}>
-                {(routeData) => {                    
-                    return <Middleware match={routeData.match} location={routeData.location} route={route} history={history} />;
+                {(routeData) => {          
+                    // timestamp
+                    // When forceRefresh flag is set to true
+                    // then the route component will be re-rendered every time
+                    // the user clicks on the same route
+                    // otherwise, the user will still in the same page without re-rendering
+                    const middlewareKey = forceRefresh ? Date.now() : null;          
+                    return <Middleware key={middlewareKey} match={routeData.match} location={routeData.location} route={route} history={history} />;
                 }}
             </Route>
         );
@@ -88,6 +95,24 @@ function Routes() {
  */
 export function navigateTo(path) {
     history.push(path);
+}
+
+/**
+ * Get current route 
+ * 
+ * @returns {string}
+ */
+export function currentRoute() {
+    return history.location.pathname;
+}
+
+/**
+ * Force reload current route content
+ * 
+ * @returns {void} 
+ */
+export function refresh() {
+    navigateTo(currentRoute());
 }
 
 /**
