@@ -1,12 +1,12 @@
 import React from 'react';
 import FormInput from 'reactor/components/form/form-input';
+import { trans } from 'reactor/localization';
 
 export default function UserForm(props) {
-    let { record } = props;
-    
+    const { record } = props;
     return (
         <>
-            <FormInput name="name" defaultValue={record.name} required placeholder="User Name"></FormInput>
+            <FormInput name="name" autoFocus defaultValue={record.name} placeholder={trans('name')} />
         </>
     )
 }

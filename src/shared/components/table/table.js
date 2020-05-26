@@ -33,6 +33,12 @@ export default function SimpleTable(props) {
 
     const closeModal = () => {
         displayForm(false);
+        setTimeout(() => {
+            // Reset the action to null
+            setAction(null);
+            // Reset the record to empty object to clean up any updated records
+            setRecord({});
+        }, 100);
     };
 
     const itemType = action === 'edit' ? 'editItem' : 'addItem';
@@ -42,11 +48,10 @@ export default function SimpleTable(props) {
             <FormModal
                 open={formIsDisplayed}
                 onSubmit={closeModal}
-                index={recordIndex}
                 title={trans(itemType, trans(options.singleName))}
                 onClose={closeModal}
             >
-                <options.form record={record} />
+                <options.form index={recordIndex} record={record} />
             </FormModal>
             <TableToolBar displayForm={displayForm} text={trans(options.heading)} />
             <TableContainer component={Paper}>

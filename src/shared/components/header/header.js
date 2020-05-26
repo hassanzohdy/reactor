@@ -1,19 +1,18 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import { refresh } from 'reactor/router';
 import { trans } from 'reactor/localization';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import layoutSettings from '../layout-settings';
+import Tooltip from 'reactor/components/tooltip';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import ExitToApp from '@material-ui/icons/ExitToApp';
 import userLogout from 'modules/users/helpers/user-logout';
-import { refresh } from 'reactor/router';
-import Tooltip from 'reactor/components/tooltip';
-import RefreshIcon from '@material-ui/icons/Refresh';
 
 const refreshText = trans('refresh');
 const logoutText = trans('logout');
