@@ -5,7 +5,7 @@ import Is from '@flk/supportive-is';
 
 let http = axios.create({
     baseURL: config.get('endpoint.baseUrl'),
-    transformRequest: [function (data) {
+    transformRequest: [function (data) {        
         if (Is.formElement(data)) {
             return new FormData(data);
         }

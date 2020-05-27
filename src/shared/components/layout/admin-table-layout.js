@@ -22,7 +22,7 @@ export default function AdminTableLayout(props) {
     // Display In Progress Spinner
     // load the users data from API
     // 
-    let displayedContent = isLoading ? <ProgressBar /> : renderTable(options, response);
+    let displayedContent = isLoading ? <ProgressBar /> : renderTable(options, response, service);
 
     return (
         <DashboardLayout>

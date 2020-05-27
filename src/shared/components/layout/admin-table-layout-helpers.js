@@ -8,9 +8,10 @@ export async function loadData(service, updateLoader, updateResponse) {
     updateLoader(false);
 }
 
-export function renderTable(tableOptions, response, ) {
+export function renderTable(tableOptions, response, service) {
     return <Table
         options={tableOptions}
         records={response.records}
+        service={service}
         pagination={response.paginationInfo} />
 }

@@ -7,6 +7,8 @@ export default function UserForm(props) {
     return (
         <>
             <FormInput name="name" required autoFocus defaultValue={record.name} placeholder={trans('name')} />
+            <FormInput type="email" name="email" required defaultValue={record.email} placeholder={trans('email')} />
+            <FormInput type="password" name="password" required placeholder={trans('password')} />
         </>
     )
 }

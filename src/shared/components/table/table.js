@@ -11,11 +11,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
 
 export default function SimpleTable(props) {
-    let { options, records } = props;
+    let { options, records, service } = props;
     const [formIsDisplayed, displayForm] = useState(false);
     const [record, setRecord] = useState({});
     const [recordIndex, setIndex] = useState(null);
     const [action, setAction] = useState(null);
+    const [tableRecords, setRecords] = useState(records);
 
     const recordUpdate = (record, index, currentAction) => {
         setRecord(record);
@@ -25,11 +26,11 @@ export default function SimpleTable(props) {
             displayForm(true);
         }
     };
-
+    
     // store the value until one of the given deps is changed
     let [tableHeading, tableRows] = React.useMemo(() => {
-        return tableStructure(options, records, recordUpdate);
-    }, [options, records]);
+        return tableStructure(options, tableRecords, recordUpdate);
+    }, [tableRecords]);
 
     const closeModal = () => {
         displayForm(false);
@@ -43,11 +44,28 @@ export default function SimpleTable(props) {
 
     const itemType = action === 'edit' ? 'editItem' : 'addItem';
 
+    const submitForm = async (e) => {
+        const form = e.target;
+        if (action === 'edit') {
+            service.update(record.id, form);
+        } else {
+            // action here is adding
+            let { data } = await service.create(form);
+
+            let { record } = data;
+
+            tableRecords.unshift(record);
+            setRecords(tableRecords.concat([]));      
+        }
+
+        closeModal();
+    };
+
     return (
         <>
             <FormModal
                 open={formIsDisplayed}
-                onSubmit={closeModal}
+                onSubmit={submitForm}
                 title={trans(itemType, trans(options.singleName))}
                 onClose={closeModal}
             >
