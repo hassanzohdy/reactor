@@ -28,7 +28,7 @@ export default function tableStructure(options, records, setRecord) {
                         {column.buttons.map((ActionButton, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <ActionButton onClick={(e, currentAction) => setRecord(record, index, currentAction)} />
+                                    <ActionButton onClick={(e, currentAction) => setRecord(record, recordIndex, currentAction)} />
                                 </React.Fragment>
                             )
                         })}

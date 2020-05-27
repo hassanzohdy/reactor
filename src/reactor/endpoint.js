@@ -5,9 +5,18 @@ import Is from '@flk/supportive-is';
 
 let http = axios.create({
     baseURL: config.get('endpoint.baseUrl'),
-    transformRequest: [function (data) {        
+    transformRequest: [function (data, headers) {
         if (Is.formElement(data)) {
-            return new FormData(data);
+            let formData = new FormData(data);
+
+            if (headers.isPutRequest) {
+                formData.append('_method', 'PUT');
+
+                // delete the isPutRequest flag
+                delete headers.isPutRequest;
+
+                return formData;
+            }
         }
 
         return data;
@@ -16,6 +25,11 @@ let http = axios.create({
 
 http.interceptors.request.use(requestConfig => {    
     let auth = user.isLoggedIn() ? `Bearer ${user.getAccessToken()}` : `key ${config.get('endpoint.apiKey')}`;
+
+    if (requestConfig.method === 'put') {
+        requestConfig.method = 'post';
+        requestConfig.headers.isPutRequest = true;
+    }
 
     requestConfig.headers.Authorization = auth;
     

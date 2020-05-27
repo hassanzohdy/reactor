@@ -26,11 +26,11 @@ export default function SimpleTable(props) {
             displayForm(true);
         }
     };
-    
+
     // store the value until one of the given deps is changed
     let [tableHeading, tableRows] = React.useMemo(() => {
         return tableStructure(options, tableRecords, recordUpdate);
-    }, [tableRecords]);
+    }, [options, tableRecords]);
 
     const closeModal = () => {
         displayForm(false);
@@ -47,7 +47,13 @@ export default function SimpleTable(props) {
     const submitForm = async (e) => {
         const form = e.target;
         if (action === 'edit') {
-            service.update(record.id, form);
+            let { data } = await service.update(record.id, form);
+            let { record: updateRecord } = data;
+
+            // update existing record data by its index
+            tableRecords[recordIndex] = updateRecord;
+            // reset the records list to force re-render the table rows
+            setRecords(tableRecords.concat([]));
         } else {
             // action here is adding
             let { data } = await service.create(form);
@@ -55,7 +61,7 @@ export default function SimpleTable(props) {
             let { record } = data;
 
             tableRecords.unshift(record);
-            setRecords(tableRecords.concat([]));      
+            setRecords(tableRecords.concat([]));
         }
 
         closeModal();
