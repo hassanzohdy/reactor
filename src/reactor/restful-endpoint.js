@@ -40,10 +40,8 @@ export default class RestfulEndpoint {
      * @param   {object|FormData} data 
      * @returns {Promise}
      */
-    post(data) {
-        return endpoint.post(this.route, {
-            data
-        });
+    create(data) {
+        return endpoint.post(this.route, data);
     }
 
     /**
@@ -53,10 +51,8 @@ export default class RestfulEndpoint {
      * @param   {object|FormData} data 
      * @returns {Promise}
      */
-    put(id, data) {
-        return endpoint.put(this.route + '/' + id, {
-            data
-        });
+    update(id, data) {
+        return endpoint.put(this.route + '/' + id, data);
     }
 
     /**
