@@ -9,4 +9,5 @@ localization.extend('en', {
     editItem: 'Edit %s',
     removeItem: 'Remove %s',
     actions: 'Actions',
+    removeText: 'Are you sure you want to delete this record?',
 });

@@ -14,9 +14,9 @@ let http = axios.create({
 
                 // delete the isPutRequest flag
                 delete headers.isPutRequest;
-
-                return formData;
             }
+            
+            return formData;
         }
 
         return data;

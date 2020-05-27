@@ -9,6 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
+import Confirm from 'reactor/components/confirm';
+
+const removeText = trans('removeText');
 
 export default function SimpleTable(props) {
     let { options, records, service } = props;
@@ -18,10 +21,17 @@ export default function SimpleTable(props) {
     const [action, setAction] = useState(null);
     const [tableRecords, setRecords] = useState(records);
 
+    /**
+     * Triggered when user clicks on any of table action buttons
+     *  
+     * @param {Object} record 
+     * @param {number} index 
+     * @param {string} currentAction 
+     */
     const recordUpdate = (record, index, currentAction) => {
         setRecord(record);
         setIndex(index);
-        setAction(currentAction);
+        setAction(currentAction); // remove
         if (currentAction === 'edit') {
             displayForm(true);
         }
@@ -67,8 +77,27 @@ export default function SimpleTable(props) {
         closeModal();
     };
 
+    const closeRemoveConfirm = () => {
+        setAction(null);
+    };
+
+    const removeRecord = () => {
+        // Remove record from table
+        tableRecords.splice(recordIndex, 1);
+        // update table records
+        setRecords(tableRecords.concat([]));
+
+        // Remove from API
+        service.delete(record.id);
+    };
+
     return (
         <>
+            <Confirm open={action === 'remove'} 
+                    onClose={closeRemoveConfirm} 
+                    onConfirm={removeRecord} 
+                    message={removeText} />
+        
             <FormModal
                 open={formIsDisplayed}
                 onSubmit={submitForm}
