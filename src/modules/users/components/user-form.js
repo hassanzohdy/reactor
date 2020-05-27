@@ -6,7 +6,7 @@ export default function UserForm(props) {
     const { record } = props;
     return (
         <>
-            <FormInput name="name" autoFocus defaultValue={record.name} placeholder={trans('name')} />
+            <FormInput name="name" required autoFocus defaultValue={record.name} placeholder={trans('name')} />
         </>
     )
 }

@@ -29,6 +29,7 @@ function DefaultModalTitle(props) {
 export default function Modal(props) {
     const {
         size, esc,
+        plain,
         title, onClose, onSubmit,
         backdrop, ...otherDialogProps } =
         props;
@@ -41,6 +42,10 @@ export default function Modal(props) {
         modalTitle = <DefaultModalTitle title={title} onClose={onClose} />
     }
 
+    const modalContent = plain === false ?  
+                        <DialogContent dividers children={props.children} /> :
+                        props.children; // if plain true, display children directly
+
     return (
         <Dialog
             fullWidth
@@ -51,21 +56,20 @@ export default function Modal(props) {
             {...otherDialogProps}
         >
             {modalTitle}
-            <DialogContent dividers>
-                {props.children}
-            </DialogContent>
+            {modalContent}
         </Dialog>
     );
 }
 
 Modal.propTypes = {
+    plain: PropTypes.bool,
     esc: PropTypes.bool.isRequired,
     open: PropTypes.bool.isRequired,// same attribute name in the modal
     size: PropTypes.string.isRequired,
     title: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node,
-    ]).isRequired,
+    ]),
     onClose: PropTypes.func.isRequired,
     children: PropTypes.any.isRequired,
     backdrop: PropTypes.bool.isRequired,
@@ -74,6 +78,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
     size: 'sm',
+    plain: false, // if set to true, then the modal dialog content will not be used
     esc: false, // if set to false, then the esc button will not close the modal    
     backdrop: false, // if set to false, then the backdrop click will not close the modal
     fullScreen: false,

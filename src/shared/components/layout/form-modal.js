@@ -1,30 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Modal from './modal';
+import PropTypes from 'prop-types';
 import FormModalTitle from './form-modal-title';
 import Form from 'reactor/components/form/form';
+import DialogContent from '@material-ui/core/DialogContent';
 
 export default function FormModal(props) {
     const { title, onSubmit, ...otherDialogProps } = props;
 
-    let formHandler;
-
-    const handleOnConfirm = () => {
-        formHandler.submit();
-    };
-
-    const formTitle = <FormModalTitle title={title} onSubmit={handleOnConfirm} onClose={props.onClose} />;
+    const formTitle = <FormModalTitle title={title} onClose={props.onClose} />;
 
     return (
         <Modal
+            plain
             {...otherDialogProps}
-            title={formTitle}
         >
             <Form
                 onSubmit={onSubmit}
-                ref={form => formHandler = form}
             >
-                {props.children}
+                {formTitle}
+                <DialogContent>
+                    {props.children}
+                </DialogContent>
             </Form>
         </Modal>
     );

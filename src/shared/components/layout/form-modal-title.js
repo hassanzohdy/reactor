@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import FormButton from 'reactor/components/form/form-button';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,7 +29,7 @@ export default function FormModalTitle(props) {
                 <Typography variant="h6" className={classes.title}>
                     {props.title}
                 </Typography>
-                <Button autoFocus color="inherit" onClick={props.onSubmit}>save</Button>
+                <FormButton color="inherit">Save</FormButton>
             </Toolbar>
         </AppBar>
     )
