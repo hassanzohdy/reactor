@@ -4,7 +4,7 @@ import Is from '@flk/supportive-is';
 export default function Middleware(props) {
     let { route, history, match } = props;
 
-    let { params } = match;
+    let { params } = match || {};
 
     let middlewareList = route.middleware;
 
@@ -21,6 +21,5 @@ export default function Middleware(props) {
             }
         }
     }
-
     return <route.component params={params} history={history} />;
 }

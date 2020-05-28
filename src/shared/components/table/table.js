@@ -20,7 +20,6 @@ export default function SimpleTable(props) {
     const [recordIndex, setIndex] = useState(null);
     const [action, setAction] = useState(null);
     const [tableRecords, setRecords] = useState(records);
-
     /**
      * Triggered when user clicks on any of table action buttons
      *  
@@ -93,11 +92,11 @@ export default function SimpleTable(props) {
 
     return (
         <>
-            <Confirm open={action === 'remove'} 
-                    onClose={closeRemoveConfirm} 
-                    onConfirm={removeRecord} 
-                    message={removeText} />
-        
+            <Confirm open={action === 'remove'}
+                onClose={closeRemoveConfirm}
+                onConfirm={removeRecord}
+                message={removeText} />
+
             <FormModal
                 open={formIsDisplayed}
                 onSubmit={submitForm}

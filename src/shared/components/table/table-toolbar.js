@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         color: 'inherit',
         backgroundColor: grey[100],
+        marginBottom: '0.4rem',
     },
     title: {
         flexGrow: 1,

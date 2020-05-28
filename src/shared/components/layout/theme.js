@@ -6,7 +6,6 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import MultiDirection from './multi-direction';
 
-
 const theme = createMuiTheme({
     direction: Globals.direction,
     palette: {
@@ -24,7 +23,7 @@ export default function Theme(props) {
         <MultiDirection>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                {props.children}
+                    {props.children}
             </ThemeProvider>
         </MultiDirection>
     )

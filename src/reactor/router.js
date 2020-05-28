@@ -5,11 +5,12 @@ import {
     Router,
     Switch,
 } from "react-router-dom";
-
 // use custom history to manage router navigation from our side
 import { createBrowserHistory } from 'history';
 import Middleware from './middleware';
 import config from 'reactor/config';
+import { providers } from 'reactor/reactor';
+import ProgressBar from 'reactor/components/progress-bar';
 
 const history = createBrowserHistory();
 
@@ -26,6 +27,22 @@ let [firstSegmentOfLocation] = history.location.pathname.replace(/^\//, '').spli
 if (localeCodes[firstSegmentOfLocation]) {
     document.documentElement.dir = localeCodes[firstSegmentOfLocation];
     document.documentElement.lang = firstSegmentOfLocation;
+}
+
+/**
+ * Get first segment of the given location
+ * 
+ * @param   {object} location 
+ * @returns {string}
+ */
+function firstSegmentOfRoute(location) {
+    const routeSegments = location.pathname.replace(/^\//, '').split('/');
+
+    if (routeSegments) {        
+        return '/' + (localeCodes[routeSegments[0]] ? (routeSegments[1] || '') : routeSegments[0]);
+    }
+
+    return '/';
 }
 
 /**
@@ -56,6 +73,40 @@ function addRouter(path, component, middleware = null) {
  * @returns {Array}
  */
 function Routes() {
+    return (
+        <Router history={history}>
+            <Switch>
+                <Renderer />
+            </Switch>
+        </Router>
+    );
+}
+
+function Renderer(props) {
+    const { location } = props;
+
+    const firstSegment = firstSegmentOfRoute(location);
+
+    const [loadedModules, loadModules] = React.useState([]);
+     
+    const moduleIsLoaded = loadedModules.includes(firstSegment) || ! providers[firstSegment]; 
+
+    React.useEffect(() => { 
+        const moduleData = providers[firstSegment];
+
+        if (! moduleIsLoaded && firstSegment) {
+            moduleData().then(e => {
+                loadedModules.push(firstSegment);
+                
+                loadModules(loadedModules.concat([]));
+            });
+        }
+    }, [moduleIsLoaded, loadedModules, firstSegment]);
+
+    if (! moduleIsLoaded) {
+        return <ProgressBar />
+    }
+
     // each route contains:
     // path: path to page
     // middleware: middleware to be applied before accessing the component page 
@@ -66,26 +117,23 @@ function Routes() {
             // /users
             // /en/users
             // /ar/users
-            <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`} exact={true} key={index}>
-                {(routeData) => {          
+            <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`}
+                exact={true}
+                key={index}
+                render={routeData => {
                     // timestamp
                     // When forceRefresh flag is set to true
                     // then the route component will be re-rendered every time
                     // the user clicks on the same route
                     // otherwise, the user will still in the same page without re-rendering
-                    const middlewareKey = forceRefresh ? Date.now() : null;          
+                    const middlewareKey = forceRefresh ? Date.now() : null;
                     return <Middleware key={middlewareKey} match={routeData.match} location={routeData.location} route={route} history={history} />;
                 }}
-            </Route>
+            />
         );
     });
-    return (
-        <Router history={history}>
-            <Switch>
-                {routes}
-            </Switch>
-        </Router>
-    );
+
+    return routes;
 }
 
 /**
