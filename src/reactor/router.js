@@ -1,21 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// use custom history to manage router navigation from our side
+import { createBrowserHistory } from 'history';
+import Middleware from './middleware';
+import config from 'reactor/config';
+import modules from 'shared/modules';
+import ProgressBar from 'reactor/components/progress-bar';
 import {
     Route,
     Router,
     Switch,
 } from "react-router-dom";
-// use custom history to manage router navigation from our side
-import { createBrowserHistory } from 'history';
-import Middleware from './middleware';
-import config from 'reactor/config';
-import { providers } from 'reactor/reactor';
-import ProgressBar from 'reactor/components/progress-bar';
 
 const history = createBrowserHistory();
 
 const localeCodes = config.get('locales');
 const forceRefresh = config.get('forceRefresh', true);
+
+// List of all modules 
+const modulesList = {};
+
+// spread all entries into object
+for (let moduleInfo of modules) {
+    moduleInfo.load = () => import(`modules/${moduleInfo.module}/${moduleInfo.module}-provider.js`);
+    // loop over the entry array
+    for (let entryRoute of moduleInfo.entry) {
+        modulesList[entryRoute] = moduleInfo;
+    }
+}
+
 
 // /en/users
 // /users
@@ -29,20 +42,26 @@ if (localeCodes[firstSegmentOfLocation]) {
     document.documentElement.lang = firstSegmentOfLocation;
 }
 
+
 /**
- * Get first segment of the given location
+ * Get first segment of the given location data
  * 
- * @param   {object} location 
- * @returns {string}
+ * @param   {object} location
+ * @returns {string}   
  */
 function firstSegmentOfRoute(location) {
-    const routeSegments = location.pathname.replace(/^\//, '').split('/');
+    let [firstSegment, secondSegment] = location.pathname.replace(/^\//, '').split('/');
 
-    if (routeSegments) {        
-        return '/' + (localeCodes[routeSegments[0]] ? (routeSegments[1] || '') : routeSegments[0]);
+    let segment = firstSegment;
+
+    // if first segment is locale code, then take the second
+    if (localeCodes[firstSegment]) {
+        // if there is no second segment
+        // then return empty not undefined
+        segment = secondSegment || '';
     }
 
-    return '/';
+    return '/' + segment;
 }
 
 /**
@@ -66,7 +85,6 @@ function addRouter(path, component, middleware = null) {
         middleware,
     });
 }
-
 /**
  * Return all application routes
  * 
@@ -82,36 +100,54 @@ function Routes() {
     );
 }
 
+function isPartOfLazyModules(firstSegment) {
+    return modulesList[firstSegment];
+}
+
 function Renderer(props) {
     const { location } = props;
 
-    const firstSegment = firstSegmentOfRoute(location);
+    let firstSegment = firstSegmentOfRoute(location);
 
-    const [loadedModules, loadModules] = React.useState([]);
-     
-    const moduleIsLoaded = loadedModules.includes(firstSegment) || ! providers[firstSegment]; 
+    const [loadedModules, loadModule] = React.useState([]);
 
-    React.useEffect(() => { 
-        const moduleData = providers[firstSegment];
+    // check if module is loaded
+    const moduleIsLoaded = loadedModules.includes(firstSegment);
 
-        if (! moduleIsLoaded && firstSegment) {
-            moduleData().then(e => {
-                loadedModules.push(firstSegment);
-                
-                loadModules(loadedModules.concat([]));
+    React.useEffect(() => {
+        // login
+        const moduleInfo = modulesList[firstSegment];
+
+        if (!moduleIsLoaded && moduleInfo) {
+            console.log(moduleInfo);
+                        
+            moduleInfo.load().then(e => {
+                // /users 
+                loadModule(loadedModules.concat(moduleInfo.entry));                
             });
         }
-    }, [moduleIsLoaded, loadedModules, firstSegment]);
 
-    if (! moduleIsLoaded) {
+    }, [firstSegment, moduleIsLoaded, loadedModules]);
+
+
+    // Display the progress bar
+    // if the first segment is not in the 
+    // loadedModules and
+    // the first segment is part of modules list that will be loaded
+    if (! moduleIsLoaded && isPartOfLazyModules(firstSegment)) {
         return <ProgressBar />
     }
 
-    // each route contains:
-    // path: path to page
-    // middleware: middleware to be applied before accessing the component page 
-    // component: component class that will render the page
     const routes = routesList.map((route, index) => {
+        const renderRoute = routeData => {
+            // timestamp
+            // When forceRefresh flag is set to true
+            // then the route component will be re-rendered every time
+            // the user clicks on the same route
+            // otherwise, the user will still in the same page without re-rendering
+            const middlewareKey = forceRefresh ? Date.now() : null;
+            return <Middleware key={middlewareKey} match={routeData.match} location={routeData.location} route={route} history={history} />;
+        };
         return (
             // added optional localization
             // /users
@@ -120,15 +156,7 @@ function Renderer(props) {
             <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`}
                 exact={true}
                 key={index}
-                render={routeData => {
-                    // timestamp
-                    // When forceRefresh flag is set to true
-                    // then the route component will be re-rendered every time
-                    // the user clicks on the same route
-                    // otherwise, the user will still in the same page without re-rendering
-                    const middlewareKey = forceRefresh ? Date.now() : null;
-                    return <Middleware key={middlewareKey} match={routeData.match} location={routeData.location} route={route} history={history} />;
-                }}
+                render={renderRoute}
             />
         );
     });

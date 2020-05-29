@@ -1,8 +1,6 @@
 import { scan } from 'reactor/router';
 import * as serviceWorker from './serviceWorker';
 
-export const providers = {};
-
 export default class Reactor {    
     /**
      * Start the application
