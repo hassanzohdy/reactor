@@ -119,8 +119,6 @@ function Renderer(props) {
         const moduleInfo = modulesList[firstSegment];
 
         if (!moduleIsLoaded && moduleInfo) {
-            console.log(moduleInfo);
-                        
             moduleInfo.load().then(e => {
                 // /users 
                 loadModule(loadedModules.concat(moduleInfo.entry));                

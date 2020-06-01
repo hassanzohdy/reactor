@@ -24,7 +24,7 @@ export default class Login extends ReactorComponent {
      */
     init() {
         title('My Login Page');
-        description('Some login description');
+        description('Some login description');        
     }
 
     /**

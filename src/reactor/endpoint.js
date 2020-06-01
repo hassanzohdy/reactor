@@ -6,7 +6,16 @@ import Is from '@flk/supportive-is';
 let http = axios.create({
     baseURL: config.get('endpoint.baseUrl'),
     transformRequest: [function (data, headers) {
-        if (Is.formElement(data)) {
+        if (Is.plainObject(data)) {
+            headers['Content-Type'] = 'Application/json';
+            
+            if (headers.isPutRequest) {
+                data._method = 'PUT';
+                delete headers.isPutRequest;
+            }
+            
+            data = JSON.stringify(data);
+        } else if (Is.formElement(data)) {
             let formData = new FormData(data);
 
             if (headers.isPutRequest) {
