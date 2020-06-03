@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Link from 'reactor/components/link';
 
 export default function SidebarListItem(props) {
     let { text, route, icon, nestedItemClass } = props;
+
 
     return (
         <ListItem
