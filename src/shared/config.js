@@ -8,7 +8,11 @@ config.set({
         apiKey: 'SP6YHG56IKLO90MNF4TGAQW23FVBG765',
     },
     locales: {
-        en: 'ltr',
-        ar: 'rtl',
+        en: {
+            direction: 'ltr',
+        },
+        ar: {
+            direction: 'rtl',
+        },
     },
 });

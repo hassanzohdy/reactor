@@ -2,9 +2,9 @@ import 'shared/config';
 import Reactor from 'reactor/reactor';
 import 'shared/shared-provider';
 
-// Reactor
+// // Reactor
 
 const reactor = new Reactor();    
 
-// start the application
+// // start the application
 reactor.react();

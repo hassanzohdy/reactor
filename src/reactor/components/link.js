@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { initialLocaleCode } from '../router-configurations/navigator';
-import Globals from '../globals';
+import { hasInitialLocaleCode } from 'reactor/router-configurations/navigator';
+import Globals from 'reactor/globals';
 
 const Link = React.forwardRef(function (props, forwardedRef) {
     let { to, localeCode, ...otherLinkProps } = props;
@@ -10,7 +10,7 @@ const Link = React.forwardRef(function (props, forwardedRef) {
         // /users
         // /en/users
         // to = /
-        to = '/' + localeCode + (to == '/' ? '' : to);
+        to = '/' + localeCode + (to === '/' ? '' : to);
         // /en
     }
 
@@ -20,7 +20,7 @@ const Link = React.forwardRef(function (props, forwardedRef) {
 });
     
 Link.defaultProps = {
-    localeCode: initialLocaleCode ? Globals.localeCode : null,
+    localeCode: hasInitialLocaleCode() ? Globals.localeCode : null,
 };
 
 // if initial locale code is true, then add the current locale code as locale code prop

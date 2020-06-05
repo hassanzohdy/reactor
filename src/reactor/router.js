@@ -1,20 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // use custom history to manage router navigation from our side
-import setCurrentLocale from './router-configurations/update-current-localization';
 import Routes from './router-configurations/routes-handler';
 import { addRouter } from './router-configurations/routes-list';
-import { navigateTo, switchLang, refresh, currentRoute } from './router-configurations/navigator';
-
-setCurrentLocale();
-
-export {
-    navigateTo, 
-    switchLang, 
-    refresh, 
-    currentRoute,
-};
-
+import initiateNavigator from './router-configurations/navigator';
+export { navigateTo, switchLang, refresh, currentRoute } from './router-configurations/navigator';
 
 /**
  * Scan the entire routes list
@@ -22,6 +12,7 @@ export {
  * @returns  {void}
  */
 export function scan() {
+    initiateNavigator();
     ReactDOM.render(<Routes />, document.getElementById('root'));
 }
 

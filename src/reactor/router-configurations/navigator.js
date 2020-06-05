@@ -1,21 +1,7 @@
 import history from "./router-history";
-import config from 'reactor/config';
-import Globals from './../globals';
+import { localeCodes, updateCurrentLocaleCode } from "../localization/locales";
 
-history.listen(location => {
-    updateCurrentRoute(location.pathname);
-})
-
-let currentLocaleCode = Globals.localeCode;
-
-const localeCodes = Object.keys(config.get('locales'));
-
-let currentFullRoute,
-currentRouteWithoutLocaleCode;
-
-updateCurrentRoute(history.location.pathname || '/');
-
-export const initialLocaleCode = currentFullRoute !== currentRouteWithoutLocaleCode;
+let currentFullRoute, currentRouteWithoutLocaleCode;
 
 /**
  * Set the full current route and the current route without the locale code
@@ -24,13 +10,15 @@ export const initialLocaleCode = currentFullRoute !== currentRouteWithoutLocaleC
  * @returns {void} 
  */
 function updateCurrentRoute(route) {
+    // /en/users
     currentFullRoute = route;
 
     // remove any possible locale code
-    let regex = new RegExp(`^/(${localeCodes.join('|')})`);
+    let regex = new RegExp(`^/(${localeCodes.join('|')})`); 
+    // let regex = new RegExp('^/(en|ar)')
 
     currentRouteWithoutLocaleCode = currentFullRoute.replace(regex, function (matched, localeCode) {
-        currentLocaleCode = localeCode;
+        updateCurrentLocaleCode(localeCode);
         return '';
     });
 }
@@ -72,4 +60,29 @@ export function refresh() {
  */
 export function switchLang(localeCode) {
 
+}
+
+/**
+ * Initialize Navigator
+ */
+export default function initiateNavigator() {
+    /**
+     * Listen to any router navigation to update current full route 
+     * and current route without locale codes
+     */
+    history.listen(location => {
+        updateCurrentRoute(location.pathname);
+    });
+
+    updateCurrentRoute(history.location.pathname || '/');
+}
+
+/**
+ * Check if current route has a locale code
+ * By comparing the currentFullRoute with currentRouteWithoutLocaleCode
+ * 
+ * @returns  {boolean} 
+ */
+export function hasInitialLocaleCode() {
+    return currentFullRoute !== currentRouteWithoutLocaleCode;
 }

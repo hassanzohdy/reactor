@@ -1,7 +1,10 @@
 import { scan } from 'reactor/router';
 import * as serviceWorker from './serviceWorker';
+import { initiateLocaleCode } from './localization/locales';
 
-export default class Reactor {    
+initiateLocaleCode();
+
+export default class Reactor {
     /**
      * Start the application
      */
