@@ -4,10 +4,13 @@ import { create } from 'jss';
 import PropTypes from 'prop-types';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 
-const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+const plugins = [...jssPreset().plugins, rtl()];
+
+const jss = create({ plugins });
 
 export default function MultiDirection(props) {
-    return (        
+
+    return (
         <StylesProvider jss={jss}>
             {props.children}
         </StylesProvider>

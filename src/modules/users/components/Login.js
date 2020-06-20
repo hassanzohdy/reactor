@@ -1,17 +1,18 @@
 import './login.scss';
 import user from 'user';
 import React from 'react';
+import Alert from '@material-ui/lab/Alert';
 import { navigateTo } from 'reactor/router';
 import { mapObject } from 'reactor/helpers';
-import Form from 'reactor/components/form/form';
+import { trans } from 'reactor/localization';
+import Form from 'reactor/form/components/form';
 import { login } from 'modules/users/services/auth';
 import Layout from 'shared/components/layout/layout';
-import { title, description } from 'reactor/metadata';
-import FormInput from 'reactor/components/form/form-input';
+import { title, description } from 'reactor/metadata'; 
+import EmailInput from 'reactor/form/components/email-input';
+import SubmitButton from 'reactor/form/components/submit-button';
+import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
-import FormButton from 'reactor/components/form/form-button';
-import Alert from '@material-ui/lab/Alert';
-import { trans } from 'reactor/localization';
 
 export default class Login extends ReactorComponent {
     /**
@@ -24,7 +25,7 @@ export default class Login extends ReactorComponent {
      */
     init() {
         title('My Login Page');
-        description('Some login description');        
+        description('Some login description');   
     }
 
     /**
@@ -84,8 +85,7 @@ export default class Login extends ReactorComponent {
                             <Alert severity="error">{this.get('error')}</Alert>
                         }
 
-                        <FormInput
-                            type="email"
+                        <EmailInput
                             autoFocus
                             className="form-control"
                             name="email"
@@ -93,8 +93,7 @@ export default class Login extends ReactorComponent {
                             placeholder={trans('email')}
                         />
 
-                        <FormInput
-                            type="password"
+                        <PasswordInput
                             required
                             minLength={8}
                             name="password"
@@ -102,7 +101,7 @@ export default class Login extends ReactorComponent {
                             placeholder="Enter Your Password"
                         />
 
-                        <FormButton fullWidth theme="dark">Login</FormButton>
+                        <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>
                 </div>
             </Layout>

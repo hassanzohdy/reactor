@@ -2,6 +2,13 @@ import modulesList from "./modules-list";
 import config from 'reactor/config';
 const localeCodes = config.get('locales');
 
+
+/**
+ * Check if the given firstSegment is part of modules list
+ * 
+ * @param   {object} firstSegment
+ * @returns {string}   
+ */
 export function isPartOfLazyModules(firstSegment) {
     return modulesList[firstSegment];
 }

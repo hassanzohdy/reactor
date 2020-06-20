@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactorComponent from 'reactor/components/reactor.component';
-import FormContext from './form-context';
 import { Arr } from 'reinforcements';
+import FormContext from '../utils/form-context';
+import ReactorComponent from 'reactor/components/reactor.component';
 
 export default class Form extends ReactorComponent {
     inputs = [];

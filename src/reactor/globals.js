@@ -1,4 +1,5 @@
-const direction = document.documentElement.dir || 'ltr';
+const localeCode = document.documentElement.lang;
+const direction = document.documentElement.dir;
 const left = direction === 'ltr' ? 'left' : 'right';
 const right = direction === 'ltr' ? 'right' : 'left';
 
@@ -10,7 +11,7 @@ const Globals = {
     marginRight: `margin-${right}`,
     paddingLeft: `padding-${left}`,
     paddingRight: `padding-${right}`,
-    localeCode: document.documentElement.lang,
+    localeCode: localeCode,
 };
 
 export default Globals;

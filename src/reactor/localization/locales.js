@@ -65,7 +65,7 @@ export function initiateLocaleCode() {
  * @returns {void} 
  */
 export function updateCurrentLocaleCode(localeCode) {
-    if (localeCode == currentLocaleCode) return;
+    if (localeCode === currentLocaleCode) return;
 
     document.documentElement.dir = directionOf(localeCode);
     document.documentElement.lang = localeCode;

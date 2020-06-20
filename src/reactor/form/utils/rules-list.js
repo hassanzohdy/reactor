@@ -1,10 +1,9 @@
-import { Arr } from "reinforcements";
+import '../validation/locales/en';
 import PropTypes from 'prop-types';
-import required from "./validation/rules/required";
-import email from "./validation/rules/email";
-import minLength from "./validation/rules/min-length";
-
-import './validation/locales/en';
+import { Arr } from "reinforcements";
+import email from "../validation/rules/email";
+import required from "../validation/rules/required";
+import minLength from "../validation/rules/min-length";
 
 const ruleSchema = {
     // 

@@ -80,7 +80,6 @@ const layoutSettings = makeStyles((theme) => ({
         top: theme.spacing(1),
         color: theme.palette.grey[500],
     },
-
     // Themes
     darkTheme: {
         background: '#333',

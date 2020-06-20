@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Is from '@flk/supportive-is';
-import rulesList from './rules-list';
-import FormContext from './form-context';
+import rulesList from '../utils/rules-list';
+import FormContext from '../utils/form-context';
 import TextField from '@material-ui/core/TextField';
 import ReactorComponent from 'reactor/components/reactor.component';
 
