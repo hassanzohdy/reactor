@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Globals from 'reactor/globals';
+import MultiDirection from './multi-direction';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import MultiDirection from './multi-direction';
 
 const theme = createMuiTheme({    
     direction: Globals.direction,

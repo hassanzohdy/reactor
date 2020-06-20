@@ -1,13 +1,13 @@
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import PropTypes from 'prop-types';
 import Is from '@flk/supportive-is';
-import layoutSettings from '../layout-settings';
+import Dialog from '@material-ui/core/Dialog';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import layoutSettings from 'shared/components/layout-settings';
 
 function DefaultModalTitle(props) {
     const classes = layoutSettings();

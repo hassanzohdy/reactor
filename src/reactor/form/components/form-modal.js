@@ -1,9 +1,9 @@
 import React from 'react';
-import Modal from './modal';
+import Modal from 'reactor/components/modal';
 import PropTypes from 'prop-types';
-import FormModalTitle from './form-modal-title';
 import Form from 'reactor/form/components/form';
 import DialogContent from '@material-ui/core/DialogContent';
+import FormModalTitle from './form-modal-title';
 
 export default function FormModal(props) {
     const { title, onSubmit, ...otherDialogProps } = props;
