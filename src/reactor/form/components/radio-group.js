@@ -9,8 +9,8 @@ export default function RadioGroup({ value, defaultValue, onChange, inputs, row,
     const [currentValue, setValue] = React.useState(defaultValue || value);
 
     const radioInputs = inputs.map(input => {
-        const { label, value, disabled } = input;
-        return <FormControlLabel key={value} value={value} control={<Radio color="primary" />} disabled={disabled} label={label} />;
+        const { label, value, disabled, ...otherProps } = input;
+        return <FormControlLabel key={value} value={value} disabled={disabled} label={label} control={<Radio color="primary" />} {...otherProps} />;
     });
 
     const handleChange = e => {

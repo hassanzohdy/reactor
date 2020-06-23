@@ -13,23 +13,7 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
-import RadioGroup from 'reactor/form/components/radio-group';
-
-const inputs = [
-    {
-        label: 'Male!',
-        value: 'male',
-    },
-    {
-        label: 'Female',
-        value: 'female'
-    },
-    {
-        label: 'other',
-        value: 'other',
-        disabled: true,
-    }
-];
+import SwitchButton from 'reactor/form/components/switch-button';
 
 export default class Login extends ReactorComponent {
     /**
@@ -119,7 +103,7 @@ export default class Login extends ReactorComponent {
                             placeholder="Enter Your Password"
                         />
 
-                        <RadioGroup name="gender" label="Gender" value="female" inputs={inputs} />
+                        <SwitchButton label="Site Status" checked disabled />
 
                         <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>
