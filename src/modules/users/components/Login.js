@@ -13,8 +13,6 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
-import SwitchButton from 'reactor/form/components/switch-button';
-
 export default class Login extends ReactorComponent {
     /**
      * {@inheritdoc}
@@ -102,8 +100,6 @@ export default class Login extends ReactorComponent {
                             className="form-control"
                             placeholder="Enter Your Password"
                         />
-
-                        <SwitchButton label="Site Status" checked disabled />
 
                         <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>
