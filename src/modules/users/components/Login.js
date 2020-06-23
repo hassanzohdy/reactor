@@ -8,11 +8,28 @@ import { trans } from 'reactor/localization';
 import Form from 'reactor/form/components/form';
 import { login } from 'modules/users/services/auth';
 import Layout from 'shared/components/layout/layout';
-import { title, description } from 'reactor/metadata'; 
+import { title, description } from 'reactor/metadata';
 import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
+import RadioGroup from 'reactor/form/components/radio-group';
+
+const inputs = [
+    {
+        label: 'Male!',
+        value: 'male',
+    },
+    {
+        label: 'Female',
+        value: 'female'
+    },
+    {
+        label: 'other',
+        value: 'other',
+        disabled: true,
+    }
+];
 
 export default class Login extends ReactorComponent {
     /**
@@ -25,7 +42,7 @@ export default class Login extends ReactorComponent {
      */
     init() {
         title('My Login Page');
-        description('Some login description');   
+        description('Some login description');
     }
 
     /**
@@ -81,6 +98,7 @@ export default class Login extends ReactorComponent {
                             </div>
                         }
 
+
                         {this.get('error') &&
                             <Alert severity="error">{this.get('error')}</Alert>
                         }
@@ -100,6 +118,8 @@ export default class Login extends ReactorComponent {
                             className="form-control"
                             placeholder="Enter Your Password"
                         />
+
+                        <RadioGroup name="gender" label="Gender" value="female" inputs={inputs} />
 
                         <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>
