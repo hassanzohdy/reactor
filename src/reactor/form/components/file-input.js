@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StaticButton, { PrimaryButton } from './static-button';
+import { PrimaryButton } from './static-button';
 import FormContext from '../utils/form-context';
 import { trans } from 'reactor/localization/translator';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
+import { RequiredSpan, HiddenInputFile } from './form-compoents-helpers';
 
 export default function FileInput({ label, required, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
     const [error, setError] = React.useState(null);
 
-    const fileInputRef = React.useRef();    
+    const fileInputRef = React.useRef();
     const inputToForm = React.useRef();
 
-    const { form } = React.useContext(FormContext);    
+    const { form } = React.useContext(FormContext);
 
     const hasError = Boolean(error);
 
@@ -64,7 +65,10 @@ export default function FileInput({ label, required, onChange, buttonText, butto
     return (
         <FileInputWrapper>
             <FormControl error={hasError}>
-                <FormLabel htmlFor={id}>{label}</FormLabel>
+                <FormLabel htmlFor={id}>
+                    <span>{label}</span>
+                    <RequiredSpan required={required} />
+                </FormLabel>
                 <FileButtonWrapper>
                     <otherProps.buttonComponent id={id} onClick={openFileSelectionDialog}>
                         {buttonIcon}
@@ -74,7 +78,7 @@ export default function FileInput({ label, required, onChange, buttonText, butto
 
                 <FormHelperText error={hasError}>{error}</FormHelperText>
 
-                <input type="file" onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={name} />
+                <HiddenInputFile onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={name} />
             </FormControl>
         </FileInputWrapper>
     )
@@ -85,8 +89,9 @@ FileInput.propTypes = {
     name: PropTypes.string,
     buttonText: PropTypes.node,
     buttonIcon: PropTypes.node,
-    buttonComponent: PropTypes.node,
+    buttonComponent: PropTypes.any,
     required: PropTypes.bool,
+    onChange: PropTypes.func,
 }
 
 FileInput.defaultProps = {
@@ -94,4 +99,5 @@ FileInput.defaultProps = {
     buttonIcon: <CloudUploadIcon />,
     id: 'file-input-' + Math.random(),
     buttonComponent: PrimaryButton,
+    onChange: () => {},
 }
