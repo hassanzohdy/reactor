@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Obj } from 'reinforcements';
+import Is from "@flk/supportive-is";
 
 class ReactorComponent extends Component {
     constructor(props) {
@@ -105,7 +106,9 @@ class ReactorComponent extends Component {
      * @returns {array|null}
      */
     children() {
-        return this.props.children;
+        let children = this.props.children;
+
+        return Is.callable(children) ? children(this) : children;
     }
 
     /**

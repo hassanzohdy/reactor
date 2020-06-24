@@ -11,6 +11,8 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
+import { TextCenter } from 'reactor/components/aligned';
+
 
 export default class Login extends ReactorComponent {
     /**
@@ -60,23 +62,31 @@ export default class Login extends ReactorComponent {
                     <h1>Login Page</h1>
 
                     <Form onSubmit={this.login}>
-                        <FormError error={this.get('error')} />
-                        
-                        <EmailInput
-                            autoFocus
-                            className="form-control"
-                            name="email"
-                            required
-                        />
+                        {form => {
+                            return (
+                                <>
+                                    <FormError error={this.get('error')} />
 
-                        <PasswordInput
-                            required
-                            minLength={8}
-                            name="password"
-                            className="form-control"
-                        />
+                                    <EmailInput
+                                        autoFocus
+                                        className="form-control"
+                                        name="email"
+                                        required
+                                    />
 
-                        <SubmitButton fullWidth theme="dark">Login</SubmitButton>
+                                    <PasswordInput
+                                        required
+                                        minLength={8}
+                                        name="password"
+                                        className="form-control"
+                                    />
+
+                                    <TextCenter>
+                                        <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>
+                                    </TextCenter>
+                                </>
+                            )
+                        }}
                     </Form>
                 </div>
             </Layout>

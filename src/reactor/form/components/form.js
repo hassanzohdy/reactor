@@ -79,7 +79,7 @@ export default class Form extends ReactorComponent {
         return (
             <FormContext.Provider value={{ form: this }}>
                 <form ref={form => this.formElement = form} noValidate={true} onSubmit={this.triggerSubmit.bind(this)}>
-                    {this.props.children}
+                    {this.children()}
                 </form>
             </FormContext.Provider>
         );
