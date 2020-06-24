@@ -14,7 +14,7 @@ import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
 import FileInput from 'reactor/form/components/file-input';
-import { Div, TestButton } from './styled';
+import { SecondaryButton } from 'reactor/form/components/static-button';
 
 export default class Login extends ReactorComponent {
     /**
@@ -104,11 +104,7 @@ export default class Login extends ReactorComponent {
                             placeholder="Enter Your Password"
                         />
 
-                        <TestButton eating={false}>OK</TestButton>
-
-                        <Div>
-                            <FileInput required label="Attachment" />
-                        </Div>
+                        <FileInput required label="Attachment" />
 
                         <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>
