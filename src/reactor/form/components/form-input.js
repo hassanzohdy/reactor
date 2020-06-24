@@ -78,20 +78,6 @@ export default class FormInput extends ReactorComponent {
             }
         }
 
-        // // validate required input
-        // // check if the input is not empty
-        // if (this.props.required === true && Is.empty(value)) {
-        //     // he didn't access this body
-        //     inputValidation = this.messages.required;
-        // }
-
-        // // check if the input value a valid email address
-        // // validate the email when?
-        // // when the validation.email is null 
-        // if (this.props.type === 'email' && inputValidation === null && !Is.empty(value) && !Is.email(value)) {
-        //     inputValidation = this.messages.email;
-        // }
-
         // tell the form if the input is clean or not
         if (inputValidation) {
             this.form.dirtyInput(this);

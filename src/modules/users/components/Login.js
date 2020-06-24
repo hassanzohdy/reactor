@@ -13,6 +13,8 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
+import FileInput from 'reactor/form/components/file-input';
+
 export default class Login extends ReactorComponent {
     /**
      * {@inheritdoc}
@@ -100,6 +102,8 @@ export default class Login extends ReactorComponent {
                             className="form-control"
                             placeholder="Enter Your Password"
                         />
+
+                        <FileInput required label="Attachment" />
 
                         <SubmitButton fullWidth theme="dark">Login</SubmitButton>
                     </Form>

@@ -25,7 +25,7 @@ export default class Form extends ReactorComponent {
         this.isValidForm = true; // make sure its is reset
 
         for (let input of this.inputs) {
-            input.validate();
+            input.validate(e);
 
             if (input.hasError) {
                 this.isValidForm = false;
