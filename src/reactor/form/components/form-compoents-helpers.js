@@ -21,4 +21,3 @@ const InputFile = React.forwardRef((props, ref) => {
 export const HiddenInputFile = styled(InputFile)({
     display: 'none',
 });
-
