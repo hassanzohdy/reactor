@@ -2,16 +2,15 @@ import './login.scss';
 import user from 'user';
 import React from 'react';
 import { navigateTo } from 'reactor/router';
-import { trans } from 'reactor/localization';
 import Form from 'reactor/form/components/form';
 import { login } from 'modules/users/services/auth';
 import Layout from 'shared/components/layout/layout';
 import { title, description } from 'reactor/metadata';
+import FormError from 'reactor/form/components/form-error';
 import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
-import FormError from 'reactor/form/components/form-error';
 
 export default class Login extends ReactorComponent {
     /**
@@ -32,7 +31,6 @@ export default class Login extends ReactorComponent {
      */
     login = async (e, form) => {
         this.set('error', null); // make sure to clear previous errors
-        this.set('errors', null); // make sure to clear previous errors
 
         try {
             let { data } = await login(e.target);
