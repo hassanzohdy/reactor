@@ -81,7 +81,7 @@ export default class Login extends ReactorComponent {
                                         className="form-control"
                                     />
 
-                                    <FileInput />
+                                    <FileInput required label="Go" />
 
                                     <TextCenter>
                                         <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>

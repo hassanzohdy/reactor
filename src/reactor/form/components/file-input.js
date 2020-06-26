@@ -1,56 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PrimaryButton } from './static-button';
-import FormContext from '../utils/form-context';
-import { trans } from 'reactor/localization/translator';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { RequiredSpan, HiddenInputFile } from './form-components-helpers';
-import { FormControl, FormLabel, FormHelperText } from '@material-ui/core';
+import { HiddenInputFile } from './form-components-helpers';
+import { FormControl, FormHelperText } from '@material-ui/core';
 import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
 import Is from '@flk/supportive-is';
 import Label from './label';
+import useRequiredInputValidator from './../hooks/use-required-input-validator';
 
 export default function FileInput({ label, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
     const [error, setError] = React.useState(null);
+    const [files, setFiles] = React.useState(null);
 
     const fileInputRef = React.useRef();
-    const inputToForm = React.useRef();
+    const componentRef = React.useRef();
+
+    const clearRequiredInput = useRequiredInputValidator(required, componentRef, files, setError);
 
     if (Is.array(accept)) {
         accept = accept.map(extension => '.' + extension).join(',');
     }
 
-    const { form } = React.useContext(FormContext);
-
     const hasError = Boolean(error);
-
-    if (!inputToForm.current) {
-        inputToForm.current = {
-            validate() {
-                if (!required) return;
-
-                const files = fileInputRef.current.files;
-
-                // reset the error if exists
-                this.hasError = null;
-
-                // now check if there are no files selected
-                if (files.length === 0) {
-                    // the required error
-                    const errorMessage = trans('validation.required');
-
-                    // set the error to the form
-                    this.hasError = errorMessage;
-
-                    // also update the file input error
-                    setError(errorMessage);
-                }
-            }
-        };
-
-        form.setInput(inputToForm.current);
-    }
 
     const openFileSelectionDialog = e => {
         fileInputRef.current.click();
@@ -63,9 +36,9 @@ export default function FileInput({ label, required, accept, onChange, buttonTex
 
         setButtonText(selectedFileName);
 
-        setError(null);
+        setFiles(Array.from(e.target.files));
 
-        form.cleanInput(inputToForm.current);
+        clearRequiredInput();
     }
     
     return (
