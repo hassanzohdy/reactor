@@ -4,10 +4,11 @@ import { PrimaryButton } from './static-button';
 import FormContext from '../utils/form-context';
 import { trans } from 'reactor/localization/translator';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { RequiredSpan, HiddenInputFile } from './form-compoents-helpers';
+import { RequiredSpan, HiddenInputFile } from './form-components-helpers';
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
 import Is from '@flk/supportive-is';
+import Label from './label';
 
 export default function FileInput({ label, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
@@ -70,10 +71,8 @@ export default function FileInput({ label, required, accept, onChange, buttonTex
     return (
         <FileInputWrapper>
             <FormControl error={hasError}>
-                <FormLabel htmlFor={id}>
-                    <span>{label}</span>
-                    <RequiredSpan required={required} />
-                </FormLabel>
+                <Label label={label} htmlFor={id} required={required} />
+                
                 <FileButtonWrapper>
                     <otherProps.buttonComponent id={id} onClick={openFileSelectionDialog}>
                         {buttonIcon}
