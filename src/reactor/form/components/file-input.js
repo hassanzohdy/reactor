@@ -7,13 +7,18 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { RequiredSpan, HiddenInputFile } from './form-compoents-helpers';
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
+import Is from '@flk/supportive-is';
 
-export default function FileInput({ label, inputRef, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
+export default function FileInput({ label, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
     const [error, setError] = React.useState(null);
 
     const fileInputRef = React.useRef();
     const inputToForm = React.useRef();
+
+    if (Is.array(accept)) {
+        accept = accept.map(extension => '.' + extension).join(',');
+    }
 
     const { form } = React.useContext(FormContext);
 
@@ -44,17 +49,6 @@ export default function FileInput({ label, inputRef, required, accept, onChange,
         };
 
         form.setInput(inputToForm.current);
-    }
-
-    const setInputReference = file => {
-        if (fileInputRef.current) return;
-        
-        fileInputRef.current = file;
-        inputRef.current = file;
-    }
-
-    if (inputRef && fileInputRef.current) {
-        inputRef = fileInputRef;
     }
 
     const openFileSelectionDialog = e => {
@@ -89,7 +83,7 @@ export default function FileInput({ label, inputRef, required, accept, onChange,
 
                 <FormHelperText error={hasError}>{error}</FormHelperText>
 
-                <HiddenInputFile accept={accept} onChange={onFileSelection} ref={setInputReference} style={{ display: 'none' }} name={name} />
+                <HiddenInputFile accept={accept} onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={name} />
             </FormControl>
         </FileInputWrapper>
     )
