@@ -10,6 +10,14 @@ export default class Form extends ReactorComponent {
     dirtyInputs = new Arr([]);
 
     setInput(input) {
+        if (input.id && this.inputs.find(inp => inp.id == input.id)) {
+            let inputIndex = this.inputs.findIndex(inp => inp.id == input.id);
+
+            this.inputs[inputIndex] = input;
+
+            return;
+        }
+
         if (this.inputs.includes(input)) return;
 
         this.inputs.push(input);
@@ -23,7 +31,7 @@ export default class Form extends ReactorComponent {
         e.stopPropagation();
 
         this.isValidForm = true; // make sure its is reset
-
+        
         for (let input of this.inputs) {
             input.validate(e);
 

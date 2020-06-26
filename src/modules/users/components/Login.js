@@ -12,7 +12,6 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
-import FileInput from 'reactor/form/components/file-input';
 
 export default class Login extends ReactorComponent {
     /**
@@ -80,8 +79,6 @@ export default class Login extends ReactorComponent {
                                         name="password"
                                         className="form-control"
                                     />
-
-                                    <FileInput required label="Go" />
 
                                     <TextCenter>
                                         <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>

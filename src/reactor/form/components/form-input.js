@@ -5,6 +5,7 @@ import rulesList from '../utils/rules-list';
 import FormContext from '../utils/form-context';
 import TextField from '@material-ui/core/TextField';
 import ReactorComponent from 'reactor/components/reactor.component';
+import toInputName from 'reinforcements/src/utilities/str/toInputName';
 
 export default class FormInput extends ReactorComponent {
     state = {
@@ -94,6 +95,7 @@ export default class FormInput extends ReactorComponent {
     render() {
         const errorMessage = this.get('validationError');
         let label = this.props.label || this.props.placeholder;
+        let {rules, name, ...props} = this.props;
         return (
             <FormContext.Consumer>
                 {context => {
@@ -110,11 +112,12 @@ export default class FormInput extends ReactorComponent {
                             error={Boolean(errorMessage)}
                             label={label}
                             margin="normal"
+                            name={toInputName(name)}
                             inputRef={this.inputReference}
                             onInput={this.validateInput.bind(this)}
                             helperText={errorMessage}
                             fullWidth
-                            {...this.props}
+                            {...props}
                         />
                     )
                 }}

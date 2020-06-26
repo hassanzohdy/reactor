@@ -1,13 +1,14 @@
 import React from 'react';
+import Label from './label';
+import Is from '@flk/supportive-is';
 import PropTypes from 'prop-types';
 import { PrimaryButton } from './static-button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { HiddenInputFile } from './form-components-helpers';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { FormControl, FormHelperText } from '@material-ui/core';
-import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
-import Is from '@flk/supportive-is';
-import Label from './label';
 import useRequiredInputValidator from './../hooks/use-required-input-validator';
+import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
+import toInputName from 'reinforcements/src/utilities/str/toInputName';
 
 export default function FileInput({ label, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
@@ -55,7 +56,7 @@ export default function FileInput({ label, required, accept, onChange, buttonTex
 
                 <FormHelperText error={hasError}>{error}</FormHelperText>
 
-                <HiddenInputFile accept={accept} onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={name} />
+                <HiddenInputFile accept={accept} onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={toInputName(name)} />
             </FormControl>
         </FileInputWrapper>
     )
@@ -64,17 +65,17 @@ export default function FileInput({ label, required, accept, onChange, buttonTex
 FileInput.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
-    buttonText: PropTypes.node,
-    buttonIcon: PropTypes.node,
-    buttonComponent: PropTypes.any,
-    required: PropTypes.bool,
     onChange: PropTypes.func,
+    required: PropTypes.bool,
+    buttonIcon: PropTypes.node,
+    buttonText: PropTypes.node,
+    buttonComponent: PropTypes.any,
 }
 
 FileInput.defaultProps = {
-    buttonText: 'Please Select File',
-    buttonIcon: <CloudUploadIcon />,
-    id: 'file-input-' + Math.random(),
-    buttonComponent: PrimaryButton,
     onChange: () => {},
+    buttonComponent: PrimaryButton,
+    buttonIcon: <CloudUploadIcon />,
+    buttonText: 'Please Select File',
+    id: 'file-input-' + Math.random(),
 }
