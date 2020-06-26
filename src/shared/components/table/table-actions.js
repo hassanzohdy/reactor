@@ -1,10 +1,10 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/AddCircle';
+import { trans } from 'reactor/localization';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from 'reactor/components/tooltip';
+import AddIcon from '@material-ui/icons/AddCircle';
+import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/DeleteSweep';
-import { trans } from 'reactor/localization';
 
 export function TableAddButton(props) {
     return (

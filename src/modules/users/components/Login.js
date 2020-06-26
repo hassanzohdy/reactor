@@ -12,6 +12,7 @@ import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
 import { TextCenter } from 'reactor/components/aligned';
+import ImageInput from 'reactor/form/components/image-input';
 
 
 export default class Login extends ReactorComponent {
@@ -80,6 +81,8 @@ export default class Login extends ReactorComponent {
                                         name="password"
                                         className="form-control"
                                     />
+
+                                    <ImageInput label="Profile Image" />
 
                                     <TextCenter>
                                         <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>

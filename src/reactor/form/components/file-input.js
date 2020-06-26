@@ -4,11 +4,11 @@ import { PrimaryButton } from './static-button';
 import FormContext from '../utils/form-context';
 import { trans } from 'reactor/localization/translator';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { RequiredSpan, HiddenInputFile } from './form-compoents-helpers';
 import { FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { FileInputWrapper, FileButtonWrapper, FileButtonText } from './file-input-helper-components';
-import { RequiredSpan, HiddenInputFile } from './form-compoents-helpers';
 
-export default function FileInput({ label, required, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
+export default function FileInput({ label, inputRef, required, accept, onChange, buttonText, buttonIcon, id, name, ...otherProps }) {
     const [currentButtonText, setButtonText] = React.useState(buttonText);
     const [error, setError] = React.useState(null);
 
@@ -46,6 +46,17 @@ export default function FileInput({ label, required, onChange, buttonText, butto
         form.setInput(inputToForm.current);
     }
 
+    const setInputReference = file => {
+        if (fileInputRef.current) return;
+        
+        fileInputRef.current = file;
+        inputRef.current = file;
+    }
+
+    if (inputRef && fileInputRef.current) {
+        inputRef = fileInputRef;
+    }
+
     const openFileSelectionDialog = e => {
         fileInputRef.current.click();
     }
@@ -61,7 +72,7 @@ export default function FileInput({ label, required, onChange, buttonText, butto
 
         form.cleanInput(inputToForm.current);
     }
-
+    
     return (
         <FileInputWrapper>
             <FormControl error={hasError}>
@@ -78,7 +89,7 @@ export default function FileInput({ label, required, onChange, buttonText, butto
 
                 <FormHelperText error={hasError}>{error}</FormHelperText>
 
-                <HiddenInputFile onChange={onFileSelection} ref={fileInputRef} style={{ display: 'none' }} name={name} />
+                <HiddenInputFile accept={accept} onChange={onFileSelection} ref={setInputReference} style={{ display: 'none' }} name={name} />
             </FormControl>
         </FileInputWrapper>
     )
