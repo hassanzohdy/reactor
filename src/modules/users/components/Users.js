@@ -4,8 +4,7 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import BadgeFormatter from 'reactor/table/components/formatters/BadgeFormatter';
-import { RedBadge, DarkBadge, OrangeBadge, GreenBadge } from 'reactor/components/badge';
+import SwitchFormatter from 'reactor/table/components/formatters/SwitchFormatter';
 
 const options = {
     heading: 'users',
@@ -20,16 +19,21 @@ const options = {
         {
             heading: 'name',
             key: 'name',
-            formatter: BadgeFormatter,
-            badges: {
-                Testing: OrangeBadge,
-                malak: GreenBadge,
-                'Hasan Zohdy': RedBadge,
-            }
         },
         {
             heading: 'group',
             key: 'group.name',
+        },
+        {
+            heading: 'Status',
+            key: 'status',
+            defaultValue: true,
+            formatter: SwitchFormatter,
+            onChange: (record, checked) => {
+                // send request to api
+                console.log(checked);
+                
+            }
         },
         {
             heading: 'email',

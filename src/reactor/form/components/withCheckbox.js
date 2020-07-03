@@ -18,13 +18,17 @@ export default function withCheckbox(WrappedCheckboxComponent) {
 
         const checkboxInput = <WrappedCheckboxComponent color="primary" {...otherProps} checked={checked} onChange={handleChange} />;
 
+        if (! label) {
+            return checkboxInput;
+        }
+        
         return (
             <FormControlLabel control={checkboxInput} label={label} />
         )
     }
 
     Checkbox.propTypes = {
-        label: PropTypes.string.isRequired,
+        label: PropTypes.string,
         name: PropTypes.string,
         onChange: PropTypes.func.isRequired,
         defaultChecked: PropTypes.bool,
