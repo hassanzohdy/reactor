@@ -9,9 +9,9 @@ that is injected in the table while being extracted from the Table Data
 - Image 
 - ImageLink
 - Email
+- Number
 - Translator 
 - MultiLingual
 - Badge 
-- Numbers
 - Buttons
 - Switch
