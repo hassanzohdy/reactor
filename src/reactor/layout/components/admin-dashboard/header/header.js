@@ -12,13 +12,13 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import userLogout from 'modules/users/helpers/user-logout';
-import layoutSettings from 'reactor/layout/utils/style';
+import layoutClasses from 'reactor/layout/utils/style';
 
 const refreshText = trans('refresh');
 const logoutText = trans('logout');
 
 export default function Header(props) {
-    let classes = layoutSettings(),
+    let classes = layoutClasses(),
         sidebarIsOpened = props.sidebarIsOpened;
 
     return (

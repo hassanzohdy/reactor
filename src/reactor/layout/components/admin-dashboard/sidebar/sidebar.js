@@ -9,12 +9,12 @@ import SidebarListItemGroup from './list-item-group';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import layoutSettings from 'reactor/layout/utils/style';
+import layoutClasses from 'reactor/layout/utils/style';
 
 export default function Sidebar(props) {
     let { onClose, open } = props;
     const theme = useTheme();
-    const classes = layoutSettings();
+    const classes = layoutClasses();
 
     let itemsList = items.map((item, index) => {
         // in this case, we'll return itemGroup

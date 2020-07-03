@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import FormContext from '../utils/form-context';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import layoutSettings from 'reactor/layout/utils/style';
+import layoutClasses from 'reactor/layout/utils/style';
 
 export default function SubmitButton(props) {
     const { form } = React.useContext(FormContext);
@@ -11,7 +11,7 @@ export default function SubmitButton(props) {
     const {children, theme, ...buttonProps} = props;
 
     if (theme) {
-        const classes = layoutSettings();
+        const classes = layoutClasses();
         buttonProps.className = clsx(buttonProps.className, classes[theme + 'Theme']); 
     }
 

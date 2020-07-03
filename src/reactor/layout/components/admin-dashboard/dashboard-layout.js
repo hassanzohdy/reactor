@@ -4,10 +4,10 @@ import Layout from "../layout";
 import PropTypes from 'prop-types';
 import Header from "./header/header";
 import Sidebar from "./sidebar/sidebar";
-import layoutSettings from "reactor/layout/utils/style";
+import layoutClasses from "reactor/layout/utils/style";
 
 export default function DashboardLayout(props) {
-    const classes = layoutSettings();
+    const classes = layoutClasses();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {

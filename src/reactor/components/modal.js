@@ -7,10 +7,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import layoutSettings from 'reactor/layout/utils/style';
+import layoutClasses from 'reactor/layout/utils/style';
 
 function DefaultModalTitle(props) {
-    const classes = layoutSettings();
+    const classes = layoutClasses();
     return (
         <DialogTitle disableTypography className={classes.modalTitle}>
             <Typography variant="h6">{props.title}</Typography>
