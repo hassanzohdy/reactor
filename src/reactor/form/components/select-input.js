@@ -1,13 +1,11 @@
 import React from 'react';
 import Label from './label';
 import { Random } from 'reinforcements';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Select from '@material-ui/core/Select';
+import { getItem } from '../utils/select-items';
+import { Input, Select } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { selectItems, RenderSelectedValues } from './select-input-helper-components';
-import { getItem } from '../utils/select-items';
-import { Input } from '@material-ui/core';
 
 export default function SelectInput({ id, label, onChange, labelId, placeholder, required, value, items, groups, imagable, iconable, multiple, readOnly, none, ...otherProps }) {
     // for multiple selections
@@ -72,7 +70,6 @@ export default function SelectInput({ id, label, onChange, labelId, placeholder,
         </FormControl>
     );
 }
-
 
 SelectInput.defaultProps = {
     id: Random.id(),
