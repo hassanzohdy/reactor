@@ -22,7 +22,7 @@ const genderTypes = [
     {
         value: 'female',
         label: 'Female',
-    }
+    },
 ];
 
 export default class Login extends ReactorComponent {
@@ -92,7 +92,13 @@ export default class Login extends ReactorComponent {
                                         className="form-control"
                                     />
 
-                                    <SelectInput label="Gender" items={genderTypes} />
+                                    <SelectInput
+                                        none
+                                        label="Gender"
+                                        // placeholder="Please Select Your Bloody Gender"
+                                        onChange={console.log}
+                                        items={genderTypes}
+                                    />
 
                                     <TextCenter>
                                         <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>

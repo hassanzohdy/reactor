@@ -27,6 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "link-module-alias",
+    "code": "code . --disable-gpu",
     "video": "code . --disable-gpu && yarn start"
   },
   "_moduleAliases": {

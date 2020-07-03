@@ -1,47 +1,75 @@
 import React from 'react';
 import Label from './label';
 import { Random } from 'reinforcements';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { selectItems, RenderSelectedValues } from './select-input-helper-components';
+import { getItem } from '../utils/select-items';
+import { Input } from '@material-ui/core';
 
+export default function SelectInput({ id, label, onChange, labelId, placeholder, required, value, items, groups, imagable, iconable, multiple, readOnly, none, ...otherProps }) {
+    // for multiple selections
+    if (multiple && ! value) {
+        value = [];
+    }
 
-const selectItems = items => {
-    return items.map(item => {
-        return <MenuItem key={item.value} value={item.value}>
-            {item.label}
-        </MenuItem>
-    });
-};
+    const [noneAdded, markNoneAsAdded] = React.useState(false);
+    const [placeholderAdded, markPlaceholderAsAdded] = React.useState(false);
 
+    if (none && ! noneAdded) {
+        // add none 
+        items.unshift({
+            value: '',
+            label: 'None',
+        });
 
-export default function SelectInput({ id, label, labelId, placeholder, required, value, items, groups, imagable, iconable, multiple, readOnly, none, ...otherProps }) {
+        markNoneAsAdded(true);
+    }
+
+    if (placeholder && ! placeholderAdded) {
+        items.unshift({
+            value: Random.id(3),
+            label: placeholder,
+            disabled: true,
+        });
+
+        markPlaceholderAsAdded(true);
+    }
+
+    const [opened, setOpenedStatus] = React.useState(false);
+
     const [currentValue, setValue] = React.useState(value);
+    // get the item object for the given value
 
     const handleChange = (event) => {
-        setValue(event.target.value);
-    };
-
-    const displayValue = value => {
-        return <MenuItem>{value}</MenuItem>
+        let value = event.target.value;        
+        setValue(value);
+        // select the item by value
+        let item = getItem(items, value);
+        // set the item as an argument for the onChange event 
+        onChange(item);
     };
 
     return (
-        <div>
-            <FormControl fullWidth>
-                <Label component={InputLabel} id={labelId} label={label} />
-                <Select
-                    labelId={labelId}
-                    id={id}
-                    value={currentValue}
-                    onChange={handleChange}
-                    renderValue={displayValue}
-                >
-                    {selectItems(items)}
-                </Select>
-            </FormControl>
-        </div>
+        <FormControl fullWidth>
+            <Label component={InputLabel} id={labelId} label={label} />
+            <Select
+                input={<Input />}
+                id={id}
+                displayEmpty
+                labelId={labelId}
+                onOpen={e => setOpenedStatus(true)}
+                onBlur={e => setOpenedStatus(false)}
+                multiple={multiple}
+                value={currentValue}
+                onChange={handleChange}
+                renderValue={selected => <RenderSelectedValues opened={opened} placeholder={placeholder} label={label} items={items} selected={selected} /> }
+                children={selectItems(items)}
+                {...otherProps}
+            />
+        </FormControl>
     );
 }
 
