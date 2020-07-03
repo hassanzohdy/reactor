@@ -4,7 +4,12 @@ import { hasInitialLocaleCode } from 'reactor/router-configurations/navigator';
 import Globals from 'reactor/globals';
 
 const Link = React.forwardRef(function (props, forwardedRef) {
-    let { to, localeCode, ...otherLinkProps } = props;
+    let { to, localeCode, relative, ...otherLinkProps } = props;
+
+    // if not relative, then use the normal anchor tag
+    if (! relative) {
+        return <a href={to} ref={forwardedRef} {...otherLinkProps} />
+    }
 
     if (localeCode) {
         // /users
@@ -20,6 +25,7 @@ const Link = React.forwardRef(function (props, forwardedRef) {
 });
     
 Link.defaultProps = {
+    relative: true,
     localeCode: hasInitialLocaleCode() ? Globals.localeCode : null,
 };
 

@@ -3,6 +3,7 @@ import UserForm from './user-form';
 import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
+import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
 
 const options = {
     heading: 'users',
@@ -25,6 +26,7 @@ const options = {
         {
             heading: 'email',
             key: 'email',
+            formatter: EmailFormatter,
         },
     ],
 };

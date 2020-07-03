@@ -5,9 +5,9 @@ import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import layoutClasses from 'reactor/layout/utils/style';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import layoutClasses from 'reactor/layout/utils/style';
 
 function DefaultModalTitle(props) {
     const classes = layoutClasses();

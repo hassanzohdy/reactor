@@ -20,7 +20,7 @@ export default function tableStructure(options, records, setRecord) {
         return <TableCell key={index}>{column.heading}</TableCell>;
     });
 
-    let tableRows = records.map((record, recordIndex) => {
+    let tableRows = records.map((record, rowIndex) => {
         return <TableRow key={record.id}>
             {options.columns.map((column, columnIndex) => {
                 if (column.buttons) {
@@ -28,14 +28,17 @@ export default function tableStructure(options, records, setRecord) {
                         {column.buttons.map((ActionButton, index) => {
                             return (
                                 <React.Fragment key={index}>
-                                    <ActionButton onClick={(e, currentAction) => setRecord(record, recordIndex, currentAction)} />
+                                    <ActionButton onClick={(e, currentAction) => setRecord(record, rowIndex, currentAction)} />
                                 </React.Fragment>
                             )
                         })}
                     </TableCell>
                 }
+
+                let columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : Obj.get(record, column.key);
+
                 return <TableCell key={column.heading}>
-                    {Obj.get(record, column.key)}
+                    {columnValue}
                 </TableCell>
             })}
 
