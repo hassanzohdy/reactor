@@ -22,16 +22,8 @@ const options = {
             key: 'name',
         },
         {
-            heading: 'image',
-            key: 'image',
-            defaultValue: 'https://image.winudf.com/v2/image1/Y29tLndhbGxwYXBlcnMuYWhkcGlfc2NyZWVuXzE1XzE1NjcwOTU1ODdfMDYx/screen-15.jpg?fakeurl=1&type=.jpg',
-            formatter: ImageLinkFormatter,
-            href: record => '/users/' + record.id,
-        },
-        {
             heading: 'group',
             key: 'group.name',
-            defaultValue: 'Peep Peeep',
         },
         {
             heading: 'email',

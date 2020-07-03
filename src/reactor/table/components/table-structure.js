@@ -21,8 +21,11 @@ export default function tableStructure(options, records, setRecord) {
     });
 
     let tableRows = records.map((record, rowIndex) => {
+        if (! record.columnsList) {
+            record.columnsList = Obj.clone(options.columns);
+        }
         return <TableRow key={record.id}>
-            {options.columns.map((column, columnIndex) => {
+            {record.columnsList.map((column, columnIndex) => {
                 if (column.buttons) {
                     return <TableCell key={columnIndex}>
                         {column.buttons.map((ActionButton, index) => {
