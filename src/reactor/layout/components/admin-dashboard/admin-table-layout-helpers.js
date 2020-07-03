@@ -1,6 +1,6 @@
 import React from 'react';
-import Table from './../table/table';
-
+import Table from 'reactor/table/components/table';
+    
 export async function loadData(service, updateLoader, updateResponse) {
     let { data } = await service.list();
 

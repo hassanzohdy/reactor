@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import layoutSettings from 'shared/components/layout-settings';
+import layoutSettings from 'reactor/layout/utils/layout-settings';
 
 function DefaultModalTitle(props) {
     const classes = layoutSettings();

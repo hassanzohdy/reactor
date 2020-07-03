@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import DashboardLayout from './dashboard-layout';
 import React, { useEffect, useState } from 'react';
 import ProgressBar from 'reactor/components/progress-bar';
 import { loadData, renderTable } from './admin-table-layout-helpers';
+import DashboardLayout from './dashboard-layout';
 
 export default function AdminTableLayout(props) {
     let { service, options } = props;

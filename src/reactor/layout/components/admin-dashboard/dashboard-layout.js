@@ -1,19 +1,10 @@
 import clsx from 'clsx';
 import React from 'react';
-import Layout from "./layout";
+import Layout from "../layout";
 import PropTypes from 'prop-types';
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
-import layoutSettings from "../layout-settings";
-
-// 1
-
-// useState => Records
-// useState => open
-
-// 2
-
-// useState => open
+import Header from "./header/header";
+import Sidebar from "./sidebar/sidebar";
+import layoutSettings from "reactor/layout/utils/layout-settings";
 
 export default function DashboardLayout(props) {
     const classes = layoutSettings();

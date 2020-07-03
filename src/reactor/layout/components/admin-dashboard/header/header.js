@@ -6,13 +6,13 @@ import { trans } from 'reactor/localization';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import layoutSettings from '../layout-settings';
 import Tooltip from 'reactor/components/tooltip';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import userLogout from 'modules/users/helpers/user-logout';
+import layoutSettings from 'reactor/layout/utils/layout-settings';
 
 const refreshText = trans('refresh');
 const logoutText = trans('logout');

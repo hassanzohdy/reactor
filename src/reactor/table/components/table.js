@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Table from '@material-ui/core/Table';
+import MaterialTable from '@material-ui/core/Table';
 import TableToolBar from './table-toolbar';
 import Paper from '@material-ui/core/Paper';
 import { trans } from 'reactor/localization';
@@ -13,7 +13,7 @@ import FormModal from 'reactor/form/components/form-modal';
 
 const removeText = trans('removeText');
 
-export default function SimpleTable(props) {
+export default function Table(props) {
     let { options, records, service } = props;
     const [formIsDisplayed, displayForm] = useState(false);
     const [record, setRecord] = useState({});
@@ -107,7 +107,7 @@ export default function SimpleTable(props) {
             </FormModal>
             <TableToolBar displayForm={displayForm} text={trans(options.heading)} />
             <TableContainer component={Paper}>
-                <Table>
+                <MaterialTable>
                     <TableHead>
                         <TableRow>
                             {tableHeading}
@@ -116,7 +116,7 @@ export default function SimpleTable(props) {
                     <TableBody>
                         {tableRows}
                     </TableBody>
-                </Table>
+                </MaterialTable>
             </TableContainer>
         </>
     );

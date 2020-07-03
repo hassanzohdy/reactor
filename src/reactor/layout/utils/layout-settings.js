@@ -94,5 +94,4 @@ const layoutSettings = makeStyles((theme) => ({
     },
 }));
 
-
 export default layoutSettings;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { translatedTitle } from 'reactor/metadata';
-import DashboardLayout from 'shared/components/layout/dashboard-layout';
+import DashboardLayout from 'reactor/layout/components/admin-dashboard/dashboard-layout';
 
 export default function Home() {
     let title = translatedTitle('dashboard');

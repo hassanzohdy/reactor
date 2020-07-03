@@ -4,7 +4,7 @@ import React from 'react';
 import { navigateTo } from 'reactor/router';
 import Form from 'reactor/form/components/form';
 import { login } from 'modules/users/services/auth';
-import Layout from 'shared/components/layout/layout';
+import Layout from 'reactor/layout/components/layout';
 import { title, description } from 'reactor/metadata';
 import { TextCenter } from 'reactor/components/aligned';
 import FormError from 'reactor/form/components/form-error';

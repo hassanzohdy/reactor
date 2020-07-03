@@ -1,8 +1,8 @@
 import React from 'react';
+import UserForm from './user-form';
 import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
-import AdminTableLayout from 'shared/components/layout/admin-table-layout';
-import UserForm from './user-form';
+import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 
 const options = {
     heading: 'users',
