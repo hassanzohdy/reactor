@@ -11,7 +11,7 @@ const defaultTableActions = {
 };
 
 export default function tableStructure(options, records, setRecord) {
-    if (options.actions === true && ! options.actionsIsAdded) {
+    if (options.actions === true && !options.actionsIsAdded) {
         options.columns.push(defaultTableActions);
         options.actionsIsAdded = true;
     }
@@ -36,6 +36,14 @@ export default function tableStructure(options, records, setRecord) {
                 }
 
                 column.value = Obj.get(column, 'value', Obj.get(record, column.key));
+
+                // if no value and there is a default value
+                // then create new key `originalValue` and override 
+                // the value key with the default value 
+                if (!column.value && column.defaultValue) {
+                    column.originalValue = column.value;
+                    column.value = column.defaultValue;
+                }
 
                 const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
 

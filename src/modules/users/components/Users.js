@@ -24,13 +24,14 @@ const options = {
         {
             heading: 'image',
             key: 'image',
-            defaultImage: 'https://image.winudf.com/v2/image1/Y29tLndhbGxwYXBlcnMuYWhkcGlfc2NyZWVuXzE1XzE1NjcwOTU1ODdfMDYx/screen-15.jpg?fakeurl=1&type=.jpg',
+            defaultValue: 'https://image.winudf.com/v2/image1/Y29tLndhbGxwYXBlcnMuYWhkcGlfc2NyZWVuXzE1XzE1NjcwOTU1ODdfMDYx/screen-15.jpg?fakeurl=1&type=.jpg',
             formatter: ImageLinkFormatter,
             href: record => '/users/' + record.id,
         },
         {
             heading: 'group',
             key: 'group.name',
+            defaultValue: 'Peep Peeep',
         },
         {
             heading: 'email',
