@@ -4,7 +4,22 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import SwitchFormatter from 'reactor/table/components/formatters/SwitchFormatter';
+import DropdownFormatter from 'reactor/table/components/formatters/DropdownFormatter';
+
+const items = [
+    {
+        value: 'white',
+        label: 'White',
+    }, 
+    {
+        value: 'black',
+        label: 'Black',
+    },
+    {
+        value: 'orange',
+        label: 'Orange',
+    }
+]
 
 const options = {
     heading: 'users',
@@ -25,14 +40,14 @@ const options = {
             key: 'group.name',
         },
         {
-            heading: 'Status',
-            key: 'status',
-            defaultValue: true,
-            formatter: SwitchFormatter,
-            onChange: (record, checked) => {
-                // send request to api
-                console.log(checked);
-                
+            heading: 'Color',
+            key: 'color',
+            // defaultValue: 'white',
+            placeholder: 'Color',
+            formatter: DropdownFormatter,
+            items: items,
+            onChange: (record, selectItem) => {
+                console.log(selectItem);                
             }
         },
         {

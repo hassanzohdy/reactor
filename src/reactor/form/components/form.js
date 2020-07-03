@@ -10,8 +10,8 @@ export default class Form extends ReactorComponent {
     dirtyInputs = new Arr([]);
 
     setInput(input) {
-        if (input.id && this.inputs.find(inp => inp.id == input.id)) {
-            let inputIndex = this.inputs.findIndex(inp => inp.id == input.id);
+        if (input.id && this.inputs.find(inp => inp.id === input.id)) {
+            let inputIndex = this.inputs.findIndex(inp => inp.id === input.id);
 
             this.inputs[inputIndex] = input;
 

@@ -14,4 +14,5 @@ that is injected in the table while being extracted from the Table Data
 - MultiLingual
 - Badge 
 - Switch
+- DropDown
 - Buttons
