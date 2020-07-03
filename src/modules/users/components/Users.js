@@ -4,7 +4,6 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import TranslatorFormatter from 'reactor/table/components/formatters/translator-formatter';
 
 const options = {
     heading: 'users',
@@ -23,8 +22,6 @@ const options = {
         {
             heading: 'group',
             key: 'group.name',
-            defaultValue: 'OK',
-            formatter: TranslatorFormatter,
         },
         {
             heading: 'email',
