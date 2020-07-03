@@ -4,6 +4,7 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
+import LinkFormatter from 'reactor/table/components/formatters/link-formatter';
 
 const options = {
     heading: 'users',
@@ -14,6 +15,8 @@ const options = {
         {
             heading: '#',
             key: 'id',
+            formatter: LinkFormatter,
+            href: (record) => '/users/' + record.id, 
         },
         {
             heading: 'name',

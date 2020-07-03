@@ -1,14 +1,15 @@
 import React from 'react';
+import Globals from 'reactor/globals';
+import MaterialLink from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { hasInitialLocaleCode } from 'reactor/router-configurations/navigator';
-import Globals from 'reactor/globals';
 
 const Link = React.forwardRef(function (props, forwardedRef) {
     let { to, localeCode, relative, ...otherLinkProps } = props;
 
     // if not relative, then use the normal anchor tag
     if (! relative) {
-        return <a href={to} ref={forwardedRef} {...otherLinkProps} />
+        return <MaterialLink href={to} ref={forwardedRef} {...otherLinkProps} />
     }
 
     if (localeCode) {
@@ -21,7 +22,7 @@ const Link = React.forwardRef(function (props, forwardedRef) {
 
     otherLinkProps.to = to;
 
-    return <RouterLink {...otherLinkProps} ref={forwardedRef} />
+    return <RouterLink component={MaterialLink} {...otherLinkProps} ref={forwardedRef} />
 });
     
 Link.defaultProps = {
