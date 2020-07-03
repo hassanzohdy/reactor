@@ -3,7 +3,7 @@ import { lightBlue } from "@material-ui/core/colors";
 import Globals from "reactor/globals";
 
 const drawerWidth = 240;
-const layoutSettings = makeStyles((theme) => ({
+const layoutClasses = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
@@ -94,4 +94,4 @@ const layoutSettings = makeStyles((theme) => ({
     },
 }));
 
-export default layoutSettings;
+export default layoutClasses;

@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import FormContext from '../utils/form-context';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import layoutSettings from 'reactor/layout/utils/layout-settings';
+import layoutSettings from 'reactor/layout/utils/style';
 
 export default function SubmitButton(props) {
     const { form } = React.useContext(FormContext);

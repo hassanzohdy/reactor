@@ -9,7 +9,7 @@ import SidebarListItemGroup from './list-item-group';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import layoutSettings from 'reactor/layout/utils/layout-settings';
+import layoutSettings from 'reactor/layout/utils/style';
 
 export default function Sidebar(props) {
     let { onClose, open } = props;
