@@ -12,6 +12,18 @@ import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-type';
 import ReactorComponent from 'reactor/components/reactor.component';
+import SelectInput from 'reactor/form/components/select-input';
+
+const genderTypes = [
+    {
+        value: 'male',
+        label: 'Male',
+    },
+    {
+        value: 'female',
+        label: 'Female',
+    }
+];
 
 export default class Login extends ReactorComponent {
     /**
@@ -79,6 +91,8 @@ export default class Login extends ReactorComponent {
                                         name="password"
                                         className="form-control"
                                     />
+
+                                    <SelectInput label="Gender" items={genderTypes} />
 
                                     <TextCenter>
                                         <SubmitButton fullWidth={form.isSubmitting !== true} theme="dark">Login</SubmitButton>

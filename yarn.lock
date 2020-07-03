@@ -9477,10 +9477,10 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
-reinforcements@^1.1.10:
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/reinforcements/-/reinforcements-1.1.10.tgz#79213fd63be5144bc564a8f3f1e534d432230c41"
-  integrity sha512-x/FxiT7wplVTY95e05tiu3QHSqR//UfeYyPIxUh7cVo0RUN0CsQtHBnCaqjplZv1fwf9BfkVjKwPMFwm5SUaiA==
+reinforcements@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/reinforcements/-/reinforcements-1.1.12.tgz#c9d686b202465818446ac1ec9d2fd0f6a4bbabe1"
+  integrity sha512-ycIPw3JySqb+SoKP9LMlR6rIXXgwRW0BXboB7u6BuyFcCFq0jI7gaRVcQ8+au/OwLdGjf/iag11tgfpaZj4Diw==
   dependencies:
     "@flk/supportive-is" "^0.2.3"
     ts-contracts "^1.0.8"
