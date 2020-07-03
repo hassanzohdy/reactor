@@ -1,9 +1,8 @@
 import React from 'react';
-import { Obj } from 'reinforcements';
 import Link from 'reactor/components/link';
 
 export default function EmailFormatter({record, column}) {
-    let email = Obj.get(record, column.key);
+    let email = column.value;
 
     if (! email) return '';
     

@@ -4,7 +4,7 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import LinkFormatter from 'reactor/table/components/formatters/link-formatter';
+import ImageFormatter from 'reactor/table/components/formatters/ImageFormatter';
 
 const options = {
     heading: 'users',
@@ -15,12 +15,16 @@ const options = {
         {
             heading: '#',
             key: 'id',
-            formatter: LinkFormatter,
-            href: (record) => '/users/' + record.id, 
         },
         {
             heading: 'name',
             key: 'name',
+        },
+        {
+            heading: 'image',
+            key: 'image',
+            defaultImage: 'https://image.winudf.com/v2/image1/Y29tLndhbGxwYXBlcnMuYWhkcGlfc2NyZWVuXzE1XzE1NjcwOTU1ODdfMDYx/screen-15.jpg?fakeurl=1&type=.jpg',
+            formatter: ImageFormatter,
         },
         {
             heading: 'group',

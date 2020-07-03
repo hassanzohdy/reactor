@@ -9,7 +9,7 @@ that is injected in the table while being extracted from the Table Data
 - Image 
 - ImageLink
 - Email
-- Translator enabled 
+- Translator 
 - MultiLingual
 - Badge 
 - Numbers

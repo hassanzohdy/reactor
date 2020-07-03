@@ -22,7 +22,7 @@ const Link = React.forwardRef(function (props, forwardedRef) {
 
     otherLinkProps.to = to;
 
-    return <RouterLink component={MaterialLink} {...otherLinkProps} ref={forwardedRef} />
+    return <MaterialLink component={RouterLink} {...otherLinkProps} ref={forwardedRef} />
 });
     
 Link.defaultProps = {

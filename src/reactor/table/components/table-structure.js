@@ -35,7 +35,9 @@ export default function tableStructure(options, records, setRecord) {
                     </TableCell>
                 }
 
-                let columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : Obj.get(record, column.key);
+                column.value = Obj.get(column, 'value', Obj.get(record, column.key));
+
+                const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
 
                 return <TableCell key={column.heading}>
                     {columnValue}
