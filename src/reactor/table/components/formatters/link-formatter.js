@@ -2,8 +2,8 @@ import React from 'react';
 import { Obj } from 'reinforcements';
 import Link from 'reactor/components/link';
 
-export default function LinkFormatter({record, column}) {
-    let value = column.value;
+export default function LinkFormatter({record, column, children}) {
+    let value = children || column.value;
     let href = Obj.get(column, 'href');
 
     if (! href) return '';
