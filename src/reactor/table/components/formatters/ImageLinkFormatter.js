@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageFormatter from './ImageFormatter';
-import LinkFormatter from './link-formatter';
+import LinkFormatter from './LinkFormatter';
 
 export default function ImageLinkFormatter({ record, column }) {
     const Image = <ImageFormatter column={column} />;
