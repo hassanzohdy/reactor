@@ -4,28 +4,24 @@ import { translatedTitle } from 'reactor/metadata';
 import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import DropdownFormatter from 'reactor/table/components/formatters/DropdownFormatter';
+import tableActions from 'reactor/layout/components/admin-dashboard/table-actions';
 
-const items = [
-    {
-        value: 'white',
-        label: 'White',
-    }, 
-    {
-        value: 'black',
-        label: 'Black',
-    },
-    {
-        value: 'orange',
-        label: 'Orange',
-    }
-]
+const Button1 = (props) => {
+    console.log(props.record);
+    
+    return <button>GO</button>
+}
+
+
+const Button2 = props => {
+    
+    return <button>GO 2</button>
+}
 
 const options = {
     heading: 'users',
     form: UserForm,
     singleName: 'user',
-    actions: true, // table button actions
     columns: [
         {
             heading: '#',
@@ -40,25 +36,15 @@ const options = {
             key: 'group.name',
         },
         {
-            heading: 'Color',
-            key: 'color',
-            // defaultValue: 'white',
-            placeholder: 'Color',
-            formatter: DropdownFormatter,
-            items: items,
-            onChange: (record, selectItem) => {
-                console.log(selectItem);                
-            }
-        },
-        {
             heading: 'email',
             key: 'email',
             formatter: EmailFormatter,
         },
+        tableActions,
     ],
 };
 
-export default function Users(props) {
+export default function Users() {
     translatedTitle(options.heading);
 
     return <AdminTableLayout options={options} service={usersService}></AdminTableLayout>;

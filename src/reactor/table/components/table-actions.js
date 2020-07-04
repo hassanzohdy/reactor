@@ -14,11 +14,11 @@ export function TableAddButton(props) {
             </Tooltip>
         </IconButton>
     )
-}   
+}
 
-export function TableEditButton(props) {
+export function TableEditButton({ record, rowIndex, setRecord }) {
     const editClick = e => {
-        props.onClick(e, 'edit');
+        setRecord(record, rowIndex, 'edit');
     };
     return (
         <IconButton onClick={editClick}>
@@ -29,9 +29,9 @@ export function TableEditButton(props) {
     )
 }
 
-export function TableDeleteButton(props) {
+export function TableDeleteButton({ record, rowIndex, setRecord }) {
     const deleteClick = e => {
-        props.onClick(e, 'remove');
+        setRecord(record, rowIndex, 'remove');
     };
     return (
         <IconButton onClick={deleteClick}>

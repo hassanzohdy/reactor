@@ -26,18 +26,6 @@ export default function tableStructure(options, records, setRecord) {
         }
         return <TableRow key={record.id}>
             {record.columnsList.map((column, columnIndex) => {
-                if (column.buttons) {
-                    return <TableCell key={columnIndex}>
-                        {column.buttons.map((ActionButton, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <ActionButton onClick={(e, currentAction) => setRecord(record, rowIndex, currentAction)} />
-                                </React.Fragment>
-                            )
-                        })}
-                    </TableCell>
-                }
-
                 column.value = Obj.get(column, 'value', Obj.get(record, column.key));
 
                 // if no value and there is a default value
@@ -48,7 +36,7 @@ export default function tableStructure(options, records, setRecord) {
                     column.value = column.defaultValue;
                 }
 
-                const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
+                const columnValue = column.formatter ? <column.formatter record={record} setRecord={setRecord} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
 
                 return <TableCell key={column.heading}>
                     {columnValue}
