@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Switch } from 'react-router-dom';
 import history from './router-history';
 import Renderer from './renderer';
-
 /**
  * Return all application routes
  * 

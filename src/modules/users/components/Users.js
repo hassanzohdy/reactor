@@ -5,18 +5,7 @@ import usersService from 'modules/users/services/users-service';
 import AdminTableLayout from 'reactor/layout/components/admin-dashboard/admin-table-layout';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
 import tableActions from 'reactor/layout/components/admin-dashboard/table-actions';
-
-const Button1 = (props) => {
-    console.log(props.record);
-    
-    return <button>GO</button>
-}
-
-
-const Button2 = props => {
-    
-    return <button>GO 2</button>
-}
+import Link from 'reactor/components/link';
 
 const options = {
     heading: 'users',
@@ -46,6 +35,13 @@ const options = {
 
 export default function Users() {
     translatedTitle(options.heading);
+
+    return (
+        <>
+            <h1>{options.heading}</h1>
+            <Link to="/">Hme</Link>
+        </>
+    )
 
     return <AdminTableLayout options={options} service={usersService}></AdminTableLayout>;
 }   

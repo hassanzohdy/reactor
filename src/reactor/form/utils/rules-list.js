@@ -22,7 +22,6 @@ const ruleSchema = {
 // export default function evaluate()
 
 const rulesList = new Arr([
-    // required
     required,
     email,
     minLength,

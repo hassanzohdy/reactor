@@ -7,6 +7,13 @@ import Sidebar from "./sidebar/sidebar";
 import layoutClasses from "reactor/layout/utils/style";
 
 export default function DashboardLayout(props) {
+    React.useEffect(() => {
+        console.log('Dashboard Layout Is Mounted');
+        return e => {
+            console.log('Dashboard Layout Is Unmounted');
+        }
+    }, []);
+    
     const classes = layoutClasses();
     const [open, setOpen] = React.useState(false);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // use custom history to manage router navigation from our side
 import Routes from './router-configurations/routes-handler';
-import { addRouter } from './router-configurations/routes-list';
+import { addRouter, partOf } from './router-configurations/routes-list';
 import initiateNavigator from './router-configurations/navigator';
 export { navigateTo, switchLang, refresh, currentRoute } from './router-configurations/navigator';
 
@@ -17,5 +17,6 @@ export function scan() {
 }
 
 export default {
-    add: addRouter
+    add: addRouter,
+    partOf
 };
