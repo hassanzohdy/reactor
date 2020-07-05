@@ -1,6 +1,9 @@
 import React from 'react';
 import { localeCodes } from 'reactor/localization/locales';
 
+// join all locale code with | for route matching
+const gluedLocaleCodes = localeCodes.join('|');
+
 /**
  * Default Full Page >> It Will be just a React Fragment
  */
@@ -54,7 +57,7 @@ export function partOf(LayoutComponent, routes) {
         // /users
         // /en/users
         // /ar/users
-        route.path = `/:localeCode(${localeCodes})?${route.path}`;
+        route.path = `/:localeCode(${gluedLocaleCodes})?${route.path}`;
         layout.routesList.push(route.path);
         return route;
     });

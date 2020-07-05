@@ -1,5 +1,8 @@
 import history from "./router-history";
-import { localeCodes, updateCurrentLocaleCode } from "../localization/locales";
+import ltrim from "reinforcements/src/utilities/str/ltrim";
+import {
+    localeCodes, updateCurrentLocaleCode, getCurrentLocaleCode
+} from "reactor/localization/locales";
 
 let currentFullRoute, currentRouteWithoutLocaleCode;
 
@@ -14,7 +17,7 @@ function updateCurrentRoute(route) {
     currentFullRoute = route;
 
     // remove any possible locale code
-    let regex = new RegExp(`^/(${localeCodes.join('|')})`); 
+    let regex = new RegExp(`^/(${localeCodes.join('|')})`);
     // let regex = new RegExp('^/(en|ar)')
 
     currentRouteWithoutLocaleCode = currentFullRoute.replace(regex, function (matched, localeCode) {
@@ -42,6 +45,15 @@ export function navigateTo(path) {
  */
 export function currentRoute() {
     return history.location.pathname;
+}
+
+/**
+ * Get the route without the locale code
+ * 
+ * @returns  {string}
+ */
+export function routeOnly() {
+    return ltrim(currentRoute(), '/' + getCurrentLocaleCode());
 }
 
 /**

@@ -65,7 +65,7 @@ export default function Renderer(props) {
         });
 
         return (
-            <Route key={LayoutComponent} exact path={routesList} render={props => (
+            <Route key={LayoutComponent} exact path={routesList} render={props => (                
                 <LayoutComponent {...props}>
                     {layoutRoutes}
                 </LayoutComponent>

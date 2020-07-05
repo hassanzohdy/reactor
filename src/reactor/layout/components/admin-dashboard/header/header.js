@@ -18,14 +18,6 @@ const refreshText = trans('refresh');
 const logoutText = trans('logout');
 
 export default function Header(props) {
-    React.useEffect(() => {
-        console.log(1);
-
-        return e => {
-            console.log(2);
-        }
-    }, []);
-
     let classes = layoutClasses(),
         sidebarIsOpened = props.sidebarIsOpened;
 

@@ -69,5 +69,5 @@ export function updateCurrentLocaleCode(localeCode) {
 
     document.documentElement.dir = directionOf(localeCode);
     document.documentElement.lang = localeCode;
-    currentLocaleCode = localeCodes;
+    currentLocaleCode = localeCode;
 }
