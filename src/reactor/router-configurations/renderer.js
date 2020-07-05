@@ -42,34 +42,32 @@ export default function Renderer(props) {
 
     }, [firstSegment, moduleIsLoaded, loadedModules]);
 
+    // Display the progress bar
+    // if the first segment is not in the 
+    // loadedModules and
+    // the first segment is part of modules list that will be loaded
+    if (!moduleIsLoaded && isPartOfLazyModules(firstSegment)) {
+        return <ProgressBar />
+    }
+
     return layoutsList.map(layout => {
         const { LayoutComponent, routes, routesList } = layout;
 
-        let layoutContent;
-
-        // Display the progress bar
-        // if the first segment is not in the 
-        // loadedModules and
-        // the first segment is part of modules list that will be loaded
-        if (!moduleIsLoaded && isPartOfLazyModules(firstSegment)) {
-            layoutContent = <ProgressBar />
-        } else {
-            // list of routes
-            layoutContent = routes.map((route, index) => {
-                return (
-                    <Route path={route.path}
-                        exact
-                        key={route.path}
-                        render={props => renderRoute(props, route)}
-                    />
-                );
-            });
-        }
+        // list of routes
+        let layoutRoutes = routes.map((route, index) => {
+            return (
+                <Route path={route.path}
+                    exact
+                    key={route.path}
+                    render={props => renderRoute(props, route)}
+                />
+            );
+        });
 
         return (
             <Route key={LayoutComponent} exact path={routesList} render={props => (
                 <LayoutComponent {...props}>
-                    {layoutContent}
+                    {layoutRoutes}
                 </LayoutComponent>
             )} />
         )

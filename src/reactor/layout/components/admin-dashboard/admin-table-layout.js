@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import ProgressBar from 'reactor/components/progress-bar';
 import { loadData, renderTable } from './admin-table-layout-helpers';
-import DashboardLayout from './dashboard-layout';
 
 export default function AdminTableLayout(props) {
     let { service, options } = props;
@@ -22,13 +21,7 @@ export default function AdminTableLayout(props) {
     // Display In Progress Spinner
     // load the users data from API
     // 
-    let displayedContent = isLoading ? <ProgressBar /> : renderTable(options, response, service);
-
-    return (
-        <DashboardLayout>
-            {displayedContent}
-        </DashboardLayout>
-    );
+    return isLoading ? <ProgressBar /> : renderTable(options, response, service);
 }
 
 AdminTableLayout.propTypes = {
