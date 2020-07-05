@@ -1,4 +1,4 @@
-import Globals from './../globals';
+import Globals from 'reactor/globals';
 import { Obj } from 'reinforcements';
 import { vsprintf } from 'sprintf-js';
 

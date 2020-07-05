@@ -1,5 +1,5 @@
 import config from "reactor/config";
-import history from "reactor/router-configurations/router-history";
+import history from "reactor/router/router-history";
 import { Obj } from "reinforcements";
 
 /**

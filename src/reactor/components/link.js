@@ -2,7 +2,7 @@ import React from 'react';
 import Globals from 'reactor/globals';
 import MaterialLink from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
-import { hasInitialLocaleCode } from 'reactor/router-configurations/navigator';
+import { hasInitialLocaleCode } from 'reactor/router/navigator';
 
 const Link = React.forwardRef(function (props, forwardedRef) {
     let { to, localeCode, relative, ...otherLinkProps } = props;
