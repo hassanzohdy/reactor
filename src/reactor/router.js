@@ -16,6 +16,7 @@ export function scan() {
     ReactDOM.render(<Routes />, document.getElementById('root'));
 }
 
+
 export default {
     add: addRouter,
     partOf

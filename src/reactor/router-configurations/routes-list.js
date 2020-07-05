@@ -1,62 +1,63 @@
 import React from 'react';
+import { localeCodes } from 'reactor/localization/locales';
 
 /**
- * Set all routes that may be requested in our application
+ * Default Full Page >> It Will be just a React Fragment
+ */
+export const FULL_PAGE = ({ key, children }) => <React.Fragment key={key} children={children} />;
+
+/**
+ * Set all layouts that will wrap the application routes
  * 
  * @const  {Array}  
  */
-export const routesList = [];
-
-export const FULL_PAGE = props => {
-
-    React.useEffect(() => {
-        // var err = new Error();
-        // return err.stack;
-        console.log('Full Page Layout Is Mounted');
-
-        return () => {
-            console.log('Full Page Layout Is Unmounted');            
-        }
-    }, []);
-    
-    return <React.Fragment {...props} />
-};
 export const layoutsList = [];
 
 /**
- * Add new route to the routes list
+ * Add new route to the routes list of full page
  *
  * @param {string} path
  * @param {React.Component} component
  * @param {Function|Array|null} middleware
  */
 export function addRouter(path, component, middleware = null) {
-    partOf(FULL_PAGE, [
-        {
-            path,
-            component,
-            middleware,
-        }
-    ])
-    // routesList.push({
-    //     path,
-    //     component,
-    //     middleware,
-    // });
+    return partOf(FULL_PAGE, [{
+        path,
+        component,
+        middleware
+    }]);
 }
 
+/**
+ * Add the given routes as part of the given layout
+ * 
+ * @param  {React.Component} LayoutComponent
+ * @param  {Array} routes   
+ */
 export function partOf(LayoutComponent, routes) {
-    let layout = layoutsList.find(layout => layout.Layout == LayoutComponent);
+    let layout = layoutsList.find(layout => layout.LayoutComponent === LayoutComponent);
 
+    // if the layout component does not exist
+    // then create new one and add it to the layouts list
     if (!layout) {
         layout = {
-            Layout: LayoutComponent,
+            LayoutComponent,
             routes: [],
+            routesList: [],
         };
+
         layoutsList.push(layout);
     }
 
-    layout.routes = layout.routes.concat(routes);
+    routes = routes.map(route => {
+        // added optional localization
+        // /users
+        // /en/users
+        // /ar/users
+        route.path = `/:localeCode(${localeCodes})?${route.path}`;
+        layout.routesList.push(route.path);
+        return route;
+    });
 
-    layout.routesList = layout.routes.map(route => route.path);
+    layout.routes = layout.routes.concat(routes);
 }

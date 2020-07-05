@@ -4,7 +4,7 @@ export default [
         module: 'users',
     },
     {
-        entry: ['/', '/test'],
+        entry: ['/'],
         module: 'home',
     }
 ];

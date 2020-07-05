@@ -8,9 +8,7 @@ import config from 'reactor/config';
 import history from './router-history';
 import { layoutsList } from './routes-list';
 
-const localeCodes = config.get('locales');
 const forceRefresh = config.get('router.forceRefresh', true);
-
 
 const renderRoute = (routeData, route) => {
     // timestamp
@@ -33,7 +31,6 @@ export default function Renderer(props) {
     const moduleIsLoaded = loadedModules.includes(firstSegment);
 
     React.useEffect(() => {
-        // login
         const moduleInfo = modulesList[firstSegment];
 
         if (!moduleIsLoaded && moduleInfo) {
@@ -45,8 +42,8 @@ export default function Renderer(props) {
 
     }, [firstSegment, moduleIsLoaded, loadedModules]);
 
-    return layoutsList.map((layout, index) => {
-        const { Layout, routes, routesList } = layout;
+    return layoutsList.map(layout => {
+        const { LayoutComponent, routes, routesList } = layout;
 
         let layoutContent;
 
@@ -57,15 +54,12 @@ export default function Renderer(props) {
         if (!moduleIsLoaded && isPartOfLazyModules(firstSegment)) {
             layoutContent = <ProgressBar />
         } else {
+            // list of routes
             layoutContent = routes.map((route, index) => {
                 return (
-                    // added optional localization
-                    // /users
-                    // /en/users
-                    // /ar/users
-                    <Route path={`/:localeCode(${Object.keys(localeCodes).join('|')})?${route.path}`}
-                        exact={true}
-                        key={index}
+                    <Route path={route.path}
+                        exact
+                        key={route.path}
                         render={props => renderRoute(props, route)}
                     />
                 );
@@ -73,13 +67,11 @@ export default function Renderer(props) {
         }
 
         return (
-            <Route key={index} exact path={routesList} render={props => (
-                // console.log(routesList),
-                <Layout key={Layout}>
+            <Route key={LayoutComponent} exact path={routesList} render={props => (
+                <LayoutComponent {...props}>
                     {layoutContent}
-                </Layout>
+                </LayoutComponent>
             )} />
         )
     });
-
 }
