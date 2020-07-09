@@ -1,4 +1,4 @@
-import { trans, extend } from ".//translator";
+import { trans, extend } from "./translator";
 
 export {
     trans,

@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core";
-import { lightBlue } from "@material-ui/core/colors";
+import { lightBlue, blue } from "@material-ui/core/colors";
 import Globals from "reactor/globals";
 
 const drawerWidth = 240;
-const layoutClasses = makeStyles((theme) => ({
+const useLayoutClasses = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
@@ -53,7 +53,7 @@ const layoutClasses = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        [Globals.marginLeft]: -drawerWidth,
+        // [Globals.marginLeft]: -drawerWidth,
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
@@ -69,6 +69,13 @@ const layoutClasses = makeStyles((theme) => ({
     },
     sidebarNestedItem: {
         paddingLeft: theme.spacing(4),
+    },
+    sidebarListItemIcon: {
+        minWidth: theme.spacing(5),
+    },
+    sidebarActiveColor: {
+        color: blue[500],
+        fontWe: 'bold',
     },
     modalTitle: {
         margin: 0,
@@ -94,4 +101,4 @@ const layoutClasses = makeStyles((theme) => ({
     },
 }));
 
-export default layoutClasses;
+export default useLayoutClasses;
