@@ -1,6 +1,7 @@
 import config from "reactor/config";
 import history from "reactor/router/router-history";
 import { Obj } from "reinforcements";
+import events from "@flk/events";
 
 /**
  * List of locale code object
@@ -51,23 +52,6 @@ export function getCurrentLocaleCode() {
     return currentLocaleCode;
 }
 
-/**
- * Set current locale code at the beginning of the application
- */
-function initiateLocaleCode() {
-    // /en/users
-    // /users
-    // first remove the first slash from the url
-    // then split the pathname by the /
-    // then get the first segment of the created array 
-    let [ localeCode ] = history.location.pathname.replace(/^\//, '').split('/');
-
-    if (localeCodes.includes(localeCode)) {
-        updateCurrentLocaleCode(localeCode);
-    }
-};
-
-initiateLocaleCode();
 
 
 /**
@@ -83,3 +67,24 @@ export function updateCurrentLocaleCode(localeCode) {
     document.documentElement.lang = localeCode;
     currentLocaleCode = localeCode;
 }
+
+
+/**
+ * Set current locale code at the beginning of the application
+ */
+function initiateLocaleCode() {
+    // /en/users
+    // /users
+    // first remove the first slash from the url
+    // then split the pathname by the /
+    // then get the first segment of the created array 
+    let [ localeCode ] = history.location.pathname.replace(/^\//, '').split('/');
+
+    if (localeCodes.includes(localeCode)) {
+        updateCurrentLocaleCode(localeCode);
+    }
+
+    events.on('switchingLocaleCode', updateCurrentLocaleCode);
+};
+
+initiateLocaleCode();

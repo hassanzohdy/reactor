@@ -1,13 +1,17 @@
-import Globals from 'reactor/globals';
 import { Obj } from 'reinforcements';
 import { vsprintf } from 'sprintf-js';
 import { getCurrentLocaleCode } from './locales';
+import events from '@flk/events';
 
 /**
  * all keywords for all locale codes
  */
 let keywordsList = {};
 
+/**
+ * Default locale Code
+ */
+let currentLocaleCode = getCurrentLocaleCode();
 
 /**
  * Add keywords 
@@ -26,11 +30,7 @@ export function extend(localeCode, keywords) {
  * @returns {any} 
  */
 export function trans(keyword, ...args) {
-    /**
-     * Default locale Code
-     */
-    let localeCode = getCurrentLocaleCode();
-    return translateFrom(localeCode, keyword, ...args);
+    return translateFrom(currentLocaleCode, keyword, ...args);
 }
 
 /**
@@ -46,3 +46,7 @@ export function translateFrom(localeCode, keyword, ...args) {
 
     return vsprintf(translation, args) || keyword;
 }
+
+events.on('switchingLocaleCode', newLocaleCode => {
+    currentLocaleCode = newLocaleCode;
+});

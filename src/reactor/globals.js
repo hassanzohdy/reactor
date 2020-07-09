@@ -1,10 +1,10 @@
 import { currentDirection, getCurrentLocaleCode, directionOf } from "reactor/localization/locales";
+import events from '@flk/events';
 
 const localeCode = getCurrentLocaleCode();
 const direction = currentDirection();
 const left = direction === 'ltr' ? 'left' : 'right';
 const right = direction === 'ltr' ? 'right' : 'left';
-
 
 const Globals = {
     left: left,
@@ -17,8 +17,8 @@ const Globals = {
     localeCode: localeCode,
 };
 
-export const updateGlobalLocaleCode = localeCode => {
-    const direction = currentDirection();
+const updateGlobalLocaleCode = localeCode => {
+    const direction = directionOf(localeCode);
     const left = direction === 'ltr' ? 'left' : 'right';
     const right = direction === 'ltr' ? 'right' : 'left';
 
@@ -31,5 +31,7 @@ export const updateGlobalLocaleCode = localeCode => {
     Globals.paddingLeft = `padding-${left}`;
     Globals.paddingRight = `padding-${right}`;
 };
+
+events.on('switchingLocaleCode', updateGlobalLocaleCode);
 
 export default Globals;

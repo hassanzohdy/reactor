@@ -3,7 +3,8 @@ import ltrim from "reinforcements/src/utilities/str/ltrim";
 import {
     localeCodes, updateCurrentLocaleCode, getCurrentLocaleCode
 } from "reactor/localization/locales";
-import { updateGlobalLocaleCode } from "../globals";
+
+import events from '@flk/events';
 
 let currentFullRoute, fullRouteWithoutLocaleCode;
 
@@ -13,7 +14,7 @@ let currentFullRoute, fullRouteWithoutLocaleCode;
  * @param   {string} route
  * @returns {void} 
  */
-function updatefullRoute(route) {
+function updateFullRoute(route) {
     // /en/users
     currentFullRoute = route;
 
@@ -73,8 +74,7 @@ export function refresh() {
  */
 export function switchLang(localeCode) {    
     let route = currentRoute();
-    updateCurrentLocaleCode(localeCode);
-    updateGlobalLocaleCode(localeCode); 
+    events.trigger('switchingLocaleCode', localeCode);
     
     navigateTo('/' + localeCode + route);
 }
@@ -88,10 +88,10 @@ export default function initiateNavigator() {
      * and current route without locale codes
      */
     history.listen(location => {
-        updatefullRoute(location.pathname);
+        updateFullRoute(location.pathname);
     });
 
-    updatefullRoute(history.location.pathname || '/');
+    updateFullRoute(history.location.pathname || '/');
 }
 
 /**
