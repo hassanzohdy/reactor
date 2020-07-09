@@ -1,8 +1,5 @@
 import { scan } from 'reactor/router';
 import * as serviceWorker from './serviceWorker';
-import { initiateLocaleCode } from './localization/locales';
-
-initiateLocaleCode();
 
 export default class Reactor {
     /**

@@ -3,6 +3,7 @@ import ltrim from "reinforcements/src/utilities/str/ltrim";
 import {
     localeCodes, updateCurrentLocaleCode, getCurrentLocaleCode
 } from "reactor/localization/locales";
+import { updateGlobalLocaleCode } from "../globals";
 
 let currentFullRoute, fullRouteWithoutLocaleCode;
 
@@ -73,6 +74,8 @@ export function refresh() {
 export function switchLang(localeCode) {    
     navigateTo('/' + localeCode + currentRoute());
     updateCurrentLocaleCode(localeCode);
+
+    updateGlobalLocaleCode(localeCode);
 }
 
 /**

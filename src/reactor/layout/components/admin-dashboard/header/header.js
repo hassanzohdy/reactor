@@ -13,9 +13,30 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import userLogout from 'modules/users/helpers/user-logout';
 import layoutClasses from 'reactor/layout/utils/style';
+import SelectInput from 'reactor/form/components/select-input';
+import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
+import { makeStyles } from '@material-ui/core';
 
 const refreshText = trans('refresh');
 const logoutText = trans('logout');
+
+const localeCodesList = localeCodes.map(localeCode => {
+    return {
+        label: trans(localeCode),
+        value: localeCode,
+    };
+});
+
+const useStyles = makeStyles({
+    whiteColor: {
+        color: '#FFF',
+    },
+});
+
+const Dropdown = props => {
+    const classes = useStyles(); 
+    return <SelectInput {...props} disableUnderline classes={{root: classes.whiteColor, icon: classes.whiteColor}} />
+};
 
 export default function Header(props) {
     let classes = layoutClasses(),
@@ -56,10 +77,8 @@ export default function Header(props) {
 
                 {/* Switch Button */}
 
-                <IconButton color="inherit" onClick={e => switchLang('ar')}>
-                    <Tooltip title={'Ar'}>
-                        <RefreshIcon />
-                    </Tooltip>
+                <IconButton>
+                    <Dropdown value={getCurrentLocaleCode()} items={localeCodesList} onChange={item => switchLang(item.value)} />
                 </IconButton>
 
                 {/* Logout Button */}

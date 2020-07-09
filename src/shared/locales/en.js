@@ -10,4 +10,6 @@ localization.extend('en', {
     removeItem: 'Remove %s',
     actions: 'Actions',
     removeText: 'Are you sure you want to delete this record?',
+    en: 'English',
+    ar: 'العربية',
 });

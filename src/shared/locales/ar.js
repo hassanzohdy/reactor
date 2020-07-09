@@ -8,4 +8,6 @@ localization.extend('ar', {
     addItem: 'إضافة %s جديد',
     editItem: 'تعديل %s',
     removeItem: 'حذف %s',
+    en: 'English',
+    ar: 'العربية',
 });

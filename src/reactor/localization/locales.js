@@ -54,7 +54,7 @@ export function getCurrentLocaleCode() {
 /**
  * Set current locale code at the beginning of the application
  */
-export function initiateLocaleCode() {
+function initiateLocaleCode() {
     // /en/users
     // /users
     // first remove the first slash from the url
@@ -66,6 +66,9 @@ export function initiateLocaleCode() {
         updateCurrentLocaleCode(localeCode);
     }
 };
+
+initiateLocaleCode();
+
 
 /**
  * Update current locale code 

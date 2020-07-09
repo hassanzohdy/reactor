@@ -25,8 +25,11 @@ const useLayoutClasses = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    menuButton() {     
+        return {
+            // flip: false, // disable auto switching
+            [Globals.marginRight]: theme.spacing(2),
+        };
     },
     hide: {
         display: 'none',
