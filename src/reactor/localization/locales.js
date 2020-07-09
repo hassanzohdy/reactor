@@ -34,6 +34,15 @@ export function directionOf(localeCode) {
 }
 
 /**
+ * Get current direction
+ * 
+ * @returns  {string}
+ */
+export function currentDirection() {
+    return directionOf(currentLocaleCode);
+}
+
+/**
  * Get current locale code
  * 
  * @returns {string}

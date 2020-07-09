@@ -1,16 +1,13 @@
 import Globals from 'reactor/globals';
 import { Obj } from 'reinforcements';
 import { vsprintf } from 'sprintf-js';
+import { getCurrentLocaleCode } from './locales';
 
 /**
  * all keywords for all locale codes
  */
 let keywordsList = {};
 
-/**
- * Default locale Code
- */
-let localeCode = Globals.localeCode;
 
 /**
  * Add keywords 
@@ -29,6 +26,10 @@ export function extend(localeCode, keywords) {
  * @returns {any} 
  */
 export function trans(keyword, ...args) {
+    /**
+     * Default locale Code
+     */
+    let localeCode = getCurrentLocaleCode();
     return translateFrom(localeCode, keyword, ...args);
 }
 

@@ -23,7 +23,7 @@ export default function SidebarListItem(props) {
 
     React.useEffect(() => {
         setActiveItem(route === currentRoute);
-    }, [currentRoute]);
+    }, [currentRoute, route]);
 
     const className = cls({
         [classes.sidebarNestedItem]: nested === true,

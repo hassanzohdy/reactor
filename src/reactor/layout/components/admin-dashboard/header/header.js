@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { refresh } from 'reactor/router';
+import { refresh, switchLang } from 'reactor/router';
 import { trans } from 'reactor/localization';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -50,6 +50,14 @@ export default function Header(props) {
 
                 <IconButton color="inherit" onClick={refresh}>
                     <Tooltip title={refreshText}>
+                        <RefreshIcon />
+                    </Tooltip>
+                </IconButton>
+
+                {/* Switch Button */}
+
+                <IconButton color="inherit" onClick={e => switchLang('ar')}>
+                    <Tooltip title={'Ar'}>
                         <RefreshIcon />
                     </Tooltip>
                 </IconButton>

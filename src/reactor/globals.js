@@ -1,5 +1,7 @@
-const localeCode = document.documentElement.lang;
-const direction = document.documentElement.dir;
+import { currentDirection, getCurrentLocaleCode } from "reactor/localization/locales";
+
+const localeCode = getCurrentLocaleCode();
+const direction = currentDirection();
 const left = direction === 'ltr' ? 'left' : 'right';
 const right = direction === 'ltr' ? 'right' : 'left';
 

@@ -70,8 +70,9 @@ export function refresh() {
  * 
  * @param  {string} localeCode
  */
-export function switchLang(localeCode) {
-
+export function switchLang(localeCode) {    
+    navigateTo('/' + localeCode + currentRoute());
+    updateCurrentLocaleCode(localeCode);
 }
 
 /**

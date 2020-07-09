@@ -14,13 +14,7 @@ import SidebarContext from './sidebar-context';
 
 export default function SidebarListItemGroup(props) {
     const { text, items } = props;
-    const [open, setOpen] = React.useState(false);
-
     const sidebarGroupRoutes = [];
-
-    const classes = useLayoutClasses();
-
-    const { currentRoute } = React.useContext(SidebarContext);
 
     let itemsList = items.map((item, index) => {
         sidebarGroupRoutes.push(item.route);
@@ -35,15 +29,23 @@ export default function SidebarListItemGroup(props) {
         )
     });
 
+    const { currentRoute } = React.useContext(SidebarContext);
+    const [isActiveGroup, setActiveGroup] = React.useState(sidebarGroupRoutes.includes(currentRoute));
+
+    const [open, setOpen] = React.useState(sidebarGroupRoutes.includes(currentRoute));
+
+    const classes = useLayoutClasses();
+
+
     // when the sidebar group is opened
     // when an item from the list is matching the current route
 
     React.useEffect(() => {
-        setOpen(sidebarGroupRoutes.includes(currentRoute)); 
-    }, [currentRoute]);
+        setActiveGroup(sidebarGroupRoutes.includes(currentRoute));
+    }, [currentRoute, sidebarGroupRoutes]);
 
     const coloredText = cls({
-        [classes.sidebarActiveColor]: open === true,
+        [classes.sidebarActiveColor]: isActiveGroup === true,
     });
 
     const handleClick = () => {
