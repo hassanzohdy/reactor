@@ -72,10 +72,11 @@ export function refresh() {
  * @param  {string} localeCode
  */
 export function switchLang(localeCode) {    
-    navigateTo('/' + localeCode + currentRoute());
+    let route = currentRoute();
     updateCurrentLocaleCode(localeCode);
-
-    updateGlobalLocaleCode(localeCode);
+    updateGlobalLocaleCode(localeCode); 
+    
+    navigateTo('/' + localeCode + route);
 }
 
 /**

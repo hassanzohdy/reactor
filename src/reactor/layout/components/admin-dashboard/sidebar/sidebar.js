@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import layoutClasses from 'reactor/layout/utils/style';
+import Globals from 'reactor/globals';
 import { currentRoute } from 'reactor/router/navigator';
 import SidebarContext from './sidebar-context';
 
@@ -41,7 +42,6 @@ export default function Sidebar(props) {
             icon={item.icon}
             route={item.route} />;
     });
-
     return (
         <SidebarContext.Provider value={sidebarContextValue}>
             <Drawer
@@ -49,6 +49,7 @@ export default function Sidebar(props) {
                 variant="temporary"
                 anchor="left"
                 open={open}
+                onClose={onClose}
                 classes={{
                     paper: classes.drawerPaper,
                 }}

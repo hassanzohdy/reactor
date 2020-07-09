@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 const Dropdown = props => {
     const classes = useStyles(); 
     return <SelectInput {...props} disableUnderline classes={{root: classes.whiteColor, icon: classes.whiteColor}} />
-};
+}
 
 export default function Header(props) {
     let classes = layoutClasses(),

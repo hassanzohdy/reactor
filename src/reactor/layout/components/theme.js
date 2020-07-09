@@ -6,19 +6,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({    
-    direction: Globals.direction,
-    palette: {
-        primary: {
-            main: lightBlue[800],
-        },
-    },
-    status: {
-        danger: 'orange',
-    },
-});
-
 export default function Theme(props) {
+    const theme = createMuiTheme({    
+        direction: Globals.direction,
+        palette: {
+            primary: {
+                main: lightBlue[800],
+            },
+        },
+        status: {
+            danger: 'orange',
+        },
+    });
+    
     return (
         <MultiDirection>
             <ThemeProvider theme={theme}>
