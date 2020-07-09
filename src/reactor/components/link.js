@@ -1,15 +1,25 @@
 import React from 'react';
-import Globals from 'reactor/globals';
+import { styled } from '@material-ui/core';
+import { ANCHOR_TAG_COLOR } from 'shared/style';
 import MaterialLink from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { hasInitialLocaleCode } from 'reactor/router/navigator';
+import { getCurrentLocaleCode } from 'reactor/localization/locales';
+
+const ColoredLink = styled(MaterialLink)({
+    color: ANCHOR_TAG_COLOR
+});
 
 const Link = React.forwardRef(function (props, forwardedRef) {
     let { to, localeCode, relative, ...otherLinkProps } = props;
 
     // if not relative, then use the normal anchor tag
     if (! relative) {
-        return <MaterialLink href={to} ref={forwardedRef} {...otherLinkProps} />
+        return <ColoredLink href={to} ref={forwardedRef} {...otherLinkProps} />
+    }
+
+    if (!localeCode && hasInitialLocaleCode()) {
+        localeCode = getCurrentLocaleCode();
     }
 
     if (localeCode) {
@@ -22,12 +32,12 @@ const Link = React.forwardRef(function (props, forwardedRef) {
 
     otherLinkProps.to = to;
 
-    return <MaterialLink component={RouterLink} {...otherLinkProps} ref={forwardedRef} />
+    return <ColoredLink component={RouterLink} {...otherLinkProps} ref={forwardedRef} />
 });
     
 Link.defaultProps = {
     relative: true,
-    localeCode: hasInitialLocaleCode() ? Globals.localeCode : null,
+    // localeCode: hasInitialLocaleCode() ? Globals.localeCode : null,
 };
 
 // if initial locale code is true, then add the current locale code as locale code prop

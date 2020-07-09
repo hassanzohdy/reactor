@@ -15,7 +15,9 @@ import userLogout from 'modules/users/helpers/user-logout';
 import layoutClasses from 'reactor/layout/utils/style';
 import SelectInput from 'reactor/form/components/select-input';
 import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, styled } from '@material-ui/core';
+import Link from 'reactor/components/link';
+import {HEADER_BAR_COLOR} from 'shared/style';
 
 const refreshText = trans('refresh');
 const logoutText = trans('logout');
@@ -31,7 +33,15 @@ const useStyles = makeStyles({
     whiteColor: {
         color: '#FFF',
     },
+    toolbarColor: {
+        color: HEADER_BAR_COLOR
+    }
 });
+
+const HeaderLink = styled(Link)({
+    color: HEADER_BAR_COLOR,
+    textDecoration: 'none'
+})
 
 const Dropdown = props => {
     const classes = useStyles(); 
@@ -42,6 +52,8 @@ export default function Header(props) {
     let classes = layoutClasses(),
         sidebarIsOpened = props.sidebarIsOpened;
 
+    const headerClasses = useStyles();
+
     return (
         <AppBar
             position="absolute"
@@ -49,7 +61,7 @@ export default function Header(props) {
                 [classes.appBarShift]: sidebarIsOpened,
             })}
         >
-            <Toolbar>
+            <Toolbar classes={{root: headerClasses.toolbarColor}}>
                 {/* Sidebar Toggle Icon */}
                 <IconButton
                     color="inherit"
@@ -62,7 +74,7 @@ export default function Header(props) {
                 </IconButton>
                 {/* Application Name */}
                 <Typography variant="h6" noWrap>
-                    {trans('appName')}
+                    <HeaderLink to={'/'}>{trans('appName')}</HeaderLink>
                 </Typography>
                 {/* Divider */}
                 <div className={classes.grow} />

@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import layoutClasses from 'reactor/layout/utils/style';
-import Globals from 'reactor/globals';
 import { currentRoute } from 'reactor/router/navigator';
 import SidebarContext from './sidebar-context';
 
