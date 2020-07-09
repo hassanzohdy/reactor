@@ -1,27 +1,36 @@
 import cls from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { styled } from '@material-ui/core';
 import Link from 'reactor/components/link';
+import SidebarContext from './sidebar-context';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import useLayoutClasses from 'reactor/layout/utils/style';
-import { styled } from '@material-ui/core';
 
 const ItemLink = styled(Link)({
     color: '#333',
 });
 
 export default function SidebarListItem(props) {
-    let { text, route, nested, active } = props;
+    let { text, route, nested } = props;
     const classes = useLayoutClasses();
+
+    const { currentRoute } = React.useContext(SidebarContext);
+
+    const [isActiveItem, setActiveItem] = React.useState(currentRoute === route);
+
+    React.useEffect(() => {
+        setActiveItem(route === currentRoute);
+    }, [currentRoute]);
 
     const className = cls({
         [classes.sidebarNestedItem]: nested === true,
     });
 
     const coloredTextClass = cls({
-        [classes.sidebarActiveColor]: active === true,
+        [classes.sidebarActiveColor]: isActiveItem === true,
     });
 
     return (
@@ -34,7 +43,7 @@ export default function SidebarListItem(props) {
             <ListItemIcon classes={{ root: classes.sidebarListItemIcon }}>
                 {<props.icon />}
             </ListItemIcon>
-            <ListItemText classes={{root: coloredTextClass}} primary={text} />
+            <ListItemText classes={{ root: coloredTextClass }} primary={text} />
         </ListItem>
     );
 }

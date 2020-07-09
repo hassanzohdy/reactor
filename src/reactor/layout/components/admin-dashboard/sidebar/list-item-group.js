@@ -10,28 +10,23 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import useLayoutClasses from 'reactor/layout/utils/style';
-import { routeOnly } from 'reactor/router/navigator';
+import SidebarContext from './sidebar-context';
 
 export default function SidebarListItemGroup(props) {
     const { text, items } = props;
+    const [open, setOpen] = React.useState(false);
+
+    const sidebarGroupRoutes = [];
 
     const classes = useLayoutClasses();
 
-    let expandGroup = false;
-
-    const currentRoute = routeOnly();
+    const { currentRoute } = React.useContext(SidebarContext);
 
     let itemsList = items.map((item, index) => {
-        const active = currentRoute === item.route;
-
-        if (active) {
-            expandGroup = true;
-        }
-
+        sidebarGroupRoutes.push(item.route);
         return (
             <SidebarListItem
                 nested
-                active={active}
                 key={index}
                 route={item.route}
                 text={item.text}
@@ -40,10 +35,15 @@ export default function SidebarListItemGroup(props) {
         )
     });
 
-    const [open, setOpen] = React.useState(expandGroup);
+    // when the sidebar group is opened
+    // when an item from the list is matching the current route
+
+    React.useEffect(() => {
+        setOpen(sidebarGroupRoutes.includes(currentRoute)); 
+    }, [currentRoute]);
 
     const coloredText = cls({
-        [classes.sidebarActiveColor]: expandGroup === true,
+        [classes.sidebarActiveColor]: open === true,
     });
 
     const handleClick = () => {

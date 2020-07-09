@@ -10,14 +10,18 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import layoutClasses from 'reactor/layout/utils/style';
-import { routeOnly } from 'reactor/router/navigator';
+import { currentRoute } from 'reactor/router/navigator';
+import SidebarContext from './sidebar-context';
 
 export default function Sidebar(props) {
     let { onClose, open } = props;
     const theme = useTheme();
     const classes = layoutClasses();
+    const route = currentRoute();
 
-    const currentRoute = routeOnly();
+    const sidebarContextValue = {
+        currentRoute: route,
+    };
 
     let itemsList = items.map((item, index) => {
         // in this case, we'll return itemGroup
@@ -26,42 +30,43 @@ export default function Sidebar(props) {
                 key={index}
                 text={item.text}
                 icon={item.icon}
-                items={item.items} 
+                items={item.items}
             />;
         }
 
         // otherwise, we'll just return a list item
         return <SidebarListItem
             key={index}
-            active={currentRoute === item.route}
             text={item.text}
             icon={item.icon}
             route={item.route} />;
     });
 
     return (
-        <Drawer
-            className={classes.drawer}
-            variant="temporary"
-            anchor="left"
-            open={open}
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            <div className={classes.drawerHeader}>
-                <IconButton onClick={onClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-            </div>
-            <Divider />
-
-            <List
-                component="nav"
-                className={classes.sidebar}
+        <SidebarContext.Provider value={sidebarContextValue}>
+            <Drawer
+                className={classes.drawer}
+                variant="temporary"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
             >
-                { itemsList }
-            </List>
-        </Drawer>
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={onClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </div>
+                <Divider />
+
+                <List
+                    component="nav"
+                    className={classes.sidebar}
+                >
+                    {itemsList}
+                </List>
+            </Drawer>
+        </SidebarContext.Provider>
     );
 }

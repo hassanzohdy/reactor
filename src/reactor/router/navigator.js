@@ -4,7 +4,7 @@ import {
     localeCodes, updateCurrentLocaleCode, getCurrentLocaleCode
 } from "reactor/localization/locales";
 
-let currentFullRoute, currentRouteWithoutLocaleCode;
+let currentFullRoute, fullRouteWithoutLocaleCode;
 
 /**
  * Set the full current route and the current route without the locale code
@@ -12,7 +12,7 @@ let currentFullRoute, currentRouteWithoutLocaleCode;
  * @param   {string} route
  * @returns {void} 
  */
-function updateCurrentRoute(route) {
+function updatefullRoute(route) {
     // /en/users
     currentFullRoute = route;
 
@@ -20,7 +20,7 @@ function updateCurrentRoute(route) {
     let regex = new RegExp(`^/(${localeCodes.join('|')})`);
     // let regex = new RegExp('^/(en|ar)')
 
-    currentRouteWithoutLocaleCode = currentFullRoute.replace(regex, function (matched, localeCode) {
+    fullRouteWithoutLocaleCode = currentFullRoute.replace(regex, function (matched, localeCode) {
         updateCurrentLocaleCode(localeCode);
         return '';
     });
@@ -43,7 +43,7 @@ export function navigateTo(path) {
  * 
  * @returns {string}
  */
-export function currentRoute() {
+export function fullRoute() {
     return history.location.pathname;
 }
 
@@ -52,8 +52,8 @@ export function currentRoute() {
  * 
  * @returns  {string}
  */
-export function routeOnly() {
-    return ltrim(currentRoute(), '/' + getCurrentLocaleCode());
+export function currentRoute() {
+    return ltrim(fullRoute(), '/' + getCurrentLocaleCode());
 }
 
 /**
@@ -62,7 +62,7 @@ export function routeOnly() {
  * @returns {void} 
  */
 export function refresh() {
-    navigateTo(currentRoute());
+    navigateTo(fullRoute());
 }
 
 /**
@@ -83,18 +83,18 @@ export default function initiateNavigator() {
      * and current route without locale codes
      */
     history.listen(location => {
-        updateCurrentRoute(location.pathname);
+        updatefullRoute(location.pathname);
     });
 
-    updateCurrentRoute(history.location.pathname || '/');
+    updatefullRoute(history.location.pathname || '/');
 }
 
 /**
  * Check if current route has a locale code
- * By comparing the currentFullRoute with currentRouteWithoutLocaleCode
+ * By comparing the currentFullRoute with fullRouteWithoutLocaleCode
  * 
  * @returns  {boolean} 
  */
 export function hasInitialLocaleCode() {
-    return currentFullRoute !== currentRouteWithoutLocaleCode;
+    return currentFullRoute !== fullRouteWithoutLocaleCode;
 }
