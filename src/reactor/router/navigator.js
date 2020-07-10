@@ -5,6 +5,7 @@ import {
 } from "reactor/localization/locales";
 
 import events from '@flk/events';
+import { SWITCHING_LOCALE_CODE_EVENT } from "./flags";
 
 let currentFullRoute, fullRouteWithoutLocaleCode;
 
@@ -55,7 +56,7 @@ export function fullRoute() {
  * @returns  {string}
  */
 export function currentRoute() {
-    return ltrim(fullRoute(), '/' + getCurrentLocaleCode());
+    return ltrim(fullRoute(), '/' + getCurrentLocaleCode()) || '/';
 }
 
 /**
@@ -74,7 +75,7 @@ export function refresh() {
  */
 export function switchLang(localeCode) {    
     let route = currentRoute();
-    events.trigger('switchingLocaleCode', localeCode);
+    events.trigger(SWITCHING_LOCALE_CODE_EVENT, localeCode);
     
     navigateTo('/' + localeCode + route);
 }

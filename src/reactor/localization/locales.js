@@ -2,6 +2,7 @@ import config from "reactor/config";
 import history from "reactor/router/router-history";
 import { Obj } from "reinforcements";
 import events from "@flk/events";
+import { SWITCHING_LOCALE_CODE_EVENT } from "reactor/router/flags";
 
 /**
  * List of locale code object
@@ -78,13 +79,13 @@ function initiateLocaleCode() {
     // first remove the first slash from the url
     // then split the pathname by the /
     // then get the first segment of the created array 
-    let [ localeCode ] = history.location.pathname.replace(/^\//, '').split('/');
+    let [localeCode] = history.location.pathname.replace(/^\//, '').split('/');
 
     if (localeCodes.includes(localeCode)) {
         updateCurrentLocaleCode(localeCode);
     }
 
-    events.on('switchingLocaleCode', updateCurrentLocaleCode);
+    events.on(SWITCHING_LOCALE_CODE_EVENT, updateCurrentLocaleCode);
 };
 
 initiateLocaleCode();

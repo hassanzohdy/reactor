@@ -2,6 +2,7 @@ import { Obj } from 'reinforcements';
 import { vsprintf } from 'sprintf-js';
 import { getCurrentLocaleCode } from './locales';
 import events from '@flk/events';
+import { SWITCHING_LOCALE_CODE_EVENT } from 'reactor/router/flags';
 
 /**
  * all keywords for all locale codes
@@ -47,6 +48,6 @@ export function translateFrom(localeCode, keyword, ...args) {
     return vsprintf(translation, args) || keyword;
 }
 
-events.on('switchingLocaleCode', newLocaleCode => {
+events.on(SWITCHING_LOCALE_CODE_EVENT, newLocaleCode => {
     currentLocaleCode = newLocaleCode;
 });
