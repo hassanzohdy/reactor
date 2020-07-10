@@ -1,5 +1,6 @@
 import { currentDirection, getCurrentLocaleCode, directionOf } from "reactor/localization/locales";
 import events from '@flk/events';
+import { SWITCHING_LOCALE_CODE_EVENT } from "reactor/router/flags";
 
 const localeCode = getCurrentLocaleCode();
 const direction = currentDirection();
@@ -32,6 +33,6 @@ const updateGlobalLocaleCode = localeCode => {
     Globals.paddingRight = `padding-${right}`;
 };
 
-events.on('switchingLocaleCode', updateGlobalLocaleCode);
+events.on(SWITCHING_LOCALE_CODE_EVENT, updateGlobalLocaleCode);
 
 export default Globals;

@@ -10,7 +10,7 @@ const useLayoutClasses = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
     },
-    appBar: {
+     appBar: {
         backgroundColor: HEADER_BAR_BACKGROUND_COLOR,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,

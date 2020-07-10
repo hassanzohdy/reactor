@@ -12,6 +12,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import layoutClasses from 'reactor/layout/utils/style';
 import { currentRoute } from 'reactor/router/navigator';
 import SidebarContext from './sidebar-context';
+import { trans } from 'reactor/localization';
 
 export default function Sidebar(props) {
     let { onClose, open } = props;
@@ -54,6 +55,7 @@ export default function Sidebar(props) {
                 }}
             >
                 <div className={classes.drawerHeader}>
+                    <h1>{trans('appName')}</h1>
                     <IconButton onClick={onClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>

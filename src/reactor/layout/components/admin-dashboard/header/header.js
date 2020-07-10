@@ -17,10 +17,7 @@ import SelectInput from 'reactor/form/components/select-input';
 import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
 import { makeStyles, styled } from '@material-ui/core';
 import Link from 'reactor/components/link';
-import {HEADER_BAR_COLOR} from 'shared/style';
-
-const refreshText = trans('refresh');
-const logoutText = trans('logout');
+import { HEADER_BAR_COLOR } from 'shared/style';
 
 const localeCodesList = localeCodes.map(localeCode => {
     return {
@@ -44,8 +41,8 @@ const HeaderLink = styled(Link)({
 })
 
 const Dropdown = props => {
-    const classes = useStyles(); 
-    return <SelectInput {...props} disableUnderline classes={{root: classes.whiteColor, icon: classes.whiteColor}} />
+    const classes = useStyles();
+    return <SelectInput {...props} disableUnderline classes={{ root: classes.whiteColor, icon: classes.whiteColor }} />
 }
 
 export default function Header(props) {
@@ -61,7 +58,7 @@ export default function Header(props) {
                 [classes.appBarShift]: sidebarIsOpened,
             })}
         >
-            <Toolbar classes={{root: headerClasses.toolbarColor}}>
+            <Toolbar classes={{ root: headerClasses.toolbarColor }}>
                 {/* Sidebar Toggle Icon */}
                 <IconButton
                     color="inherit"
@@ -82,7 +79,7 @@ export default function Header(props) {
                 {/* Refresh Button */}
 
                 <IconButton color="inherit" onClick={refresh}>
-                    <Tooltip title={refreshText}>
+                    <Tooltip title={trans('refresh')}>
                         <RefreshIcon />
                     </Tooltip>
                 </IconButton>
@@ -95,7 +92,7 @@ export default function Header(props) {
 
                 {/* Logout Button */}
                 <IconButton color="inherit" onClick={userLogout}>
-                    <Tooltip title={logoutText}>
+                    <Tooltip title={trans('logout')}>
                         <ExitToApp />
                     </Tooltip>
                 </IconButton>

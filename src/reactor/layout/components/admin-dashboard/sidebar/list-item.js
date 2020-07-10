@@ -21,6 +21,8 @@ export default function SidebarListItem(props) {
 
     const [isActiveItem, setActiveItem] = React.useState(currentRoute === route);
 
+    console.log(currentRoute);
+
     React.useEffect(() => {
         setActiveItem(route === currentRoute);
     }, [currentRoute, route]);
