@@ -52,18 +52,19 @@ const useLayoutClasses = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
+        transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        // [Globals.marginLeft]: -drawerWidth,
     },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        [Globals.marginLeft]: 0,
+    contentShift() {
+        return {
+            transition: theme.transitions.create(['margin', 'width'], {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            [Globals.marginLeft]: drawerWidth,
+        };
     },
     sidebar: {
         width: '100%',

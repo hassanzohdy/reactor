@@ -8,13 +8,13 @@ import layoutClasses from "reactor/layout/utils/style";
 
 export default function DashboardLayout(props) {
     const classes = layoutClasses();
-    const [open, setOpen] = React.useState(false);
+    const [sidebarIsOpened, setOpen] = React.useState(false);
 
-    const handleDrawerOpen = () => {
+    const openSidebar = () => {
         setOpen(true);
     };
 
-    const handleDrawerClose = () => {
+    const closeSidebar = () => {
         setOpen(false);
     };
 
@@ -22,16 +22,16 @@ export default function DashboardLayout(props) {
         <Layout>
             <div className={classes.root}>
                 <Header
-                    sidebarIsOpened={open}
-                    onClick={handleDrawerOpen}
+                    sidebarIsOpened={sidebarIsOpened}
+                    onClick={openSidebar}
                 />
                 <Sidebar
-                    open={open}
-                    onClose={handleDrawerClose}
+                    open={sidebarIsOpened}
+                    onClose={closeSidebar}
                 />
                 <main
                     className={clsx(classes.content, {
-                        [classes.contentShift]: open,
+                        [classes.contentShift]: sidebarIsOpened,
                     })}
                 >
                     <div className={classes.drawerHeader} />

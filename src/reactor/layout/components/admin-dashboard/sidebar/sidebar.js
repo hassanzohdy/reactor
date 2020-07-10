@@ -2,17 +2,17 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import items from './sidebar-items-list';
 import SidebarListItem from './list-item';
+import { trans } from 'reactor/localization';
 import Drawer from '@material-ui/core/Drawer';
+import SidebarContext from './sidebar-context';
 import Divider from '@material-ui/core/Divider';
 import { useTheme } from '@material-ui/core/styles';
 import SidebarListItemGroup from './list-item-group';
 import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import layoutClasses from 'reactor/layout/utils/style';
 import { currentRoute } from 'reactor/router/navigator';
-import SidebarContext from './sidebar-context';
-import { trans } from 'reactor/localization';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 export default function Sidebar(props) {
     let { onClose, open } = props;
