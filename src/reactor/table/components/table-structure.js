@@ -5,13 +5,13 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 export default function tableStructure(options, records, setRecord) {
-    let tableHeading = options.columns.map((column, index) => {
+    let tableHeading = options.table.columns.map((column, index) => {
         return <TableCell key={index}>{trans(column.heading)}</TableCell>;
     });
 
     let tableRows = records.map((record, rowIndex) => {
         if (! record.columnsList) {
-            record.columnsList = Obj.clone(options.columns);
+            record.columnsList = Obj.clone(options.table.columns);
         }
 
         return <TableRow key={record.id}>

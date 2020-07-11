@@ -100,12 +100,12 @@ export default function Table(props) {
             <FormModal
                 open={formIsDisplayed}
                 onSubmit={submitForm}
-                title={trans(itemType, trans(options.singleName))}
+                title={trans(itemType, trans(options.formOptions.singleName))}
                 onClose={closeModal}
             >
-                <options.form index={recordIndex} record={record} />
+                <options.formOptions.form index={recordIndex} record={record} />
             </FormModal>
-            <TableToolBar displayForm={displayForm} text={trans(options.heading)} />
+            <TableToolBar displayForm={displayForm} text={trans(options.table.heading)} />
             <TableContainer component={Paper}>
                 <MaterialTable>
                     <TableHead>
