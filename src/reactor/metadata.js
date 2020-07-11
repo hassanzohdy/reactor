@@ -1,12 +1,22 @@
-import {trans} from 'reactor/localization';
+import { trans } from 'reactor/localization';
+
+const meta = {
+    title: null,
+    description: null,
+};
 
 /**
  * Set page title
  * 
- * @param {string} pageTitle 
+ * @param   {string} pageTitle 
+ * @returns {string}
  */
 export function title(pageTitle) {
-    document.title = pageTitle;
+    if (meta.title === pageTitle) return pageTitle;
+
+    document.title = meta.title = pageTitle;
+
+    return pageTitle;
 }
 
 /**
@@ -16,10 +26,7 @@ export function title(pageTitle) {
  * @returns {string}
  */
 export function translatedTitle(pageTitle) {
-    let translatedTitle = trans(pageTitle);
-    title(translatedTitle);
-
-    return translatedTitle;
+    return title(trans(pageTitle));
 }
 
 /**
@@ -28,6 +35,10 @@ export function translatedTitle(pageTitle) {
  * @param {string} title 
  */
 export function description(description) {
+    if (meta.description === description) return description;
+    
     let metaDescriptionTag = document.getElementById('meta-description')
-    metaDescriptionTag.content = description;
+    metaDescriptionTag.content = meta.description = description;
+
+    return description;
 }

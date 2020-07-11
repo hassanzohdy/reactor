@@ -39,17 +39,17 @@ export function navigateTo(path, localeCode = null) {
     // /login >> valid
     path = '/' + ltrim(path, '/');
 
-    if (! localeCode && hasInitialLocaleCode()) {
+    // /users
+    // if current initial locale code
+    // /en/users   
+    if (localeCode === null && hasInitialLocaleCode()) {
         localeCode = getCurrentLocaleCode();
     }
 
     if (localeCode) {
         path = '/' + localeCode + path;
     }
-
-    // /users
-    // if current initial locale code
-    // /en/users    
+ 
     history.push(path);
 }
 
@@ -77,7 +77,7 @@ export function currentRoute() {
  * @returns {void} 
  */
 export function refresh() {
-    navigateTo(fullRoute());
+    navigateTo(fullRoute(), false);
 }
 
 /**
