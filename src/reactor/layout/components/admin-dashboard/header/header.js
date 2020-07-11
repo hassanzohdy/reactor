@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from 'reactor/components/tooltip';
-import ExitToApp from '@material-ui/icons/ExitToApp';
+// import ExitToApp from '@material-ui/icons/ExitToApp';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,6 +18,7 @@ import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales'
 import { makeStyles, styled } from '@material-ui/core';
 import Link from 'reactor/components/link';
 import { HEADER_BAR_COLOR } from 'shared/style';
+import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 
 const localeCodesList = localeCodes.map(localeCode => {
     return {
@@ -93,7 +94,7 @@ export default function Header(props) {
                 {/* Logout Button */}
                 <IconButton color="inherit" onClick={userLogout}>
                     <Tooltip title={trans('logout')}>
-                        <ExitToApp />
+                        <LogoutIcon />
                     </Tooltip>
                 </IconButton>
             </Toolbar>

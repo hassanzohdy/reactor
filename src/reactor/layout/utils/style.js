@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import Globals from "reactor/globals";
 import { SIDEBAR_ITEM_COLOR, HEADER_BAR_BACKGROUND_COLOR } from "shared/style";
-
+    
 const drawerWidth = 240;
 const useLayoutClasses = makeStyles((theme) => ({
     root: {

@@ -1,6 +1,9 @@
-import { lightBlue } from "@material-ui/core/colors";
+// import { lightBlue } from "@material-ui/core/colors";
 
-export const MAIN_COLOR = lightBlue[800];
+// export const MAIN_COLOR = lightBlue[600];
+// export const MAIN_COLOR = lightBlue[800];
+export const MAIN_COLOR = '#064b6d';
+// export const MAIN_COLOR = '#2d3e50';
 export const ANCHOR_TAG_COLOR = MAIN_COLOR;
 
 export const HEADER_BAR_COLOR = '#FFF';

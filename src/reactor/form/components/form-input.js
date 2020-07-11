@@ -96,6 +96,11 @@ export default class FormInput extends ReactorComponent {
         const errorMessage = this.get('validationError');
         let label = this.props.label || this.props.placeholder;
         let {rules, name, ...props} = this.props;
+
+        if (name) {
+            props.name = toInputName(name);
+        }
+
         return (
             <FormContext.Consumer>
                 {context => {
@@ -112,7 +117,6 @@ export default class FormInput extends ReactorComponent {
                             error={Boolean(errorMessage)}
                             label={label}
                             margin="normal"
-                            name={toInputName(name)}
                             inputRef={this.inputReference}
                             onInput={this.validateInput.bind(this)}
                             helperText={errorMessage}
@@ -131,7 +135,7 @@ FormInput.propTypes = {
     className: PropTypes.string,
     placeholder: PropTypes.string,
     type: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
 };
 
 FormInput.defaultProps = {

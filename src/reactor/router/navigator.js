@@ -34,10 +34,22 @@ function updateFullRoute(route) {
  * 
  * @param  {string} path 
  */
-export function navigateTo(path) {
+export function navigateTo(path, localeCode = null) {
+    // login >> valid
+    // /login >> valid
+    path = '/' + ltrim(path, '/');
+
+    if (! localeCode && hasInitialLocaleCode()) {
+        localeCode = getCurrentLocaleCode();
+    }
+
+    if (localeCode) {
+        path = '/' + localeCode + path;
+    }
+
     // /users
     // if current initial locale code
-    // /en/users
+    // /en/users    
     history.push(path);
 }
 
@@ -77,7 +89,7 @@ export function switchLang(localeCode) {
     let route = currentRoute();
     events.trigger(SWITCHING_LOCALE_CODE_EVENT, localeCode);
     
-    navigateTo('/' + localeCode + route);
+    navigateTo('/' + route, localeCode);
 }
 
 /**

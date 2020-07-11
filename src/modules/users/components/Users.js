@@ -31,7 +31,7 @@ const options = {
         tableActions,
     ],
 };
-
+    
 export default function Users() {
     translatedTitle(options.heading);
 

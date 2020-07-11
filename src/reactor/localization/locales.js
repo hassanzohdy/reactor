@@ -53,8 +53,6 @@ export function getCurrentLocaleCode() {
     return currentLocaleCode;
 }
 
-
-
 /**
  * Update current locale code 
  * 
@@ -68,7 +66,6 @@ export function updateCurrentLocaleCode(localeCode) {
     document.documentElement.lang = localeCode;
     currentLocaleCode = localeCode;
 }
-
 
 /**
  * Set current locale code at the beginning of the application

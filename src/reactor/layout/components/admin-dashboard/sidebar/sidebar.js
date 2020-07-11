@@ -1,6 +1,6 @@
 import React from 'react';
 import List from '@material-ui/core/List';
-import items from './sidebar-items-list';
+import sidebarItems from './sidebar-items-list';
 import SidebarListItem from './list-item';
 import { trans } from 'reactor/localization';
 import Drawer from '@material-ui/core/Drawer';
@@ -24,7 +24,8 @@ export default function Sidebar(props) {
         currentRoute: route,
     };
 
-    let itemsList = items.map((item, index) => {
+
+    let itemsList = sidebarItems.items.map((item, index) => {
         // in this case, we'll return itemGroup
         if (item.items) {
             return <SidebarListItemGroup

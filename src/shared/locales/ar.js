@@ -10,4 +10,5 @@ localization.extend('ar', {
     removeItem: 'حذف %s',
     en: 'English',
     ar: 'العربية',
+    refresh: 'إعادة تحميل',
 });
