@@ -9,7 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
 import Confirm from 'reactor/components/confirm';
-import FormModal from 'reactor/form/components/form-modal';
+import TableForm from './table-form';
 
 const removeText = trans('removeText');
 
@@ -41,7 +41,7 @@ export default function Table(props) {
         return tableStructure(options, tableRecords, recordUpdate);
     }, [options, tableRecords]);
 
-    const closeModal = () => {
+    const closeForm = () => {
         displayForm(false);
         setTimeout(() => {
             // Reset the action to null
@@ -53,27 +53,18 @@ export default function Table(props) {
 
     const itemType = action === 'edit' ? 'editItem' : 'addItem';
 
-    const submitForm = async (e) => {
-        const form = e.target;
+    const onSubmit = async (action, record) => {
         if (action === 'edit') {
-            let { data } = await service.update(record.id, form);
-            let { record: updateRecord } = data;
-
             // update existing record data by its index
-            tableRecords[recordIndex] = updateRecord;
+            tableRecords[recordIndex] = record;
             // reset the records list to force re-render the table rows
             setRecords(tableRecords.concat([]));
         } else {
-            // action here is adding
-            let { data } = await service.create(form);
-
-            let { record } = data;
-
             tableRecords.unshift(record);
             setRecords(tableRecords.concat([]));
         }
 
-        closeModal();
+        closeForm();
     };
 
     const closeRemoveConfirm = () => {
@@ -97,14 +88,20 @@ export default function Table(props) {
                 onConfirm={removeRecord}
                 message={removeText} />
 
-            <FormModal
+            {/* Form */}
+
+            <TableForm
+                onSubmit={onSubmit}
                 open={formIsDisplayed}
-                onSubmit={submitForm}
-                title={trans(itemType, trans(options.formOptions.singleName))}
-                onClose={closeModal}
-            >
-                <options.formOptions.form index={recordIndex} record={record} />
-            </FormModal>
+                onClose={closeForm}
+                service={service}
+                action={action}
+                formOptions={options.formOptions}
+                recordIndex={recordIndex}
+                record={record}
+                itemType={itemType}
+            />
+
             <TableToolBar displayForm={displayForm} text={trans(options.table.heading)} />
             <TableContainer component={Paper}>
                 <MaterialTable>
