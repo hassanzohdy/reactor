@@ -3,8 +3,10 @@ import FormModal from 'reactor/form/components/form-modal';
 import { trans } from 'reactor/localization';
 import ProgressBar from 'reactor/components/progress-bar';
 
-export default function TableForm({ action, formOptions, onClose, itemType, recordIndex, open, onSubmit, service, record }) {
+export default function TableForm({ action, formOptions, onClose, recordIndex, open, onSubmit, service, record = {} }) {
     const [lazyRecord, setLazyRecord] = React.useState({});
+
+    const itemType = action === 'edit' ? 'editItem' : 'addItem';
 
     React.useEffect(() => {
         if (open && formOptions.lazyForm && record.id && !lazyRecord.id) {
@@ -35,7 +37,7 @@ export default function TableForm({ action, formOptions, onClose, itemType, reco
             savedRecord = responseRecord;
         }
 
-        onSubmit && onSubmit(action, savedRecord);
+        onSubmit && onSubmit(savedRecord, action);
     };
 
     let content;
