@@ -4,7 +4,7 @@ localization.extend('en', {
     appName: 'Online Store',
     add: 'Add',
     edit: 'Edit',
-    remove: 'Remove',    
+    remove: 'Remove',
     addItem: 'Add new %s',
     editItem: 'Edit %s',
     removeItem: 'Remove %s',
@@ -13,4 +13,5 @@ localization.extend('en', {
     en: 'English',
     ar: 'العربية',
     refresh: 'Refresh',
+    save: 'Save',
 });

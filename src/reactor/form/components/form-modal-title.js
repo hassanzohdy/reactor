@@ -1,4 +1,5 @@
 import React from 'react';
+import { trans } from 'reactor/localization';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -28,7 +29,9 @@ export default function FormModalTitle(props) {
                 <Typography variant="h6" className={classes.title}>
                     {props.title}
                 </Typography>
-                <SubmitButton color="inherit">Save</SubmitButton>
+                <SubmitButton color="inherit">
+                    {trans('save')}
+                </SubmitButton>
             </Toolbar>
         </AppBar>
     )

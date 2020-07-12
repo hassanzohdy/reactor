@@ -6,4 +6,6 @@ localization.extend('en', {
     email: 'Email Address',
     group: 'Administrator Group',
     user: 'User',
+    name: 'Name',
+    password: 'Password',
 });

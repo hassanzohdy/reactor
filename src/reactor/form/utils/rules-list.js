@@ -1,4 +1,5 @@
 import '../validation/locales/en';
+import '../validation/locales/ar';
 // import PropTypes from 'prop-types';
 import { Arr } from "reinforcements";
 import email from "../validation/rules/email";

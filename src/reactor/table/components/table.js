@@ -20,6 +20,7 @@ export default function Table(props) {
     const [recordIndex, setIndex] = useState(null);
     const [action, setAction] = useState(null);
     const [tableRecords, setRecords] = useState(records);
+    
     /**
      * Triggered when user clicks on any of table action buttons
      *  
