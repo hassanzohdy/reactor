@@ -7,7 +7,7 @@ import optionedAdminTable from 'reactor/layout/components/admin-dashboard/option
 const options = {
     service: usersService,
     formOptions: {
-        lazyForm: UserForm,
+        form: UserForm,
         singleName: 'user',
     },
     table: {
