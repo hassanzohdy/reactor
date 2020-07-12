@@ -4,7 +4,7 @@ import { trans } from 'reactor/localization';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
-export default function tableStructure(options, records, setRecord) {
+export default function tableStructure(options, records, setRecord, service, updateRecords) {
     let tableHeading = options.table.columns.map((column, index) => {
         return <TableCell key={index}>{trans(column.heading)}</TableCell>;
     });
@@ -16,7 +16,7 @@ export default function tableStructure(options, records, setRecord) {
 
         return <TableRow key={record.id}>
             {record.columnsList.map((column, columnIndex) => {
-                if (column.cell) return column.cell;
+                // if (column.cell) return column.cell;
 
                 column.value = Obj.get(column, 'value', Obj.get(record, column.key));
 
@@ -28,7 +28,7 @@ export default function tableStructure(options, records, setRecord) {
                     column.value = column.defaultValue;
                 }
 
-                const columnValue = column.formatter ? <column.formatter record={record} setRecord={setRecord} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
+                const columnValue = column.formatter ? <column.formatter record={record} setRecord={setRecord} column={column} options={options} service={service} rowIndex={rowIndex} updateRecords={updateRecords} columnIndex={columnIndex} /> : column.value;
 
                 column.cell = <TableCell key={column.heading}>
                     {columnValue}

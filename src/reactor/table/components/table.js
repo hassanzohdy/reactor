@@ -4,14 +4,12 @@ import TableToolBar from './table-toolbar';
 import Paper from '@material-ui/core/Paper';
 import { trans } from 'reactor/localization';
 import tableStructure from './table-structure';
-import Confirm from 'reactor/components/confirm';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import MaterialTable from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
 
-const removeText = trans('removeText');
 
 export default function Table(props) {
     let { options, records, service } = props;
@@ -20,6 +18,7 @@ export default function Table(props) {
     const [recordIndex, setIndex] = useState(null);
     const [action, setAction] = useState(null);
     const [tableRecords, setRecords] = useState(records);
+
     /**
      * Triggered when user clicks on any of table action buttons
      *  
@@ -38,8 +37,8 @@ export default function Table(props) {
 
     // store the value until one of the given deps is changed
     let [tableHeading, tableRows] = React.useMemo(() => {
-        return tableStructure(options, tableRecords, recordUpdate);
-    }, [options, tableRecords]);
+        return tableStructure(options, tableRecords, recordUpdate, service, setRecords);
+    }, [options, tableRecords, service]);
 
     const closeForm = () => {
         displayForm(false);
@@ -67,27 +66,8 @@ export default function Table(props) {
         closeForm();
     };
 
-    const closeRemoveConfirm = () => {
-        setAction(null);
-    };
-
-    const removeRecord = () => {
-        // Remove record from table
-        tableRecords.splice(recordIndex, 1);
-        // update table records
-        setRecords(tableRecords.concat([]));
-
-        // Remove from API
-        service.delete(record.id);
-    };
-
     return (
         <>
-            <Confirm open={action === 'remove'}
-                onClose={closeRemoveConfirm}
-                onConfirm={removeRecord}
-                message={removeText} />
-
             {/* Form */}
 
             <TableForm
