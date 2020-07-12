@@ -2,11 +2,11 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import grey from '@material-ui/core/colors/grey';
-import { TableAddButton } from './table-actions';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/ListOutlined';
+import TableAddButton from './actions/add';
 
 const useStyles = makeStyles((theme) => ({
     root: {

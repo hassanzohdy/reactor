@@ -36,7 +36,7 @@ export default function tableStructure(options, records, setRecord) {
 
                 return column.cell;
             })}
-
+    
         </TableRow>;
     });
 

@@ -1,15 +1,15 @@
+import TableForm from './table-form';
 import React, { useState } from 'react';
-import MaterialTable from '@material-ui/core/Table';
 import TableToolBar from './table-toolbar';
 import Paper from '@material-ui/core/Paper';
 import { trans } from 'reactor/localization';
 import tableStructure from './table-structure';
+import Confirm from 'reactor/components/confirm';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
+import MaterialTable from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
-import Confirm from 'reactor/components/confirm';
-import TableForm from './table-form';
 
 const removeText = trans('removeText');
 
@@ -20,7 +20,6 @@ export default function Table(props) {
     const [recordIndex, setIndex] = useState(null);
     const [action, setAction] = useState(null);
     const [tableRecords, setRecords] = useState(records);
-    
     /**
      * Triggered when user clicks on any of table action buttons
      *  
@@ -105,7 +104,7 @@ export default function Table(props) {
 
             <TableToolBar displayForm={displayForm} text={trans(options.table.heading)} />
             <TableContainer component={Paper}>
-                <MaterialTable>
+                <MaterialTable stickyHeader>
                     <TableHead>
                         <TableRow>
                             {tableHeading}
