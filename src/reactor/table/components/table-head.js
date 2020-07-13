@@ -5,7 +5,7 @@ import { TableCell, TableRow } from '@material-ui/core';
 import useLayoutClasses from '../../layout/utils/style';
 import MaterialTableHead from '@material-ui/core/TableHead';
 
-export default function TableHeading() {
+export default function TableHead() {
     const { options } = useTable();
 
     const classes = useLayoutClasses();

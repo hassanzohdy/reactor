@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import Table from './table';
 import React from 'react';
+import Table from './table';
+import PropTypes from 'prop-types';
 import ProgressBar from 'reactor/components/progress-bar';
 
 export default function LazyTable(props) {
@@ -25,11 +25,10 @@ export default function LazyTable(props) {
 
             updateLoader(false);
         });
-    }, [isLoading, request]);
+    }, [request, mapResponse]);
 
     // Display In Progress Spinner
     // load the users data from API
-    // 
     if (isLoading) {
         return <ProgressBar />
     }

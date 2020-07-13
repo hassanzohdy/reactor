@@ -6,27 +6,34 @@ import Paper from '@material-ui/core/Paper';
 import MaterialTable from '@material-ui/core/Table';
 import TableProvider from '../providers/table-provider';
 import TableContainer from '@material-ui/core/TableContainer';
+import TablePagination from './table-pagination';
 
 export default function Table(props) {
-    let { options, records } = props;
+    let { options, records, pagination } = props;
     const [tableRecords, setRecords] = React.useState(records);
 
     const tableOptions = {
         records: tableRecords,
         updateRecords: setRecords,
         options,
+        pagination,
         service: options.service,
     };
 
     return (
         <TableProvider.Provider value={tableOptions}>
             <TableToolBar />
-            <TableContainer component={Paper}>
-                <MaterialTable>
-                    <TableHead />
-                    <TableBody />
-                </MaterialTable>
-            </TableContainer>
+            <Paper>
+                <TableContainer>
+                    <MaterialTable>
+                        <TableHead />
+                        <TableBody />
+                    </MaterialTable>
+                </TableContainer>
+                {pagination &&
+                    <TablePagination />
+                }
+            </Paper>
         </TableProvider.Provider>
     );
 }
