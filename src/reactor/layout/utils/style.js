@@ -81,6 +81,9 @@ const useLayoutClasses = makeStyles((theme) => ({
         color: SIDEBAR_ITEM_COLOR,
         fontWe: 'bold',
     },
+    bold: {
+        fontWeight: 'bold',
+    },
     modalTitle: {
         margin: 0,
         padding: theme.spacing(2),

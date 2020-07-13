@@ -1,7 +1,7 @@
 import React from 'react';
 import { Obj } from 'reinforcements';
-import { TableRow } from '@material-ui/core';
 import useTable from '../hooks/use-table';
+import { TableRow } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import MaterialTableBody from '@material-ui/core/TableBody';
 import TableRowProvider from '../providers/table-row-provider';

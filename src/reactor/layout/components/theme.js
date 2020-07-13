@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Globals from 'reactor/globals';
+import { Obj } from 'reinforcements';
 import MultiDirection from './multi-direction';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { MAIN_COLOR, FONT_FAMILIES } from 'shared/style';
-import { Obj } from 'reinforcements';
 import { setExternalFontFamily } from '../utils/font-family-switcher';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export default function Theme(props) {
-    setExternalFontFamily(Obj.get(FONT_FAMILIES, Globals.localeCode + '.src'))
+    setExternalFontFamily(Obj.get(FONT_FAMILIES, Globals.localeCode + '.src'));
     const theme = createMuiTheme({    
         direction: Globals.direction,
         typography: {

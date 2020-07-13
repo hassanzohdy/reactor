@@ -1,11 +1,11 @@
 import React from 'react';
+import TableForm from '../table-form';
+import useTable from '../../hooks/use-table';
 import { trans } from 'reactor/localization';
 import EditIcon from '@material-ui/icons/Edit';
 import Tooltip from 'reactor/components/tooltip';
-import IconButton from '@material-ui/core/IconButton';
-import TableForm from '../table-form';
-import useTable from '../../hooks/use-table';
 import useTableRow from '../../hooks/use-table-row';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function TableEditButton() {
     const [formIsOpened, openForm] = React.useState(false);
