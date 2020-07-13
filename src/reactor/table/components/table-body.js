@@ -1,16 +1,15 @@
 import React from 'react';
 import { Obj } from 'reinforcements';
-import { trans } from 'reactor/localization';
-import TableRow from '@material-ui/core/TableRow';
+import { TableRow } from '@material-ui/core';
+import useTable from '../hooks/use-table';
 import TableCell from '@material-ui/core/TableCell';
+import MaterialTableBody from '@material-ui/core/TableBody';
 
-export default function tableStructure(options, records, service, updateRecords) {
-    let tableHeading = options.table.columns.map((column, index) => {
-        return <TableCell key={index}>{trans(column.heading)}</TableCell>;
-    });
+export default function TableBody() {
+    const { records, options } = useTable();
 
     let tableRows = records.map((record, rowIndex) => {
-        if (! record.columnsList) {
+        if (!record.columnsList) {
             record.columnsList = Obj.clone(options.table.columns);
         }
 
@@ -28,7 +27,7 @@ export default function tableStructure(options, records, service, updateRecords)
                     column.value = column.defaultValue;
                 }
 
-                const columnValue = column.formatter ? <column.formatter record={record} column={column} options={options} service={service} rowIndex={rowIndex} updateRecords={updateRecords} columnIndex={columnIndex} /> : column.value;
+                const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
 
                 column.cell = <TableCell key={column.heading}>
                     {columnValue}
@@ -36,9 +35,13 @@ export default function tableStructure(options, records, service, updateRecords)
 
                 return column.cell;
             })}
-    
+
         </TableRow>;
     });
 
-    return [tableHeading, tableRows];
-} 
+    return (
+        <MaterialTableBody>
+            {tableRows}
+        </MaterialTableBody>
+    );
+}
