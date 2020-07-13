@@ -4,39 +4,57 @@ import { TableRow } from '@material-ui/core';
 import useTable from '../hooks/use-table';
 import TableCell from '@material-ui/core/TableCell';
 import MaterialTableBody from '@material-ui/core/TableBody';
+import TableRowProvider from '../providers/table-row-provider';
 
 export default function TableBody() {
-    const { records, options } = useTable();
+    const { records, options, updateRecords } = useTable();
 
     let tableRows = records.map((record, rowIndex) => {
         if (!record.columnsList) {
             record.columnsList = Obj.clone(options.table.columns);
         }
 
-        return <TableRow key={record.id}>
-            {record.columnsList.map((column, columnIndex) => {
-                // if (column.cell) return column.cell;
+        const tableRowValue = {
+            record, 
+            rowIndex,
+            updateRecord(record) {
+                updateRecords(records => {
+                    records[rowIndex] = record;
 
-                column.value = Obj.get(column, 'value', Obj.get(record, column.key));
+                    return [...records];
+                });
+            }
+        }
 
-                // if no value and there is a default value
-                // then create new key `originalValue` and override 
-                // the value key with the default value 
-                if (!column.value && column.defaultValue) {
-                    column.originalValue = column.value;
-                    column.value = column.defaultValue;
-                }
+        return (
+            <TableRowProvider.Provider key={record.id} value={tableRowValue}>
+                <TableRow>
+                    {record.columnsList.map((column, columnIndex) => {
+                        // if (column.cell) return column.cell;
 
-                const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
+                        column.value = Obj.get(column, 'value', Obj.get(record, column.key));
 
-                column.cell = <TableCell key={column.heading}>
-                    {columnValue}
-                </TableCell>;
+                        // if no value and there is a default value
+                        // then create new key `originalValue` and override 
+                        // the value key with the default value 
+                        if (!column.value && column.defaultValue) {
+                            column.originalValue = column.value;
+                            column.value = column.defaultValue;
+                        }
 
-                return column.cell;
-            })}
+                        const columnValue = column.formatter ? <column.formatter record={record} column={column} rowIndex={rowIndex} columnIndex={columnIndex} /> : column.value;
 
-        </TableRow>;
+                        column.cell = <TableCell key={column.heading}>
+                            {columnValue}
+                        </TableCell>;
+
+                        return column.cell;
+                    })}
+
+                </TableRow>
+            </TableRowProvider.Provider>
+        )
+
     });
 
     return (

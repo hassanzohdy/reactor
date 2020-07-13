@@ -5,17 +5,16 @@ import Tooltip from 'reactor/components/tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import TableForm from '../table-form';
 import useTable from '../../hooks/use-table';
+import useTableRow from '../../hooks/use-table-row';
 
-export default function TableEditButton({ record, rowIndex, }) {
+export default function TableEditButton() {
     const [formIsOpened, openForm] = React.useState(false);
-    const { service, options, updateRecords } = useTable();
+    const { service, options} = useTable();
+
+    const { record, updateRecord} = useTableRow();
 
     const onSubmit = record => {
-        updateRecords(tableRecords => {
-            tableRecords[rowIndex] = record;
-
-            return [...tableRecords];
-        });
+        updateRecord(record);
 
         openForm(false);
     };
