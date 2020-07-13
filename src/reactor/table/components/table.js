@@ -8,14 +8,14 @@ import TableProvider from '../providers/table-provider';
 import TableContainer from '@material-ui/core/TableContainer';
 
 export default function Table(props) {
-    let { options, records, service } = props;
+    let { options, records } = props;
     const [tableRecords, setRecords] = React.useState(records);
 
     const tableOptions = {
         records: tableRecords,
         updateRecords: setRecords,
         options,
-        service,
+        service: options.service,
     };
 
     return (
