@@ -4,9 +4,12 @@ import Confirm from 'reactor/components/confirm';
 import Tooltip from 'reactor/components/tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/DeleteSweep';
+import useTable from '../../hooks/use-table';
 
-export default function TableDeleteButton({ record, rowIndex, setRecord, options, service, recordIndex, updateRecords }) {
+export default function TableDeleteButton({ record, rowIndex }) {
     const [confirming, setConfirm] = React.useState(false);
+
+    const { service, updateRecords } = useTable();
 
     const removeRecord = e => {
         // update table records

@@ -8,6 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import MaterialTable from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
+import TableProvider from '../providers/table-provider';
 
 export default function Table(props) {
     let { options, records, service } = props;
@@ -18,9 +19,16 @@ export default function Table(props) {
         return tableStructure(options, tableRecords, service, setRecords);
     }, [options, tableRecords, service]);
 
+    const tableOptions = {
+        records: tableRecords,
+        updateRecords: setRecords,
+        options,
+        service,
+    };
+
     return (
-        <>
-            <TableToolBar updateRecords={setRecords} options={options} service={service} text={trans(options.table.heading)} />
+        <TableProvider.Provider value={tableOptions}>
+            <TableToolBar />
             <TableContainer component={Paper}>
                 <MaterialTable>
                     <TableHead>
@@ -33,6 +41,6 @@ export default function Table(props) {
                     </TableBody>
                 </MaterialTable>
             </TableContainer>
-        </>
+        </TableProvider.Provider>
     );
 }

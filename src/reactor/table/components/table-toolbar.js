@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/ListOutlined';
 import TableAddButton from './actions/add';
+import useTable from '../hooks/use-table';
+import { trans } from 'reactor/localization';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,8 +24,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function TableToolBar({ text, options, updateRecords, service }) {
+export default function TableToolBar() {
     const classes = useStyles();
+
+    const {options} = useTable();
+
+    const text = trans(options.table.heading);
 
     return (
         <div className={classes.root}>
@@ -35,7 +41,7 @@ export default function TableToolBar({ text, options, updateRecords, service }) 
                     <Typography variant="h6" className={classes.title}>
                         {text}
                     </Typography>
-                    <TableAddButton updateRecords={updateRecords} options={options} service={service} />
+                    <TableAddButton />
                 </Toolbar>
             </AppBar>
         </div>

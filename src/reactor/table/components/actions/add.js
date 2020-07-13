@@ -4,9 +4,12 @@ import { trans } from 'reactor/localization';
 import Tooltip from 'reactor/components/tooltip';
 import AddIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
+import useTable from '../../hooks/use-table';
 
-export default function TableAddButton({ service, options, updateRecords }) {
+export default function TableAddButton() {
     const [formIsOpened, openForm] = React.useState(false);
+
+    const { service, options, updateRecords } = useTable();
 
     const onSubmit = record => {
         updateRecords(tableRecords => {
