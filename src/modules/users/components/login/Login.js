@@ -10,7 +10,7 @@ import { TextCenter } from 'reactor/components/aligned';
 import FormError from 'reactor/form/components/form-error';
 import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
-import PasswordInput from 'reactor/form/components/password-type';
+import PasswordInput from 'reactor/form/components/password-input';
 import ReactorComponent from 'reactor/components/reactor.component';
 export default class Login extends ReactorComponent {
     /**

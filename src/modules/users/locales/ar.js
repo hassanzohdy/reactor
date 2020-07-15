@@ -8,4 +8,6 @@ localization.extend('ar', {
     group: 'مجموعة المدراء',
     name: 'الإسم',
     password: 'كلمة المرور',
+    usersGroups: 'مجموعات المديرين',
+    usersGroup: 'مجموعة مدراء',
 });

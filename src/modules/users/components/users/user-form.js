@@ -1,12 +1,11 @@
 import React from 'react';
+import { Obj } from 'reinforcements';
 import { trans } from 'reactor/localization';
 import TextInput from 'reactor/form/components/text-input';
 import EmailInput from 'reactor/form/components/email-input';
-import PasswordInput from 'reactor/form/components/password-type';
-import usersGroupsService from '../services/users-groups-service';
 import SelectInput from 'reactor/form/components/select-input';
-import { Obj } from 'reinforcements';
-
+import PasswordInput from 'reactor/form/components/password-input';
+import usersGroupsService from 'modules/users/services/users-groups-service';
 
 const mapResponse = response => {
     return response.data.records.map(record => ({

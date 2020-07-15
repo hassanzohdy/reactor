@@ -8,4 +8,6 @@ localization.extend('en', {
     user: 'User',
     name: 'Name',
     password: 'Password',
+    usersGroups: 'Users Groups',
+    usersGroup: 'Users Group',
 });

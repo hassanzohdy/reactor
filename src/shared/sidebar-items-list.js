@@ -15,7 +15,13 @@ sidebarItems.extend([
                 text: 'Users List',
                 route: '/users',
                 icon: SupervisedUserCircle
-            }
+            },
+            {
+                text: 'Users Groups',
+                route: '/users/groups',
+                icon: SupervisedUserCircle
+            },
+
         ]
     }
 ]);
