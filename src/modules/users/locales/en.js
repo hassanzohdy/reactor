@@ -10,4 +10,5 @@ localization.extend('en', {
     password: 'Password',
     usersGroups: 'Users Groups',
     usersGroup: 'Users Group',
+    loading: 'Loading...',
 });

@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import MaterialTableBody from '@material-ui/core/TableBody';
 import TableRowProvider from '../providers/table-row-provider';
 import useLayoutClasses from 'reactor/layout/utils/style';
+import { trans } from 'reactor/localization';
 
 export default function TableBody({ isLoading }) {
     const { records, options, updateRecords } = useTable();
@@ -17,7 +18,9 @@ export default function TableBody({ isLoading }) {
     if (isLoading) {
         tableRows = (
             <TableRow>
-                <TableCell className={classes.textCenter} colSpan={options.table.columns.length}>Loading...</TableCell>
+                <TableCell className={classes.textCenter} colSpan={options.table.columns.length}>
+                    {trans('loading')}
+                </TableCell>
             </TableRow>
         );
     } else {

@@ -2,6 +2,7 @@ import localization from 'reactor/localization';
 
 localization.extend('en', {
     appName: 'Online Store',
+    dashboard: 'Dashboard',
     add: 'Add',
     edit: 'Edit',
     remove: 'Remove',

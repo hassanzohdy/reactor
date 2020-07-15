@@ -3,6 +3,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Is from '@flk/supportive-is';
 import { getItem, getItems } from '../utils/select-items';
 import { makeStyles, Chip } from '@material-ui/core';
+import { trans } from '../../localization';
 
 const useStyles = makeStyles((theme) => ({
     chips: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export const selectItems = (items, isLoading) => {
     if (isLoading) {
         items = [{
-            label: 'Loading...',
+            label: trans('loading'),
             value: '',
             disabled: true,
         }];

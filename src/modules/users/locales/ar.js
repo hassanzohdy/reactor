@@ -10,4 +10,5 @@ localization.extend('ar', {
     password: 'كلمة المرور',
     usersGroups: 'مجموعات المديرين',
     usersGroup: 'مجموعة مدراء',
+    loading: 'جاري التحميل....',
 });

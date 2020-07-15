@@ -25,7 +25,7 @@ export default function Sidebar(props) {
     };
 
 
-    let itemsList = sidebarItems.items.map((item, index) => {
+    let itemsList = sidebarItems.getItems().map((item, index) => {
         // in this case, we'll return itemGroup
         if (item.items) {
             return <SidebarListItemGroup

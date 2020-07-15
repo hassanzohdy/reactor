@@ -2,6 +2,9 @@ import localization from 'reactor/localization';
 
 localization.extend('ar', {
     appName: 'متجري الكبير',
+    dashboard: 'لوحة التحكم',
+    users: 'قائمة الأعضاء',    
+    usersGroups: 'مجموعات المديرين',
     add: 'إضافة',
     edit: 'تعديل',
     remove: 'حذف',
