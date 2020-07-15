@@ -9,10 +9,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from './table-pagination';
 import { LightBackdrop } from 'reactor/layout/components/backdrop';
 import useLayoutClasses from 'reactor/layout/utils/style';
+import { Obj } from 'reinforcements';
 
 export default function Table(props) {
-    let { options, records, pagination, isLoading } = props;
+    let { options, records, pagination, isLoading, onChange } = props;
     const [tableRecords, setRecords] = React.useState(records);
+    const [currentTableInfo, setTableInfo] = React.useState({});
 
     const classes = useLayoutClasses();
 
@@ -20,11 +22,34 @@ export default function Table(props) {
         setRecords(records);
     }, [records]);
 
+    const updateTableInfo = newInfo => {
+        const newTableInfo = Obj.merge(currentTableInfo, newInfo);
+
+        setTableInfo(newTableInfo);
+
+        onChange && onChange(newTableInfo);
+    };
+
+    const setPageNumber = pageNumber => {
+        updateTableInfo({
+            page: pageNumber,
+        });
+    };
+
+    const setItemsPerPage = itemsPerPage => {
+        updateTableInfo({
+            itemsPerPage,
+            page: 1
+        });
+    };
+
     const tableOptions = {
-        records: tableRecords,
-        updateRecords: setRecords,
         options,
         pagination,
+        setPageNumber,
+        setItemsPerPage,
+        records: tableRecords,
+        updateRecords: setRecords,
         service: options.service,
     };
 

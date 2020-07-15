@@ -6,7 +6,8 @@ export default function LazyTable(props) {
     let { request, options, mapResponse, ...otherProps } = props;
 
     let [isLoading, updateLoader] = React.useState(true);
-    let [tableInfo, updateTableInfo] = React.useState({});
+    let [tableInfo, setTableInfo] = React.useState({});
+    let [tableBody, updateTableBody] = React.useState({});
 
     // first step, set a loading state
     // second step, get data from service
@@ -17,26 +18,27 @@ export default function LazyTable(props) {
         request(tableInfo).then(response => {
             const { records, pagination } = mapResponse(response);
 
-            updateTableInfo({
+            updateTableBody({
                 records,
                 pagination,
             });
 
             updateLoader(false);
         });
-    }, [request, mapResponse]);
+    }, [request, mapResponse, tableInfo]);
 
-    const updateTable = tableInfo => {
+    const updateTableInfo = newTableInfo => {
+        setTableInfo(newTableInfo);
         updateLoader(true);
-    };
+    }
 
     return (
         <Table
             options={options}
             isLoading={isLoading}
-            records={tableInfo.records}
-            pagination={tableInfo.pagination}
-            onChange={updateTable}
+            records={tableBody.records}
+            pagination={tableBody.pagination}
+            onChange={updateTableInfo}
             {...otherProps}
         />
     );
