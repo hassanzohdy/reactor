@@ -39,7 +39,7 @@ export default function Table(props) {
     const setItemsPerPage = itemsPerPage => {
         updateTableInfo({
             itemsPerPage,
-            page: 1
+            page: 1, // reset again page to 1
         });
     };
 

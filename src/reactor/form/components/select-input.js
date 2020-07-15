@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { selectItems, RenderSelectedValues } from './select-input-helper-components';
 
-export default function SelectInput({ id, label, onChange, labelId, placeholder, required, value, items, groups, imagable, iconable, multiple, readOnly, none, ...otherProps }) {
+export default function SelectInput({ id, label, onChange, lazyLoading, request, mapResponse, labelId, placeholder, required, value, items, groups, imagable, iconable, multiple, readOnly, none, ...otherProps }) {
     // for multiple selections
     if (multiple && ! value) {
         value = [];
@@ -15,6 +15,26 @@ export default function SelectInput({ id, label, onChange, labelId, placeholder,
 
     const [noneAdded, markNoneAsAdded] = React.useState(false);
     const [placeholderAdded, markPlaceholderAsAdded] = React.useState(false);
+
+    const [currentItems, setItems] = React.useState(items || []);
+
+    const [isLoading, setLoading] = React.useState(lazyLoading);
+
+    const [loaded, requestIsLoaded] = React.useState(false);
+
+    React.useEffect(() => {
+        if (! lazyLoading || loaded) return;
+
+        request().then(response => {
+            const items = mapResponse(response);
+            
+            setItems(items);
+            requestIsLoaded(true);
+            setLoading(false);
+            setValue(value || '');
+        });
+
+    }, [lazyLoading, loaded, request, mapResponse, value]);
 
     if (none && ! noneAdded) {
         // add none 
@@ -38,16 +58,16 @@ export default function SelectInput({ id, label, onChange, labelId, placeholder,
 
     const [opened, setOpenedStatus] = React.useState(false);
 
-    const [currentValue, setValue] = React.useState(value);
+    const [currentValue, setValue] = React.useState(isLoading ? '' : value || '');
     // get the item object for the given value
 
     const handleChange = (event) => {
         let value = event.target.value;        
         setValue(value);
         // select the item by value
-        let item = getItem(items, value);
+        let item = getItem(currentItems, value);
         // set the item as an argument for the onChange event 
-        onChange(item);
+        onChange && onChange(item);
     };
 
     return (
@@ -63,8 +83,8 @@ export default function SelectInput({ id, label, onChange, labelId, placeholder,
                 multiple={multiple}
                 value={currentValue}
                 onChange={handleChange}
-                renderValue={selected => <RenderSelectedValues opened={opened} placeholder={placeholder} label={label} items={items} selected={selected} /> }
-                children={selectItems(items)}
+                renderValue={selected => <RenderSelectedValues opened={opened} placeholder={placeholder} label={label} items={currentItems} selected={selected} /> }
+                children={selectItems(currentItems, isLoading)}
                 {...otherProps}
             />
         </FormControl>

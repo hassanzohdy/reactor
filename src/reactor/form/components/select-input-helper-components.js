@@ -17,7 +17,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const selectItems = items => {
+export const selectItems = (items, isLoading) => {
+    if (isLoading) {
+        items = [{
+            label: 'Loading...',
+            value: '',
+            disabled: true,
+        }];
+    }
+
     return items.map(item => {
         return <MenuItem disabled={item.disabled === true} key={item.value} value={item.value}>
             {item.label}
@@ -47,7 +55,7 @@ export function RenderSelectedValues({ items, selected, opened, label, placehold
     // Render Placeholder On Empty Selection as a text 
     const classes = useStyles();
 
-    if (Is.empty(selected)) {
+    if (Is.empty(selected) || Is.empty(items)) {
         if (label && !opened) return '';
 
         return <MenuItem className={classes.smallText}>{placeholder}</MenuItem>
