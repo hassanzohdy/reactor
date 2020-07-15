@@ -3,7 +3,7 @@ import { TablePagination as MaterialTablePagination } from "@material-ui/core";
 import useTable from '../hooks/use-table';
 
 export default function TablePagination() {
-    const { pagination } = useTable();
+    const { pagination, setItemsPerPage } = useTable();
 
     const [currentPage, setCurrentPage] = React.useState(pagination.currentPage - 1);
 
@@ -13,7 +13,11 @@ export default function TablePagination() {
         // page has been updated and we need to send again another request to backend
     }
 
-    const allowedItemsPerPage = [10, 15, 20, 25, 30, 50, 100];
+    const allowedItemsPerPage = [1, 10, 15, 20, 25, 30, 50, 100];
+
+    const handleChangeRowsPerPage = e => {
+        setItemsPerPage(e.target.value);
+    }
 
     return (
         <MaterialTablePagination
@@ -23,7 +27,7 @@ export default function TablePagination() {
             rowsPerPage={pagination.itemsPerPage}
             page={currentPage}
             onChangePage={handleChangePage}
-        // onChangeRowsPerPage={handleChangeRowsPerPage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
         />
     )
 }

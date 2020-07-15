@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from './table';
 import PropTypes from 'prop-types';
-import ProgressBar from 'reactor/components/progress-bar';
 
 export default function LazyTable(props) {
     let { request, options, mapResponse, ...otherProps } = props;
@@ -15,7 +14,7 @@ export default function LazyTable(props) {
 
     // only once the component is rendered 
     React.useEffect(() => {
-        request().then(response => {
+        request(tableInfo).then(response => {
             const { records, pagination } = mapResponse(response);
 
             updateTableInfo({
@@ -27,17 +26,17 @@ export default function LazyTable(props) {
         });
     }, [request, mapResponse]);
 
-    // Display In Progress Spinner
-    // load the users data from API
-    if (isLoading) {
-        return <ProgressBar />
-    }
+    const updateTable = tableInfo => {
+        updateLoader(true);
+    };
 
     return (
         <Table
             options={options}
+            isLoading={isLoading}
             records={tableInfo.records}
             pagination={tableInfo.pagination}
+            onChange={updateTable}
             {...otherProps}
         />
     );

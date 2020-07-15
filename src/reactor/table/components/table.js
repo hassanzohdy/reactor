@@ -7,10 +7,18 @@ import MaterialTable from '@material-ui/core/Table';
 import TableProvider from '../providers/table-provider';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from './table-pagination';
+import { LightBackdrop } from 'reactor/layout/components/backdrop';
+import useLayoutClasses from 'reactor/layout/utils/style';
 
 export default function Table(props) {
-    let { options, records, pagination } = props;
+    let { options, records, pagination, isLoading } = props;
     const [tableRecords, setRecords] = React.useState(records);
+
+    const classes = useLayoutClasses();
+
+    React.useEffect(() => {
+        setRecords(records);
+    }, [records]);
 
     const tableOptions = {
         records: tableRecords,
@@ -23,11 +31,12 @@ export default function Table(props) {
     return (
         <TableProvider.Provider value={tableOptions}>
             <TableToolBar />
-            <Paper>
+            <Paper className={classes.positionRelative}>
+                <LightBackdrop open={isLoading} />
                 <TableContainer>
                     <MaterialTable>
                         <TableHead />
-                        <TableBody />
+                        <TableBody isLoading={isLoading} />
                     </MaterialTable>
                 </TableContainer>
                 {pagination &&

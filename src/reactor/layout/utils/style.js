@@ -7,6 +7,12 @@ const useLayoutClasses = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
+    textCenter: {
+        textAlign: 'center',
+    },
+    positionRelative: {
+        position: 'relative',
+    },
     grow: {
         flexGrow: 1,
     },

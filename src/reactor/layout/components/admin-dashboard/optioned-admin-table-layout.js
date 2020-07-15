@@ -11,7 +11,7 @@ export default function optionedAdminTable(options) {
         };
 
         const mapResponse = response => {
-            const {records, paginationInfo} = response.data;
+            const { records, paginationInfo } = response.data;
 
             return {
                 records,
