@@ -1,13 +1,13 @@
 import React from 'react';
 import { styled } from '@material-ui/core';
-import { ANCHOR_TAG_COLOR } from 'shared/style';
 import MaterialLink from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { hasInitialLocaleCode } from 'reactor/router/navigator';
 import { getCurrentLocaleCode } from 'reactor/localization/locales';
+import styleSettings from '../layout/utils/style-settings';
 
 const ColoredLink = styled(MaterialLink)({
-    color: ANCHOR_TAG_COLOR
+    color: styleSettings.get('colors.link'),
 });
 
 const Link = React.forwardRef(function (props, forwardedRef) {

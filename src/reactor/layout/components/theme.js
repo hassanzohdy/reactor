@@ -1,24 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Globals from 'reactor/globals';
-import { Obj } from 'reinforcements';
 import MultiDirection from './multi-direction';
+import styleSettings from '../utils/style-settings';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MAIN_COLOR, FONT_FAMILIES } from 'shared/style';
 import { setExternalFontFamily } from '../utils/font-family-switcher';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export default function Theme(props) {
-    setExternalFontFamily(Obj.get(FONT_FAMILIES, Globals.localeCode + '.src'));
+    const fontFamily = styleSettings.get(`fontFamily.${Globals.localeCode}.fontFamily`);
+    const fontFamilySrc = styleSettings.get(`fontFamily.${Globals.localeCode}.src`);
+
+    setExternalFontFamily(fontFamilySrc);
+    
     const theme = createMuiTheme({    
         direction: Globals.direction,
         typography: {
-            fontFamily: Obj.get(FONT_FAMILIES, Globals.localeCode + '.fontFamily'),
+            fontFamily: fontFamily,
         },
         palette: {
             primary: {
-                main: MAIN_COLOR,
+                main: styleSettings.get('colors.primary'),
             },
+            secondary: {
+                main: styleSettings.get('colors.secondary'),
+            }
         },
         status: {
             danger: 'orange',

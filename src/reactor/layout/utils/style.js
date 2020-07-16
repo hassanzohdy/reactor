@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import Globals from "reactor/globals";
-import { SIDEBAR_ITEM_COLOR, HEADER_BAR_BACKGROUND_COLOR } from "shared/style";
+import styleSettings from "./style-settings";
     
-const drawerWidth = 240;
+const drawerWidth = styleSettings.get('dashboard.sidebar.width', 240);
 const useLayoutClasses = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -17,7 +17,7 @@ const useLayoutClasses = makeStyles((theme) => ({
         flexGrow: 1,
     },
      appBar: {
-        backgroundColor: HEADER_BAR_BACKGROUND_COLOR,
+        backgroundColor: styleSettings.get('dashboard.header.backgroundColor'),
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -84,7 +84,7 @@ const useLayoutClasses = makeStyles((theme) => ({
         minWidth: theme.spacing(5),
     },
     sidebarActiveColor: {
-        color: SIDEBAR_ITEM_COLOR,
+        color: styleSettings.get('dashboard.sidebar.sidebarItemColor', '#333'),
         fontWe: 'bold',
     },
     bold: {

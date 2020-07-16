@@ -9,16 +9,16 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from 'reactor/components/tooltip';
 // import ExitToApp from '@material-ui/icons/ExitToApp';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import Link from 'reactor/components/link';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import userLogout from 'modules/users/helpers/user-logout';
 import layoutClasses from 'reactor/layout/utils/style';
-import SelectInput from 'reactor/form/components/select-input';
-import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
 import { makeStyles, styled } from '@material-ui/core';
-import Link from 'reactor/components/link';
-import { HEADER_BAR_COLOR } from 'shared/style';
+import userLogout from 'modules/users/helpers/user-logout';
+import SelectInput from 'reactor/form/components/select-input';
 import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
+import styleSettings from 'reactor/layout/utils/style-settings';
+import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
 
 const localeCodesList = localeCodes.map(localeCode => {
     return {
@@ -32,12 +32,12 @@ const useStyles = makeStyles({
         color: '#FFF',
     },
     toolbarColor: {
-        color: HEADER_BAR_COLOR
+        color: styleSettings.get('dashboard.header.color'),
     }
 });
 
 const HeaderLink = styled(Link)({
-    color: HEADER_BAR_COLOR,
+    color: styleSettings.get('dashboard.header.linkColor', 'inherit'),
     textDecoration: 'none'
 })
 
