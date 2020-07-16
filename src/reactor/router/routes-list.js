@@ -34,6 +34,26 @@ export function addRouter(path, component, middleware = null) {
 }
 
 /**
+ * Concatenate the given paths to one single path
+ * 
+ * @param   {...string} segments
+ * @returns {string} 
+ */
+export function concatRoute(...segments) {
+    let path = '';
+
+    for (let segment of segments) {
+        segment = '/' + ltrim(segment, '/');
+        
+        path += segment;
+    }
+    
+    path = rtrim(path, '/');
+
+    return path || '/';
+} 
+
+/**
  * Add the given routes as part of the given layout
  * 
  * @param  {React.Component} LayoutComponent
@@ -59,7 +79,9 @@ export function partOf(LayoutComponent, routes) {
         // /users
         // /en/users
         // /ar/users
-        route.path = `/:localeCode(${gluedLocaleCodes})?${route.path}`;
+        // route.path = `/:localeCode(${gluedLocaleCodes})?${route.path}`;
+        route.path = concatRoute(`/:localeCode(${gluedLocaleCodes})?`, route.path);
+        
         layout.routesList.push(route.path);
         return route;
     });
@@ -81,11 +103,7 @@ export function group(groupOptions) {
         }
 
         if (path) {
-            route.path = rtrim(path + '/' + ltrim(route.path, '/'), '/');
-
-            if (route.path == '') {
-                route.path = '/';
-            }
+            route.path = concatRoute(path, route.path);
         }
 
         return route;
