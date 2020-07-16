@@ -1,5 +1,4 @@
 // import { lightBlue } from "@material-ui/core/colors";
-
 import styleSettings from "reactor/layout/utils/style-settings";
 
 // export const MAIN_COLOR = lightBlue[600];

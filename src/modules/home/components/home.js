@@ -1,8 +1,12 @@
 import React from 'react';
-import { translatedTitle } from 'reactor/metadata';
+import Helmet from 'reactor/components/helmet';
+import { trans } from 'reactor/localization';
 
 export default function Home() {
-    let title = translatedTitle('dashboard');
-
-    return <h1>{title}</h1>;
+    return (
+        <>
+            <Helmet title="dashboard" description="myDescription" />
+            <h1>{trans('dashboard')}</h1>
+        </>
+    );
 } 

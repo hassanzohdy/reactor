@@ -5,27 +5,19 @@ import { navigateTo } from 'reactor/router';
 import Form from 'reactor/form/components/form';
 import { login } from 'modules/users/services/auth';
 import Layout from 'reactor/layout/components/layout';
-import { title, description } from 'reactor/metadata';
 import { TextCenter } from 'reactor/components/aligned';
 import FormError from 'reactor/form/components/form-error';
 import EmailInput from 'reactor/form/components/email-input';
 import SubmitButton from 'reactor/form/components/submit-button';
 import PasswordInput from 'reactor/form/components/password-input';
 import ReactorComponent from 'reactor/components/reactor.component';
+import Helmet from 'reactor/components/helmet';
+
 export default class Login extends ReactorComponent {
     /**
      * {@inheritdoc}
      */
     state = {};
-
-    /**
-     * {@inheritdoc} 
-     */
-    init() {
-        title('My Login Page');
-        description('Some login description');
-    }
-
     /**
      * Submit login form
      */
@@ -56,6 +48,7 @@ export default class Login extends ReactorComponent {
     render() {
         return (
             <Layout>
+                <Helmet title="login" />
                 <div id="login-page">
                     <h1>Login Page</h1>
 

@@ -34,7 +34,7 @@ export function translatedTitle(pageTitle) {
  * 
  * @param {string} title 
  */
-export function description(description) {
+export function setDescription(description) {
     if (meta.description === description) return description;
     
     let metaDescriptionTag = document.getElementById('meta-description')
