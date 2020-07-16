@@ -9,12 +9,15 @@ import UsersGroups from './components/users-groups/UsersGroups';
 // router.add('/users', Users, Guardian);
 router.add('/login', Login, ReverseGuardian);
 
-router.partOf(DashboardLayout, [{
+router.group({
     path: '/users',
-    component: Users, 
     middleware: Guardian,
-}, {
-    path: '/users/groups',
-    component: UsersGroups, 
-    middleware: Guardian,
-}]);
+    layout: DashboardLayout,
+    routes: [{
+        path: '/',
+        component: Users
+    }, {
+        path: '/groups',
+        component: UsersGroups
+    }]
+})

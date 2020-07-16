@@ -1,5 +1,7 @@
 import React from 'react';
 import { localeCodes } from 'reactor/localization/locales';
+import ltrim from 'reinforcements/src/utilities/str/ltrim';
+import rtrim from 'reinforcements/src/utilities/str/rtrim';
 
 // join all locale code with | for route matching
 const gluedLocaleCodes = localeCodes.join('|');
@@ -63,4 +65,29 @@ export function partOf(LayoutComponent, routes) {
     });
 
     layout.routes = layout.routes.concat(routes);
+}
+
+/**
+ * Group the given routes with the given options
+ * 
+ * @param  object groupOptions
+ */
+export function group(groupOptions) {
+    const { routes, path, middleware, layout = FULL_PAGE } = groupOptions;
+
+    partOf(layout, routes.map(route => {
+        if (middleware) {
+            route.middleware = middleware;
+        }
+
+        if (path) {
+            route.path = rtrim(path + '/' + ltrim(route.path, '/'), '/');
+
+            if (route.path == '') {
+                route.path = '/';
+            }
+        }
+
+        return route;
+    }))
 }
