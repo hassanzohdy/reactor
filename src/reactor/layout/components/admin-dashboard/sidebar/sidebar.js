@@ -31,6 +31,7 @@ export default function Sidebar(props) {
             return <SidebarListItemGroup
                 key={index}
                 text={item.text}
+                onClick={onClose}
                 icon={item.icon}
                 items={item.items}
             />;
@@ -41,6 +42,7 @@ export default function Sidebar(props) {
             key={index}
             text={item.text}
             icon={item.icon}
+            onClick={onClose}
             route={item.route} />;
     });
     return (

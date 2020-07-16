@@ -13,7 +13,7 @@ import useLayoutClasses from 'reactor/layout/utils/style';
 import SidebarContext from './sidebar-context';
 
 export default function SidebarListItemGroup(props) {
-    const { text, items } = props;
+    const { text, items, onClick } = props;
     const sidebarGroupRoutes = [];
 
     let itemsList = items.map((item, index) => {
@@ -22,6 +22,7 @@ export default function SidebarListItemGroup(props) {
             <SidebarListItem
                 nested
                 key={index}
+                onClick={onClick}
                 route={item.route}
                 text={item.text}
                 icon={item.icon}

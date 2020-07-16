@@ -14,7 +14,7 @@ const ItemLink = styled(Link)({
 });
 
 export default function SidebarListItem(props) {
-    let { text, route, nested } = props;
+    let { text, route, nested, onClick } = props;
     const classes = useLayoutClasses();
 
     const { currentRoute } = React.useContext(SidebarContext);
@@ -38,6 +38,7 @@ export default function SidebarListItem(props) {
             className={className}
             component={ItemLink}
             to={route}
+            onClick={onClick}
             button
         >
             <ListItemIcon classes={{ root: classes.sidebarListItemIcon }}>

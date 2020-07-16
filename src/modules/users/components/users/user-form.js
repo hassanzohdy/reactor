@@ -21,7 +21,7 @@ export default function UserForm(props) {
             <TextInput name="name" required autoFocus defaultValue={record.name} placeholder={trans('name')} />
             <EmailInput required defaultValue={record.email} placeholder={trans('email')} />
             <PasswordInput required={!record.id} placeholder={trans('password')} />
-            <SelectInput 
+            <SelectInput
                 name="group"
                 label="Administrator Group"
                 lazyLoading
