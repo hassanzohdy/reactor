@@ -7,6 +7,7 @@ import ProgressBar from 'reactor/components/progress-bar';
 import config from 'reactor/config';
 import history from './router-history';
 import { layoutsList } from './routes-list';
+import { getCurrentBseAppPath } from './apps-list';
 
 const forceRefresh = config.get('router.forceRefresh', true);
 
@@ -24,6 +25,10 @@ export default function Renderer(props) {
     const { location } = props;
 
     let firstSegment = firstSegmentOfRoute(location);
+
+    const currentBasePath = getCurrentBseAppPath();
+
+    firstSegment = currentBasePath + firstSegment;
 
     const [loadedModules, loadModule] = React.useState([]);
 
@@ -74,7 +79,7 @@ export default function Renderer(props) {
         });
 
         return (
-            <Route key={LayoutComponent} exact path={routesList} render={props => (                
+            <Route key={LayoutComponent} exact path={routesList} render={props => (
                 <LayoutComponent {...props}>
                     {layoutRoutes}
                 </LayoutComponent>

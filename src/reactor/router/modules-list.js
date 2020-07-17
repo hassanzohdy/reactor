@@ -24,6 +24,8 @@ export function setModules(modules) {
                 moduleInfo.appProvider = () => import(`modules/${name}/${name}-provider.js`); // modules/admin/admin-provider.js
             }
 
+            moduleInfo.entry = moduleInfo.entry.map(route => path + route);
+
             // loop over the entry array
             for (let entryRoute of moduleInfo.entry) {
                 modulesList[entryRoute] = moduleInfo;

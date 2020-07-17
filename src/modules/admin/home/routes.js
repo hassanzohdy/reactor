@@ -4,7 +4,7 @@ import Guardian from 'modules/admin/users/middleware/guardian';
 import DashboardLayout from 'reactor/layout/components/admin-dashboard/dashboard-layout';
 
 router.partOf(DashboardLayout, [{
-    path: '/',
+    path: '/', 
     component: Home, 
     middleware: Guardian,
 }]);

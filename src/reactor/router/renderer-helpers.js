@@ -1,5 +1,7 @@
 import modulesList from "./modules-list";
 import config from 'reactor/config';
+import appsList, { setCurrentBseAppPath } from "./apps-list";
+import { concatRoute } from "./routes-list";
 const localeCodes = config.get('locales');
 
 /**
@@ -19,16 +21,27 @@ export function isPartOfLazyModules(firstSegment) {
  * @returns {string}   
  */
 export function firstSegmentOfRoute(location) {
-    let [firstSegment, secondSegment] = location.pathname.replace(/^\//, '').split('/');
-
+    let [firstSegment, secondSegment, thirdSegment] = location.pathname.replace(/^\//, '').split('/');
     let segment = firstSegment;
 
     // if first segment is locale code, then take the second
+
+    // en
     if (localeCodes[firstSegment]) {
         // if there is no second segment
         // then return empty not undefined
-        segment = secondSegment || '';
+        if (appsList.includes('/' + secondSegment)) {
+            setCurrentBseAppPath(secondSegment);
+            segment = thirdSegment || '';
+        } else {
+            segment = secondSegment || '';
+        }
+    } else if (appsList.includes('/' + segment)) {
+        segment = secondSegment;
+        setCurrentBseAppPath(firstSegment);
     }
 
-    return '/' + segment;
+    // check the third
+
+    return concatRoute(segment);
 }

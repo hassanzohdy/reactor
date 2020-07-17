@@ -5,13 +5,15 @@ import { Link as RouterLink } from 'react-router-dom';
 import { hasInitialLocaleCode } from 'reactor/router/navigator';
 import { getCurrentLocaleCode } from 'reactor/localization/locales';
 import styleSettings from '../layout/utils/style-settings';
+import { getCurrentBseAppPath } from '../router/apps-list';
+import { concatRoute } from '../router/routes-list';
 
 const ColoredLink = styled(MaterialLink)({
     color: styleSettings.get('colors.link'),
 });
 
 const Link = React.forwardRef(function (props, forwardedRef) {
-    let { to, localeCode, relative, ...otherLinkProps } = props;
+    let { to, localeCode, relative, baseApp = getCurrentBseAppPath(), ...otherLinkProps } = props;
 
     // if not relative, then use the normal anchor tag
     if (! relative) {
@@ -22,15 +24,17 @@ const Link = React.forwardRef(function (props, forwardedRef) {
         localeCode = getCurrentLocaleCode();
     }
 
+    let path = concatRoute(baseApp, to);
+
     if (localeCode) {
         // /users
         // /en/users
         // to = /
-        to = '/' + localeCode + (to === '/' ? '' : to);
+        path = concatRoute(localeCode, path);
         // /en
     }
 
-    otherLinkProps.to = to;
+    otherLinkProps.to = path;
 
     return <ColoredLink component={RouterLink} {...otherLinkProps} ref={forwardedRef} />
 });

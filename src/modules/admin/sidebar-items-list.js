@@ -22,7 +22,6 @@ sidebarItems.onUpdate(() => ([
                 route: '/users/groups',
                 icon: SupervisedUserCircle
             },
-            
         ]
     }
 ]));
