@@ -1,6 +1,6 @@
 import React from 'react';
 import user from "reactor/user";
-import { Redirect } from 'react-router-dom';
+import Redirect from 'reactor/components/redirect';
 
 export default function isLoggedIn(route, history) {
     if (! user.isLoggedIn()) {

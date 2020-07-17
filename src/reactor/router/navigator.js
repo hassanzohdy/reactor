@@ -6,6 +6,8 @@ import {
 
 import events from '@flk/events';
 import { SWITCHING_LOCALE_CODE_EVENT } from "./flags";
+import { concatRoute } from "./routes-list";
+import { getCurrentBseAppPath } from "./apps-list";
 
 let currentFullRoute, fullRouteWithoutLocaleCode;
 
@@ -37,7 +39,8 @@ function updateFullRoute(route) {
 export function navigateTo(path, localeCode = null) {
     // login >> valid
     // /login >> valid
-    path = '/' + ltrim(path, '/');
+
+    path = concatRoute(getCurrentBseAppPath(), path);
 
     // /users
     // if current initial locale code
@@ -47,7 +50,7 @@ export function navigateTo(path, localeCode = null) {
     }
 
     if (localeCode) {
-        path = '/' + localeCode + path;
+        path = concatRoute(localeCode, path);
     }
  
     history.push(path);
@@ -68,7 +71,11 @@ export function fullRoute() {
  * @returns  {string}
  */
 export function currentRoute() {
-    return ltrim(fullRoute(), '/' + getCurrentLocaleCode()) || '/';
+    let route = ltrim(fullRoute(), '/' + getCurrentLocaleCode()) || '/';
+
+    route = ltrim(route, getCurrentBseAppPath());
+
+    return route;
 }
 
 /**

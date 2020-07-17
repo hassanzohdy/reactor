@@ -14,13 +14,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import layoutClasses from 'reactor/layout/utils/style';
 import { makeStyles, styled } from '@material-ui/core';
-// import userLogout from 'modules/users/helpers/user-logout';
 import SelectInput from 'reactor/form/components/select-input';
 import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 import styleSettings from 'reactor/layout/utils/style-settings';
 import { localeCodes, getCurrentLocaleCode } from 'reactor/localization/locales';
+import config from 'reactor/config';
 
-const userLogout = () => {};
 
 const localeCodesList = localeCodes.map(localeCode => {
     return {
@@ -50,10 +49,11 @@ const Dropdown = props => {
 
 export default function Header(props) {
     let classes = layoutClasses(),
-        sidebarIsOpened = props.sidebarIsOpened;
-
+    sidebarIsOpened = props.sidebarIsOpened;
+    const userLogout = config.get('dashboard.logout', () => {});
+    
     const headerClasses = useStyles();
-
+    
     return (
         <AppBar
             position="absolute"

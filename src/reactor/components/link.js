@@ -4,9 +4,9 @@ import MaterialLink from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { hasInitialLocaleCode } from 'reactor/router/navigator';
 import { getCurrentLocaleCode } from 'reactor/localization/locales';
-import styleSettings from '../layout/utils/style-settings';
-import { getCurrentBseAppPath } from '../router/apps-list';
-import { concatRoute } from '../router/routes-list';
+import styleSettings from 'reactor/layout/utils/style-settings';
+import { getCurrentBseAppPath } from 'reactor/router/apps-list';
+import { concatRoute } from 'reactor/router/routes-list';
 
 const ColoredLink = styled(MaterialLink)({
     color: styleSettings.get('colors.link'),
