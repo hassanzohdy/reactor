@@ -34,8 +34,17 @@ export default function Renderer(props) {
         const moduleInfo = modulesList[firstSegment];
 
         if (!moduleIsLoaded && moduleInfo) {
-            moduleInfo.load().then(e => {
-                // /users 
+            const loadingModulePaths = [];
+
+            // load main app provider file
+            if (moduleInfo.appProvider) {
+                loadingModulePaths.push(moduleInfo.appProvider());
+            }
+
+            // load module provider
+            loadingModulePaths.push(moduleInfo.load());
+
+            Promise.all(loadingModulePaths).then(e => {
                 loadModule(loadedModules.concat(moduleInfo.entry));
             });
         }

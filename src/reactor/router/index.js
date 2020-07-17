@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Routes from './routes-handler';
 import { addRouter, partOf, group } from './routes-list';
 import initiateNavigator from './navigator';
+import 'shared/modules';
 export { navigateTo, switchLang, refresh, currentRoute } from './navigator';
 
 /**

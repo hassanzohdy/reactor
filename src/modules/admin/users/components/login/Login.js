@@ -3,7 +3,7 @@ import user from 'user';
 import React from 'react';
 import { navigateTo } from 'reactor/router';
 import Form from 'reactor/form/components/form';
-import { login } from 'modules/users/services/auth';
+import { login } from 'modules/admin/users/services/auth';
 import Layout from 'reactor/layout/components/layout';
 import { TextCenter } from 'reactor/components/aligned';
 import FormError from 'reactor/form/components/form-error';

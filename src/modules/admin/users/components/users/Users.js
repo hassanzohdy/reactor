@@ -1,5 +1,5 @@
 import UserForm from './user-form';
-import usersService from 'modules/users/services/users-service';
+import usersService from 'modules/admin/users/services/users-service';
 import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
 import tableActions from 'reactor/layout/components/admin-dashboard/table-actions';
 import optionedAdminTable from 'reactor/layout/components/admin-dashboard/optioned-admin-table-layout';

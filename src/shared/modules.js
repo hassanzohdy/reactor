@@ -1,10 +1,19 @@
-export default [
+import { setModules } from "reactor/router/modules-list";
+
+setModules([
     {
-        entry: ['/users', '/login'],
-        module: 'users',
-    },
-    {
-        entry: ['/'],
-        module: 'home',
+        path: '/admin',
+        name: 'admin',
+        loadMain: true,
+        modules: [
+            {
+                entry: ['/users', '/login'],
+                module: 'users',
+            },
+            {
+                entry: ['/'],
+                module: 'home',
+            }
+        ]
     }
-];
+]);

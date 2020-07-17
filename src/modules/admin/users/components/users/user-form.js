@@ -5,7 +5,7 @@ import TextInput from 'reactor/form/components/text-input';
 import EmailInput from 'reactor/form/components/email-input';
 import SelectInput from 'reactor/form/components/select-input';
 import PasswordInput from 'reactor/form/components/password-input';
-import usersGroupsService from 'modules/users/services/users-groups-service';
+import usersGroupsService from 'modules/admin/users/services/users-groups-service';
 
 const mapResponse = response => {
     return response.data.records.map(record => ({
