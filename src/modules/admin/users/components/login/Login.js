@@ -1,7 +1,7 @@
 import './login.scss';
 import user from 'user';
 import React from 'react';
-import { navigateTo } from 'reactor/router';
+import { navigateBack } from 'reactor/router';
 import Helmet from 'reactor/components/Helmet';
 import Form from 'reactor/form/components/Form';
 import Layout from 'reactor/layout/components/Layout';
@@ -29,7 +29,7 @@ export default class Login extends ReactorComponent {
 
             user.login(data.user);
 
-            navigateTo('/users');
+            navigateBack();
         } catch (error) {
             form.isSubmitting = false;
             let { errors, error: errorText } = error.response.data;

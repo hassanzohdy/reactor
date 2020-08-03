@@ -8,7 +8,7 @@ import {queryString, hash} from './router-history';
 import { addRouter, partOf, group } from './routes-list';
 
 export { concatRoute };
-export { navigateTo, switchLang, refresh, currentRoute } from './navigator';
+export { navigateTo, navigateBack, switchLang, refresh, currentRoute } from './navigator';
 
 /**
  * Scan the entire routes list
