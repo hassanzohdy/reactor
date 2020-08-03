@@ -19,10 +19,8 @@ export function setModules(modules) {
 
         // spread all entries into object
         for (let moduleInfo of modules) {
-            moduleInfo.load = () => import(`modules/${name}/${moduleInfo.module}/${moduleInfo.module}-provider.js`);
-            if (loadMain) {
-                moduleInfo.appProvider = () => import(`modules/${name}/${name}-provider.js`); // modules/admin/admin-provider.js
-            }
+            moduleInfo.load = () => import(`modules/${name}/${moduleInfo.module}/provider.js`);
+            moduleInfo.appProvider = () => import(`modules/${name}/${name}-provider.js`); // modules/admin/admin-provider.js
 
             moduleInfo.entry = moduleInfo.entry.map(route => path + route);
 

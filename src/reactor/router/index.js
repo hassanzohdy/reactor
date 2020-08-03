@@ -5,6 +5,7 @@ import Routes from './routes-handler';
 import { addRouter, partOf, group } from './routes-list';
 import initiateNavigator from './navigator';
 import 'shared/modules';
+import { queryString, hash } from './router-history';
 export { navigateTo, switchLang, refresh, currentRoute } from './navigator';
 
 /**
@@ -21,4 +22,8 @@ export default {
     add: addRouter,
     partOf,
     group,
+    hash: hash,
+    get queryString() {
+        return queryString();
+    }
 };

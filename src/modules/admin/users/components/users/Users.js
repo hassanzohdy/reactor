@@ -9,6 +9,7 @@ const options = {
     formOptions: {
         form: UserForm,
         singleName: 'user',
+        load: process.env.NODE_ENV,
     },
     table: {
         heading: 'users',

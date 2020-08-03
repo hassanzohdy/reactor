@@ -4,7 +4,6 @@ setModules([
     {
         path: '/admin',
         name: 'admin',
-        loadMain: true,
         modules: [
             {
                 entry: ['/users', '/login'],
