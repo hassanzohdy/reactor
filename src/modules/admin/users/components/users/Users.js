@@ -1,8 +1,8 @@
 import UserForm from './user-form';
+import crudPage from  'reactor/layout/utils/admin/crudPage';
+import tableActions from 'reactor/layout/utils/admin/table-actions';
 import usersService from 'modules/admin/users/services/users-service';
-import EmailFormatter from 'reactor/table/components/formatters/email-formatter';
-import tableActions from 'reactor/layout/components/admin-dashboard/table-actions';
-import optionedAdminTable from 'reactor/layout/components/admin-dashboard/optioned-admin-table-layout';
+import EmailFormatter from 'reactor/table/components/Formatters/EmailFormatter';
 
 const options = {
     service: usersService,
@@ -36,6 +36,6 @@ const options = {
     }
 };
 
-const Users = optionedAdminTable(options);
+const Users = crudPage(options);
 
 export default Users;

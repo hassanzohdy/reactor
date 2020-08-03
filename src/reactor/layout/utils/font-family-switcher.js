@@ -9,6 +9,8 @@ function createLinkTag() {
 }
 
 export function setExternalFontFamily(url) {
+    if (! url) return;
+    
     let linkTag = document.getElementById(fontFamilyLinkId) || createLinkTag();
 
     linkTag.href = url;

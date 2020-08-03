@@ -12,6 +12,15 @@ import { SWITCHING_LOCALE_CODE_EVENT } from "reactor/router/flags";
 const localeCodesList = config.get('locales');
 
 /**
+ * Get locale codes
+ * 
+ * @returns {Array}
+ */
+export function getLocaleCodes() {
+    return Object.keys(config.get('locales', []));
+}
+
+/**
  * List of locale codes only in an array
  *
  * @const {array}

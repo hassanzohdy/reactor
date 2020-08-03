@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { trans } from 'reactor/localization';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function withCheckbox(WrappedCheckboxComponent) {
-    const Checkbox = function ({ label, readOnly, onChange, ...otherProps }) {
+    const Checkbox = function ({ label, readOnly, value = 1, onChange, ...otherProps }) {
         const [checked, setChecked] = React.useState(Boolean(otherProps.defaultChecked || otherProps.checked));
 
         const handleChange = e => {
@@ -16,14 +17,14 @@ export default function withCheckbox(WrappedCheckboxComponent) {
             onChange(newInputCheckedState);
         };
 
-        const checkboxInput = <WrappedCheckboxComponent color="primary" {...otherProps} checked={checked} onChange={handleChange} />;
+        const checkboxInput = <WrappedCheckboxComponent value={value} color="primary" {...otherProps} checked={checked} onChange={handleChange} />;
 
         if (! label) {
             return checkboxInput;
         }
         
         return (
-            <FormControlLabel control={checkboxInput} label={label} />
+            <FormControlLabel control={checkboxInput} label={trans(label)} />
         )
     }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormLabel } from '@material-ui/core';
-import { RequiredSpan } from './form-components-helpers';
+import { RequiredSpan } from './FormHelpers';
+import { trans } from 'reactor/localization';
 
 export default function Label({ label, children, component: Component, required, ...otherProps }) {
     label = label || children;
@@ -9,7 +10,7 @@ export default function Label({ label, children, component: Component, required,
 
     return (
         <Component {...otherProps}>
-            {label}
+            {trans(label)}
             <RequiredSpan required={required} />
         </Component>
     )

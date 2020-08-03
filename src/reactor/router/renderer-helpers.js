@@ -1,7 +1,8 @@
 import modulesList from "./modules-list";
 import config from 'reactor/config';
+import { concatRoute } from "reactor/router";
 import appsList, { setCurrentBseAppPath } from "./apps-list";
-import { concatRoute } from "./routes-list";
+
 const localeCodes = config.get('locales');
 
 /**

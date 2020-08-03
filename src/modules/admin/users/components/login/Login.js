@@ -2,16 +2,16 @@ import './login.scss';
 import user from 'user';
 import React from 'react';
 import { navigateTo } from 'reactor/router';
-import Form from 'reactor/form/components/form';
+import Helmet from 'reactor/components/Helmet';
+import Form from 'reactor/form/components/Form';
+import Layout from 'reactor/layout/components/Layout';
+import { TextCenter } from 'reactor/components/Aligned';
+import FormError from 'reactor/form/components/FormError';
 import { login } from 'modules/admin/users/services/auth';
-import Layout from 'reactor/layout/components/layout';
-import { TextCenter } from 'reactor/components/aligned';
-import FormError from 'reactor/form/components/form-error';
-import EmailInput from 'reactor/form/components/email-input';
-import SubmitButton from 'reactor/form/components/submit-button';
-import PasswordInput from 'reactor/form/components/password-input';
-import ReactorComponent from 'reactor/components/reactor.component';
-import Helmet from 'reactor/components/helmet';
+import EmailInput from 'reactor/form/components/EmailInput';
+import SubmitButton from 'reactor/form/components/SubmitButton';
+import PasswordInput from 'reactor/form/components/PasswordInput';
+import ReactorComponent from 'reactor/components/ReactorComponent';
 
 export default class Login extends ReactorComponent {
     /**
@@ -42,6 +42,7 @@ export default class Login extends ReactorComponent {
         }
     };
 
+    
     /**
      * {@inheritdoc}
      */

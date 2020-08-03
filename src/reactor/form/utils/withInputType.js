@@ -1,5 +1,5 @@
 import React from 'react';
-import FormInput from '../components/form-input';
+import FormInput from '../components/FormInput';
 
 export default function withInputType(type, defaultProps = {}) {
     const Input = function (props) {

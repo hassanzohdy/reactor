@@ -1,7 +1,8 @@
 {
   "name": "reactor",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.19.18",
     "@flk/events": "^1.3.1",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Obj } from 'reinforcements';
-import Link from 'reactor/components/link';
+import Link from 'reactor/components/Link';
 
 export default function LinkFormatter({record, column, children}) {
     let value = children || column.value;

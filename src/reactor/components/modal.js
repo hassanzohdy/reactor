@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Is from '@flk/supportive-is';
+import Grow from '@material-ui/core/Grow';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,8 +16,8 @@ function DefaultModalTitle(props) {
         <DialogTitle disableTypography className={classes.modalTitle}>
             <Typography variant="h6">{props.title}</Typography>
             {props.onClose ? (
-                <IconButton 
-                    aria-label="close" 
+                <IconButton
+                    aria-label="close"
                     className={classes.modalTitleCloseBtn}
                     onClick={props.onClose}>
                     <CloseIcon />
@@ -30,21 +31,32 @@ export default function Modal(props) {
     const {
         size, esc,
         plain,
-        title, onClose, onSubmit,
-        backdrop, ...otherDialogProps } =
+        title, open, onClose, onSubmit,
+        backdrop, children: content, ...otherDialogProps } =
         props;
-    
+
+    const [opened, openModal] = React.useState(open);
+
+    const close = () => {
+        openModal(false);
+        setTimeout(onClose, 100);
+    };
+
     // default is passing title as a component
     let modalTitle = title;
 
     // otherwise, we will render the default modal title component
     if (Is.string(modalTitle)) {
-        modalTitle = <DefaultModalTitle title={title} onClose={onClose} />
+        modalTitle = <DefaultModalTitle title={title} onClose={close} />
     }
 
-    const modalContent = plain === false ?  
-                        <DialogContent dividers children={props.children} /> :
-                        props.children; // if plain true, display children directly
+    const children = Is.function(content) ? content({
+        close,
+    }) : content;
+
+    const modalContent = plain === false ?
+        <DialogContent dividers children={children} /> :
+        children; // if plain true, display children directly
 
     return (
         <Dialog
@@ -52,7 +64,9 @@ export default function Modal(props) {
             disableBackdropClick={!backdrop}
             disableEscapeKeyDown={!esc}
             maxWidth={size}
-            onClose={onClose}
+            TransitionComponent={Grow}
+            onClose={close}
+            open={opened}
             {...otherDialogProps}
         >
             {modalTitle}

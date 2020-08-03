@@ -1,13 +1,14 @@
 import React from 'react';
+import config from 'reactor/config';
 import Middleware from './middleware';
-import { firstSegmentOfRoute, isPartOfLazyModules } from './renderer-helpers';
+import history from './router-history';
 import modulesList from './modules-list';
 import { Route } from 'react-router-dom';
-import ProgressBar from 'reactor/components/progress-bar';
-import config from 'reactor/config';
-import history from './router-history';
 import { layoutsList } from './routes-list';
+import { concatRoute } from "reactor/router";
 import { getCurrentBseAppPath } from './apps-list';
+import ProgressBar from 'reactor/components/Preloaders/ProgressBar';
+import { firstSegmentOfRoute, isPartOfLazyModules } from './renderer-helpers';
 
 const forceRefresh = config.get('router.forceRefresh', true);
 
@@ -28,7 +29,7 @@ export default function Renderer(props) {
 
     const currentBasePath = getCurrentBseAppPath();
 
-    firstSegment = currentBasePath + firstSegment;
+    firstSegment = concatRoute(currentBasePath, firstSegment);
 
     const [loadedModules, loadModule] = React.useState([]);
 

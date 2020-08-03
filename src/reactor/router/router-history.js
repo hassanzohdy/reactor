@@ -1,9 +1,13 @@
+import config from 'reactor/config';
 import { Obj } from 'reinforcements';
 import queryStringParser from 'query-string';
 import { createBrowserHistory } from 'history';
 import ltrim from 'reinforcements/src/utilities/str/ltrim';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({
+    // set the basename for production 
+    basename: process.env.NODE_ENV === 'production' ? config.get('basePath', '/') : '/',
+});
 
 /**
  * Get has value if provided

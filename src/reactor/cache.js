@@ -21,10 +21,10 @@ export default {
      * @param   {string} key 
      * @returns {any}
      */
-    get(key) {
+    get(key, defaultValue = null) {
         let value = this.storage.getItem(key);
 
-        return value ? JSON.parse(value).data : null;
+        return value ? JSON.parse(value).data : defaultValue;
     },
 
     /**

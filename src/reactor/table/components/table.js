@@ -1,15 +1,18 @@
 import React from 'react';
-import TableHead from './table-head';
-import TableBody from './table-body';
-import TableToolBar from './table-toolbar';
+import { Obj } from 'reinforcements';
+import TableHead from './TableHead';
+import TableBody from './TableBody';
+import TableToolBar from './TableToolBar';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from './TablePagination';
 import MaterialTable from '@material-ui/core/Table';
 import TableProvider from '../providers/table-provider';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from './table-pagination';
-import { LightBackdrop } from 'reactor/layout/components/backdrop';
 import useLayoutClasses from 'reactor/layout/utils/style';
-import { Obj } from 'reinforcements';
+import TableContainer from '@material-ui/core/TableContainer';
+import { LightBackdrop } from 'reactor/layout/components/Backdrop';
+
+import '../locales/ar';
+import '../locales/en';
 
 export default function Table(props) {
     let { options, records, pagination, isLoading, onChange } = props;

@@ -1,8 +1,16 @@
 import cache from 'reactor/cache';
+import { Obj } from 'reinforcements';
 
 class User {
+    cacheKey = 'user';
+
     constructor() {
-        this.userData = cache.get('user');
+        this.setCacheKey(this.cacheKey);
+    }
+
+    setCacheKey(cacheKey) {
+        this.cacheKey = cacheKey;
+        this.userData = cache.get(this.cacheKey);
     }
 
     /**
@@ -11,7 +19,7 @@ class User {
      * @returns {boolean}
      */
     isLoggedIn() {
-        return this.userData !== null;
+        return this.getAccessToken();
     }
 
     /**
@@ -24,7 +32,7 @@ class User {
      */
     login(userData) {
         this.userData = userData;
-        cache.set('user', userData);
+        cache.set(this.cacheKey, userData);
     }
 
     /**
@@ -32,7 +40,7 @@ class User {
      */
     logout() {
         this.userData = null;
-        cache.remove('user');
+        cache.remove(this.cacheKey);
     }
 
     /**
@@ -41,7 +49,43 @@ class User {
      * @returns {string}
      */
     getAccessToken() {
-        return this.userData.accessToken;
+        return Obj.get(this.userData, 'accessToken');
+    }
+
+    /**
+     * Set the given value
+     * 
+     * @param   {string} key  
+     * @param   {any} value
+     */
+    set(key, value) {
+        Obj.set(this.userData, key, value);
+
+        cache.set(this.cacheKey, this.userData);
+    }
+
+    /**
+     * Reset user info excluding access token if not provided with the given data
+     *  
+     * @param {object} newInfo 
+     */
+    update(newInfo) {
+        if (! newInfo.accessToken) {
+            newInfo.accessToken = this.getAccessToken();
+        }
+
+        this.login(newInfo);
+    }
+
+    /**
+     * Get value for the given key, otherwise return default value
+     * 
+     * @param   {string} key  
+     * @param   {any} defaultValue
+     * @returns {any}  
+     */
+    get(key, defaultValue) {
+        return Obj.get(this.userData, key, defaultValue);
     }
 }
 

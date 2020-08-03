@@ -1,4 +1,4 @@
-import { concatRoute } from "./routes-list";
+import { concatRoute } from "reactor/router";
 
 const appsList = [];
 

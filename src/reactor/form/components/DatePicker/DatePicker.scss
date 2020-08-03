@@ -1,0 +1,21 @@
+.DayPicker {
+    flex-direction: row;
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+    // width: 100%;
+    // height: 100%;
+    position: fixed;
+    top: 0;
+    background: #FFF;
+
+}
+
+.DayPicker-wrapper {
+    position: relative;
+    flex-direction: row;
+    user-select: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

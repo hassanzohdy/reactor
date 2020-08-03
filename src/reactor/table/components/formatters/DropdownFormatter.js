@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectInput from 'reactor/form/components/select-input';
+import SelectInput from 'reactor/form/components/SelectInput';
 import Is from '@flk/supportive-is';
 
 export default function DropdownFormatter({ record, column }) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import SwitchButton from 'reactor/form/components/switch-button';
+import SwitchButton from 'reactor/form/components/SwitchButton';
 
 export default function SwitchFormatter({record, column}) {
     const {value, switchComponent: SwitchComponent = SwitchButton, onChange} = column;

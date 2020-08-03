@@ -1,7 +1,9 @@
 import React from 'react';
+import '../validation/locales/en';
+import '../validation/locales/ar';
 import { Arr } from 'reinforcements';
 import FormContext from '../utils/form-context';
-import ReactorComponent from 'reactor/components/reactor.component';
+import ReactorComponent from 'reactor/components/ReactorComponent';
 
 export default class Form extends ReactorComponent {
     inputs = [];
@@ -31,7 +33,7 @@ export default class Form extends ReactorComponent {
         e.stopPropagation();
 
         this.isValidForm = true; // make sure its is reset
-        
+
         for (let input of this.inputs) {
             input.validate(e);
 
@@ -39,13 +41,16 @@ export default class Form extends ReactorComponent {
                 this.isValidForm = false;
             }
         }
-
+        
         // check if the form is valid
         // if not, then do not submit
         if (this.isValidForm === false) return;
 
         if (this.props.onSubmit) {
             this.isSubmitting = true;
+            // this.setState({
+            //     isSubmitting: true,
+            // });
             this.props.onSubmit(e, this);
         }
     }
@@ -53,9 +58,8 @@ export default class Form extends ReactorComponent {
     cleanInput(input) {
         this.dirtyInputs.remove(input);
 
-        this.isValidForm = this.dirtyInputs.isEmpty();
-
         setTimeout(() => {
+            this.isValidForm = this.dirtyInputs.isEmpty();
             this.forceUpdate();
         }, 0);
     }
@@ -86,10 +90,14 @@ export default class Form extends ReactorComponent {
         // noValidate disables the browser default validation
         return (
             <FormContext.Provider value={{ form: this }}>
-                <form ref={form => this.formElement = form} noValidate={true} onSubmit={this.triggerSubmit.bind(this)}>
+                <form ref={form => this.formElement = form} noValidate={this.props.noValidate} onSubmit={this.triggerSubmit.bind(this)}>
                     {this.children()}
                 </form>
             </FormContext.Provider>
         );
     }
 }
+
+Form.defaultProps = {
+    noValidate: true,
+};

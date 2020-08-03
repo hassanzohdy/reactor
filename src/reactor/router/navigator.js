@@ -1,15 +1,28 @@
+import events from '@flk/events';
 import history from "./router-history";
+import { concatRoute } from "reactor/router";
+import { getCurrentBseAppPath } from "./apps-list";
+import { SWITCHING_LOCALE_CODE_EVENT } from "./flags";
 import ltrim from "reinforcements/src/utilities/str/ltrim";
 import {
     localeCodes, updateCurrentLocaleCode, getCurrentLocaleCode
 } from "reactor/localization/locales";
 
-import events from '@flk/events';
-import { SWITCHING_LOCALE_CODE_EVENT } from "./flags";
-import { concatRoute } from "./routes-list";
-import { getCurrentBseAppPath } from "./apps-list";
-
 let currentFullRoute, fullRouteWithoutLocaleCode;
+
+let previousRoute = '/';
+
+/**
+ * Navigate back to the previous route
+ * @returns {string} 
+ */
+export function navigateBack(defaultRoute = null) {
+    if (! previousRoute) {
+        return navigateTo(defaultRoute);
+    }
+    
+    goTo(previousRoute); 
+}
 
 /**
  * Set the full current route and the current route without the locale code
@@ -18,6 +31,7 @@ let currentFullRoute, fullRouteWithoutLocaleCode;
  * @returns {void} 
  */
 function updateFullRoute(route) {
+    previousRoute = currentFullRoute;
     // /en/users
     currentFullRoute = route;
 
@@ -53,6 +67,15 @@ export function navigateTo(path, localeCode = null) {
         path = concatRoute(localeCode, path);
     }
  
+    goTo(path);
+}
+
+/**
+ * Go to the given full path
+ * 
+ * @param  {string} path
+ */
+function goTo(path) {    
     history.push(path);
 }
 
@@ -75,7 +98,7 @@ export function currentRoute() {
 
     route = ltrim(route, getCurrentBseAppPath());
 
-    return route;
+    return concatRoute(route);
 }
 
 /**
@@ -84,7 +107,7 @@ export function currentRoute() {
  * @returns {void} 
  */
 export function refresh() {
-    navigateTo(fullRoute(), false);
+    goTo(fullRoute());
 }
 
 /**

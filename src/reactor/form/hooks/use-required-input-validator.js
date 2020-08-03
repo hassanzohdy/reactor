@@ -18,7 +18,6 @@ export default function useRequiredInputValidator(isRequired, componentRef, valu
             // reset the error if exists
             this.hasError = null;
 
-            
             // now check if the value is empty
             if (Is.empty(value)) {
                 // the required error

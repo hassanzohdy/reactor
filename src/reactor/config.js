@@ -14,7 +14,7 @@ const config = {
         // case one one argument only is passed and is object
         if (arguments.length === 1) {
             let data = key;
-            configurationsList = Object.assign(configurationsList, data);
+            configurationsList = Obj.merge(configurationsList, data);
         } else {
             configurationsList[key] = value;
         }
@@ -29,6 +29,12 @@ const config = {
      */
     get(key, defaultValue = null) {
         return Obj.get(configurationsList, key, defaultValue);
+    },
+    /**
+     * Get all configurations 
+     */
+    list() {
+        return configurationsList;
     },
 };
 

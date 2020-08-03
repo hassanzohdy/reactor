@@ -1,4 +1,5 @@
 import endpoint from './endpoint';
+import { concatRoute } from 'reactor/router';
 
 export default class RestfulEndpoint {
     /**
@@ -8,6 +9,8 @@ export default class RestfulEndpoint {
      * @var  {string}
      */
     route = '';
+
+    endpoint = endpoint;
 
     /**
      * Fetch records from endpoint api
@@ -29,9 +32,19 @@ export default class RestfulEndpoint {
      * @returns {Promise}
      */
     get(id, params) {
-        return endpoint.get(this.route + '/' + id, {
+        return endpoint.get(this.path(id), {
             params
         });
+    }
+
+    /**
+     * Concatenate the given path with the base route
+     * 
+     * @param  {string} path
+     * @returns {string} 
+     */
+    path(...paths) {
+        return concatRoute(this.route, ...paths);
     }
 
     /**
@@ -52,7 +65,7 @@ export default class RestfulEndpoint {
      * @returns {Promise}
      */
     update(id, data) {
-        return endpoint.put(this.route + '/' + id, data);
+        return endpoint.put(this.path(id), data);
     }
 
     /**
@@ -62,6 +75,16 @@ export default class RestfulEndpoint {
      * @returns {Promise}
      */
     delete(id) {
-        return endpoint.delete(this.route + '/' + id);
+        return endpoint.delete(this.path(id));
+    }
+
+    /**
+     * Delete existing record
+     * 
+     * @param   {number} id 
+     * @returns {Promise}
+     */
+    patch(id, data = {}) {
+        return endpoint.patch(this.path(id), data);
     }
 }

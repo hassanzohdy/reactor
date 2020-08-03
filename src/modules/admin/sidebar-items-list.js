@@ -1,6 +1,6 @@
-import sidebarItems from 'reactor/layout/components/admin-dashboard/sidebar/sidebar-items-list';
-import { DashboardRounded, VerifiedUser, SupervisedUserCircle } from '@material-ui/icons';
 import { trans } from 'reactor/localization';
+import sidebarItems from 'reactor/layout/utils/admin/sidebar-items-list';
+import { DashboardRounded, VerifiedUser, SupervisedUserCircle } from '@material-ui/icons';
 
 sidebarItems.onUpdate(() => ([
     {

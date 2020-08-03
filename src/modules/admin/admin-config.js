@@ -1,12 +1,12 @@
 import config from 'reactor/config';
+import { BASE_API_URL } from 'shared/config';
 import userLogout from 'modules/admin/users/helpers/user-logout';
 
 config.set({
     // Services Configurations
     // A.K.A Endpoints
     endpoint: {
-        baseUrl: 'https://apps.mentoor.io/shera2/api/admin/',
-        apiKey: 'SP6YHG56IKLO90MNF4TGAQW23FVBG765',
+        baseUrl: BASE_API_URL + '/admin',
     },
     locales: {
         en: {
@@ -17,6 +17,8 @@ config.set({
         },
     },
     dashboard: {
-        logout: userLogout,
+        header: {
+            logout: userLogout,
+        }
     }
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { trans } from 'reactor/localization';
-import TextInput from 'reactor/form/components/text-input';
+import TextInput from 'reactor/form/components/TextInput';
 
 export default function UserGroupForm(props) {
     const { record } = props;

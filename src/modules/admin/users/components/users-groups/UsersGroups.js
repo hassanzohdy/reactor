@@ -1,7 +1,7 @@
-import tableActions from 'reactor/layout/components/admin-dashboard/table-actions';
-import optionedAdminTable from 'reactor/layout/components/admin-dashboard/optioned-admin-table-layout';
-import usersGroupsService from 'modules/admin/users/services/users-groups-service';
 import UserGroupForm from './user-group-form';
+import crudPage from  'reactor/layout/utils/admin/crudPage';
+import tableActions from 'reactor/layout/utils/admin/table-actions';
+import usersGroupsService from 'modules/admin/users/services/users-groups-service';
 
 const options = {
     service: usersGroupsService,
@@ -25,6 +25,6 @@ const options = {
     }
 };
 
-const UsersGroups = optionedAdminTable(options);
+const UsersGroups = crudPage(options);
 
 export default UsersGroups;

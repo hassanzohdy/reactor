@@ -1,11 +1,13 @@
+import 'shared/modules';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// use custom history to manage router navigation from our side
 import Routes from './routes-handler';
-import { addRouter, partOf, group } from './routes-list';
+import concatRoute from './concat-route';
 import initiateNavigator from './navigator';
-import 'shared/modules';
-import { queryString, hash } from './router-history';
+import {queryString, hash} from './router-history';
+import { addRouter, partOf, group } from './routes-list';
+
+export { concatRoute };
 export { navigateTo, switchLang, refresh, currentRoute } from './navigator';
 
 /**
@@ -22,7 +24,7 @@ export default {
     add: addRouter,
     partOf,
     group,
-    hash: hash,
+    hash,
     get queryString() {
         return queryString();
     }

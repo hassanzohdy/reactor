@@ -6,17 +6,44 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import { trans } from 'reactor/localization';
+import FormInput from '../form/components/FormInput';
+import pressed, { ENTER_KEY } from '../pressed';
 
 export default function Confirm(props) {
-    const {
-        title, message, closeText, confirmText,
-        onClose, onConfirm, ...dialogProps
-    } = props;
+  const {
+    title, message, closeText, confirmText,
+    onClose, onConfirm, withInput, input: Input, InputProps = {}, ...dialogProps
+  } = props;
+
+  const [inputValue, updateValue] = React.useState('');
 
   const handleConfirm = () => {
-    onConfirm();
+    onConfirm(inputValue);
     onClose();
+    updateValue('');
   };
+
+  const setInputValue = e => {
+    updateValue(e.target.value);
+  };
+
+  let confirmAutoFocus = true;
+
+  if (withInput) {
+    if (InputProps.autoFocus === undefined) {
+      InputProps.autoFocus = true;
+      confirmAutoFocus = false;
+    }
+  }
+
+  if (InputProps) {
+    InputProps.onKeyDown = e => {
+      if (pressed(e, ENTER_KEY)) {
+        handleConfirm();
+      }
+    };
+  }
 
   return (
     <Dialog
@@ -25,15 +52,16 @@ export default function Confirm(props) {
     >
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-            {message}
+        <DialogContentText component="div">
+          {message}
+          {withInput && <Input {...InputProps} value={inputValue} onChange={setInputValue} />}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
           {closeText}
         </Button>
-        <Button onClick={handleConfirm} color="primary" autoFocus>
+        <Button onClick={handleConfirm} color="primary" autoFocus={confirmAutoFocus}>
           {confirmText}
         </Button>
       </DialogActions>
@@ -43,17 +71,19 @@ export default function Confirm(props) {
 
 
 Confirm.propTypes = {
-    open: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onConfirm: PropTypes.func.isRequired,
-    confirmText: PropTypes.string.isRequired,
-    closeText: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  confirmText: PropTypes.string.isRequired,
+  closeText: PropTypes.string.isRequired,
 };
 
 Confirm.defaultProps = {
-    title: 'Are you sure?',
-    confirmText: 'Confirm',
-    closeText: 'Cancel',
+  title: trans('areYouSure'),
+  confirmText: trans('confirm'),
+  closeText: trans('cancel'),
+  withInput: false,
+  input: FormInput
 };

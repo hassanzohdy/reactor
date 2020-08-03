@@ -9,14 +9,11 @@ const meta = {
  * Set page title
  * 
  * @param   {string} pageTitle 
- * @returns {string}
  */
-export function title(pageTitle) {
+export function setTitle(pageTitle) {
     if (meta.title === pageTitle) return pageTitle;
 
     document.title = meta.title = pageTitle;
-
-    return pageTitle;
 }
 
 /**
@@ -26,7 +23,7 @@ export function title(pageTitle) {
  * @returns {string}
  */
 export function translatedTitle(pageTitle) {
-    return title(trans(pageTitle));
+    return setTitle(trans(pageTitle));
 }
 
 /**

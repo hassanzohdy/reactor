@@ -5,18 +5,28 @@ import { red, blue, orange, yellow, green, grey } from '@material-ui/core/colors
 
 const badgeStyle = makeStyles(theme => ({
     root: {
-        fontWeight: 'bold',
-        fontSize: theme.spacing(1),
-        padding: theme.spacing(0.4),
-        borderRadius: theme.spacing(0.4),
-        margin: theme.spacing(0.3), 
-    }
+        color: '#fff',
+        display: 'inline-block',
+        padding: '5px 12px',
+        fontSize: '10px',
+        textAlign: 'center',
+        fontWeight: 500,
+        lineHeight: 1,
+        whiteSpace: 'nowrap',
+        textTransform: 'uppercase',
+        verticalAlign: 'baseline',       
+    },
+    roundedBadge: {
+        borderRadius: '12px',    
+    },
 }));
 
-export default function Badge({ backgroundColor, color, className, style = {}, ...otherProps }) {
-    const { root } = badgeStyle();
+export default function Badge({ backgroundColor, color, className, rounded, style = {}, ...otherProps }) {
+    const { root, roundedBadge } = badgeStyle();
 
-    const classesList = cls(root, className);
+    const classesList = cls(root, className, {
+        [roundedBadge]: rounded === true
+    });
 
     style.backgroundColor = backgroundColor;
     style.color = color;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Theme from './theme';
+import Theme from './Theme';
 import PropTypes from 'prop-types';
 
 export default function Layout(props) {

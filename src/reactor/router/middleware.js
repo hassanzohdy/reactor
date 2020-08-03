@@ -22,8 +22,7 @@ export default function Middleware(props) {
         }
     }
 
-    // scroll to top page when new page is loaded
+    // scroll to the top page when navigating to new page
     window.scrollTo(0, 0);
-    
     return <route.component params={params} history={history} />;
 }

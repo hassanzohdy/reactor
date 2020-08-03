@@ -1,8 +1,7 @@
 import React from 'react';
 import { localeCodes } from 'reactor/localization/locales';
-import ltrim from 'reinforcements/src/utilities/str/ltrim';
-import rtrim from 'reinforcements/src/utilities/str/rtrim';
 import { getCurrentBseAppPath } from './apps-list';
+import concatRoute from './concat-route';
 
 // join all locale code with | for route matching
 const gluedLocaleCodes = localeCodes.join('|');
@@ -33,26 +32,6 @@ export function addRouter(path, component, middleware = null) {
         middleware
     }]);
 }
-
-/**
- * Concatenate the given paths to one single path
- * 
- * @param   {...string} segments
- * @returns {string} 
- */
-export function concatRoute(...segments) {
-    let path = '';
-
-    for (let segment of segments) {
-        segment = '/' + ltrim(segment || '', '/');
-        
-        path += segment;
-    }
-    
-    path = rtrim(path, '/');
-
-    return path || '/';
-} 
 
 /**
  * Add the given routes as part of the given layout

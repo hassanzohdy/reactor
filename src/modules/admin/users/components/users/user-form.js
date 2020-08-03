@@ -1,10 +1,10 @@
 import React from 'react';
 import { Obj } from 'reinforcements';
 import { trans } from 'reactor/localization';
-import TextInput from 'reactor/form/components/text-input';
-import EmailInput from 'reactor/form/components/email-input';
-import SelectInput from 'reactor/form/components/select-input';
-import PasswordInput from 'reactor/form/components/password-input';
+import TextInput from 'reactor/form/components/TextInput';
+import EmailInput from 'reactor/form/components/EmailInput';
+import SelectInput from 'reactor/form/components/SelectInput';
+import PasswordInput from 'reactor/form/components/PasswordInput';
 import usersGroupsService from 'modules/admin/users/services/users-groups-service';
 
 const mapResponse = response => {
