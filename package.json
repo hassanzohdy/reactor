@@ -11,7 +11,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "add": "^2.0.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "jss-rtl": "^0.3.0",
     "material-ui-image": "^3.2.3",
     "mui-datatables": "^3.1.4",
