@@ -15,7 +15,7 @@
     "jss-rtl": "^0.3.0",
     "material-ui-image": "^3.2.3",
     "mui-datatables": "^3.1.4",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "notistack": "^0.9.17",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
